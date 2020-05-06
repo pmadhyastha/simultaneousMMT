@@ -1,0 +1,43 @@
+-- disable_filters -> False
+-- batch_size -> 16
+-- max_len -> 100
+-- device_id -> gpu
+-- override -> []
+-- stochastic -> False
+-- splits -> test_2016_flickr
+-- source -> None
+-- output -> wait2_multimodal_decoding_results
+-- func -> vwk
+-- delta -> 
+-- n_init_tokens -> 1,2,3,5,7
+-- criteria -> 
+-- model -> ../experiments/simultaneouswaitknmt-rc85df.best.bleu.ckpt
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 99, in <module>
+    stranslator = STranslator(**args.__dict__)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/stranslator.py", line 31, in __init__
+    self._translator_type = get_translator(self.func)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/translators/__init__.py", line 11, in get_translator
+    'vwk': VerboseWaitKGreedySearch
+NameError: name 'VerboseWaitKGreedySearch' is not defined
+
+Sun May  3 17:37:22 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  TITAN Xp            On   | 00000000:1E:00.0 Off |                  N/A |
+| 23%   32C    P8     9W / 250W |      0MiB / 12196MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 17:37:22 up 122 days,  2:51,  4 users,  load average: 14.52, 14.09, 14.30

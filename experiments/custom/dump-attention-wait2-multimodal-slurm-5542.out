@@ -1,0 +1,100 @@
+-- disable_filters -> False
+-- batch_size -> 16
+-- max_len -> 100
+-- device_id -> gpu
+-- override -> []
+-- stochastic -> False
+-- splits -> test_2016_flickr
+-- source -> None
+-- output -> wait2_multimodal_decoding_results
+-- func -> vwk
+-- delta -> 
+-- n_init_tokens -> 1,2,3,5,7
+-- criteria -> 
+-- model -> ../experiments/simultaneouswaitknmt-r553c9-val036.best.bleu_29.370.ckpt
+STranslator: setting batch_size=1 for 'vwk' decoding
+SimultaneousWaitKNMT(
+  (encoders): ModuleDict(
+    (image): VisualFeaturesEncoder(
+      (output): Sequential(
+        (0): FF(in_features=2048, out_features=320, activ=tanh, bias=True, bias_zero=True)
+        (1): Dropout(p=0.5, inplace=False)
+      )
+    )
+    (src): TextEncoder(
+      (do_emb): Dropout(p=0.4, inplace=False)
+      (emb): Embedding(9797, 200, padding_idx=0)
+      (enc): GRU(200, 320, num_layers=2)
+      (output): Sequential(
+        (0): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (dec): SimultaneousConditionalDecoder(
+    (emb): Embedding(7875, 200, padding_idx=0)
+    (att): ModuleDict(
+      (image): MLPAttention(
+        (hid2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2hid): Linear(in_features=320, out_features=320, bias=False)
+        (mlp): Linear(in_features=320, out_features=1, bias=False)
+      )
+      (src): MLPAttention(
+        (hid2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2hid): Linear(in_features=320, out_features=320, bias=False)
+        (mlp): Linear(in_features=320, out_features=1, bias=False)
+      )
+    )
+    (fusion): Sequential(
+      (0): Fusion(type=sum, adaptor=<function Fusion.__init__.<locals>.<lambda> at 0x7fbce86c6200>, activ=None)
+    )
+    (dec0): GRUCell(200, 320)
+    (dec1): GRUCell(320, 320)
+    (do_out): Dropout(p=0.5, inplace=False)
+    (hid2out): FF(in_features=840, out_features=200, activ=tanh, bias=True, bias_zero=True)
+    (out2prob): FF(in_features=200, out_features=7875, activ=linear, bias=True, bias_zero=True)
+    (nll_loss): NLLLoss()
+  )
+)
+Vocabulary of 9797 items ('train.lc.norm.tok.vocab.en')
+Vocabulary of 7875 items ('train.lc.norm.tok-min2.vocab.de')
+# parameters: 7.22M (7.22M learnable)
+
+Post-processing filters enabled.
+Will translate "['test_2016_flickr']"
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]1000sents [00:00, 150457.51sents/s]
+Initializing dataset for 'image'...
+Skipping 'trg' as target
+MultimodalDataset - (2 source(s) / 0 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'test_2016_flickr.lc.norm.tok.en' (1000 sentences)
+    --> NumpyDataset 'test_2016_flickr-resnet50-res5c_relu-r256-c256-l2norm.npy' (1000 samples)
+
+
+Ignoring batch_size 1 for simultaneous greedy search
+Starting translation for 'test_2016_flickr'
+  0%|                                     | 0/1000 [00:00<?, ?batch/s]  0%|                                     | 0/1000 [00:00<?, ?batch/s]
+dict_keys(['alpha_image', 'alpha_src'])
+txt attention
+1
+torch.Size([1, 320])
+img attention
+0
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 100, in <module>
+    stranslator()
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/stranslator.py", line 129, in __call__
+    self.translate(input_)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/stranslator.py", line 125, in translate
+    translator.run_all()
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/translators/verbose_waitk_greedy.py", line 21, in run_all
+    hyps, actions, attentions, up_time = self.run(int(k))
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/translators/verbose_waitk_greedy.py", line 103, in run
+    print(self.model.dec.history['alpha_img'][-1].data.shape)
+IndexError: list index out of range
+

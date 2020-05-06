@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 98, in <module>
+    from nmtpytorch.stranslator import STranslator
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/stranslator.py", line 15, in <module>
+    from .translators import get_translator
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/translators/__init__.py", line 4, in <module>
+    from .verbose_waitk_greedy import VerboseWaitKGreedySearch
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/translators/verbose_waitk_greedy.py", line 12, in <module>
+    logger = logging.getLogger('nmtpytorch')
+NameError: name 'logging' is not defined
+
+Sun May  3 17:39:16 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  TITAN Xp            On   | 00000000:1E:00.0 Off |                  N/A |
+| 23%   32C    P8     9W / 250W |      0MiB / 12196MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 17:39:16 up 122 days,  2:53,  4 users,  load average: 13.29, 13.73, 14.13

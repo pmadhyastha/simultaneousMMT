@@ -1,0 +1,260 @@
+-------
+[train]
+-------
+         num_workers:0
+          pin_memory:False
+                seed:1582660384
+               gclip:1
+              l2_reg:1e-05
+            patience:10
+           optimizer:adam
+                  lr:0.0004
+            lr_decay:plateau
+     lr_decay_revert:False
+     lr_decay_factor:0.5
+   lr_decay_patience:2
+        lr_decay_min:1e-06
+          model_type:SimultaneousWaitKNMT
+            momentum:0.0
+            nesterov:False
+           disp_freq:30
+          batch_size:64
+          max_epochs:100
+      max_iterations:1000000
+        eval_metrics:bleu,loss
+        eval_filters:
+             de-hyphen
+     eval_batch_size:32
+           eval_freq:0
+        eval_max_len:100
+          eval_start:1
+           eval_zero:False
+   save_best_metrics:True
+           save_path:/homes/al4616/experiments/simnmt/nmtpy/w2w_models/en-de
+    save_optim_state:False
+     checkpoint_freq:5000
+       n_checkpoints:0
+     tensorboard_dir:/homes/al4616/experiments/simnmt/nmtpy/w2w_models/en-de/tb_dir
+     pretrained_file:
+   pretrained_layers:
+       freeze_layers:
+          handle_oom:False
+           subfolder:wait2-rnn-multimodal
+              exp_id:simultaneouswaitknmt-r75de1
+------
+[vars]
+------
+                  sl:en
+                  tl:de
+-------
+[model]
+-------
+            att_type:mlp
+      att_bottleneck:hid
+             enc_dim:320
+   enc_bidirectional:False
+             dec_dim:320
+             emb_dim:200
+         dropout_emb:0.4
+         dropout_ctx:0.5
+         dropout_out:0.5
+          n_encoders:2
+            tied_emb:2way
+             max_len:None
+           out_logic:deep
+           direction:src:Text, image:Numpy -> trg:Text
+        sampler_type:bucket
+           bucket_by:src
+     translator_args:
+                     k:2
+         aux_dropout:0.5
+        aux_proj_dim:320
+      aux_proj_activ:tanh
+             aux_dim:2048
+       dec_inp_activ:None
+        mm_fusion_op:sum
+   mm_fusion_dropout:0.0
+------
+[data]
+------
+            txt_root:/vol/bitbucket/al4616/simmt/data/multi30k/en-de
+            img_root:/vol/bitbucket/al4616/simmt/data/resnet50-256x256
+           train_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok.en
+                 image:/vol/bitbucket/al4616/simmt/data/resnet50-256x256/train-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok.de
+             val_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/val.lc.norm.tok.en
+                 image:/vol/bitbucket/al4616/simmt/data/resnet50-256x256/val-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/val.lc.norm.tok.de
+test_2016_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2016_flickr.lc.norm.tok.en
+                 image:/vol/bitbucket/al4616/simmt/data/resnet50-256x256/test_2016_flickr-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2016_flickr.lc.norm.tok.de
+test_2017_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2017_flickr.lc.norm.tok.en
+                 image:/vol/bitbucket/al4616/simmt/data/resnet50-256x256/test_2017_flickr-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2017_flickr.lc.norm.tok.de
+------------
+[vocabulary]
+------------
+                 src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok.vocab.en
+                 trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok-min2.vocab.de
+----------------------------------------------------------------------
+
+Python 3.7.7 -- torch 1.4.0 with CUDA 10.1 (on machine 'kingfisher.doc.ic.ac.uk')
+nmtpytorch 4.1.0
+DeviceManager(cuda:0, n_gpu=1)
+Seed for further reproducibility: 1582660384
+SLURM Job ID: 5503
+Loading dataset(s)
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]11639sents [00:00, 116360.43sents/s]27538sents [00:00, 137668.14sents/s]29000sents [00:00, 138606.80sents/s]
+Initializing dataset for 'image'...
+Initializing dataset for 'trg'...
+0sents [00:00, ?sents/s]438sents [00:00, 2888.56sents/s]12633sents [00:00, 50202.08sents/s]27331sents [00:00, 77707.52sents/s]29000sents [00:00, 79638.96sents/s]
+MultimodalDataset - (2 source(s) / 1 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'train.lc.norm.tok.en' (29000 sentences)
+    --> NumpyDataset 'train-resnet50-res5c_relu-r256-c256-l2norm.npy' (29000 samples)
+
+  Targets:
+    --> TextDataset 'train.lc.norm.tok.de' (29000 sentences)
+
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]1014sents [00:00, 11958.45sents/s]
+Initializing dataset for 'image'...
+Initializing dataset for 'trg'...
+0sents [00:00, ?sents/s]1014sents [00:00, 100799.29sents/s]
+MultimodalDataset - (2 source(s) / 1 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'val.lc.norm.tok.en' (1014 sentences)
+    --> NumpyDataset 'val-resnet50-res5c_relu-r256-c256-l2norm.npy' (1014 samples)
+
+  Targets:
+    --> TextDataset 'val.lc.norm.tok.de' (1014 sentences)
+
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]1014sents [00:00, 54501.50sents/s]
+Initializing dataset for 'image'...
+Skipping 'trg' as target
+MultimodalDataset - (2 source(s) / 0 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'val.lc.norm.tok.en' (1014 sentences)
+    --> NumpyDataset 'val-resnet50-res5c_relu-r256-c256-l2norm.npy' (1014 samples)
+
+
+Ignoring batch_size 32 for simultaneous greedy search
+SimultaneousWaitKNMT(
+  (encoders): ModuleDict(
+    (image): VisualFeaturesEncoder(
+      (output): Sequential(
+        (0): FF(in_features=2048, out_features=320, activ=tanh, bias=True, bias_zero=True)
+        (1): Dropout(p=0.5, inplace=False)
+      )
+    )
+    (src): TextEncoder(
+      (do_emb): Dropout(p=0.4, inplace=False)
+      (emb): Embedding(9797, 200, padding_idx=0)
+      (enc): GRU(200, 320, num_layers=2)
+      (output): Sequential(
+        (0): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (dec): SimultaneousConditionalDecoder(
+    (emb): Embedding(7875, 200, padding_idx=0)
+    (att): ModuleDict(
+      (image): MLPAttention(
+        (hid2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2hid): Linear(in_features=320, out_features=320, bias=False)
+        (mlp): Linear(in_features=320, out_features=1, bias=False)
+      )
+      (src): MLPAttention(
+        (hid2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2hid): Linear(in_features=320, out_features=320, bias=False)
+        (mlp): Linear(in_features=320, out_features=1, bias=False)
+      )
+    )
+    (fusion): Sequential(
+      (0): Fusion(type=sum, adaptor=<function Fusion.__init__.<locals>.<lambda> at 0x7ff6deadd7a0>, activ=None)
+    )
+    (dec0): GRUCell(200, 320)
+    (dec1): GRUCell(320, 320)
+    (do_out): Dropout(p=0.5, inplace=False)
+    (hid2out): FF(in_features=840, out_features=200, activ=tanh, bias=True, bias_zero=True)
+    (out2prob): FF(in_features=200, out_features=7875, activ=linear, bias=True, bias_zero=True)
+    (nll_loss): NLLLoss()
+  )
+)
+Vocabulary of 9797 items ('train.lc.norm.tok.vocab.en')
+Vocabulary of 7875 items ('train.lc.norm.tok-min2.vocab.de')
+# parameters: 7.22M (7.22M learnable)
+
+Optimizer => adam (lr: 0.0004, weight_decay: 1e-05, g_clip: 1, lr_decay: (patience=2, factor=0.5))
+TensorBoard is active
+Training started on 04-05-2020 17:01:11
+Starting Epoch 1
+Epoch 1 - update         30 => loss:   6.394 (#OOM: 0)
+Epoch 1 - update         60 => loss:   5.729 (#OOM: 0)
+Epoch 1 - update         90 => loss:   5.255 (#OOM: 0)
+Epoch 1 - update        120 => loss:   5.105 (#OOM: 0)
+Epoch 1 - update        150 => loss:   4.341 (#OOM: 0)
+Epoch 1 - update        180 => loss:   4.797 (#OOM: 0)
+Epoch 1 - update        210 => loss:   4.779 (#OOM: 0)
+Epoch 1 - update        240 => loss:   4.660 (#OOM: 0)
+Epoch 1 - update        270 => loss:   4.379 (#OOM: 0)
+Epoch 1 - update        300 => loss:   4.461 (#OOM: 0)
+Epoch 1 - update        330 => loss:   4.315 (#OOM: 0)
+Epoch 1 - update        360 => loss:   3.699 (#OOM: 0)
+Epoch 1 - update        390 => loss:   4.327 (#OOM: 0)
+Epoch 1 - update        420 => loss:   4.272 (#OOM: 0)
+Epoch 1 - update        450 => loss:   4.525 (#OOM: 0)
+--> Epoch 1 finished with mean loss 4.81150
+--> Overhead/Training/Evaluation: 0.90/0.88/0.00 mins (total: 1.78 mins)   (548 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/35 [00:00<?, ?batch/s]  0%|                                       | 0/35 [00:00<?, ?batch/s]
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 135, in <module>
+    loop()
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/mainloop.py", line 310, in __call__
+    while self.train_epoch():
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/mainloop.py", line 246, in train_epoch
+    self.do_validation()
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/mainloop.py", line 265, in do_validation
+    results.extend(self.net.test_performance(self.vloss_iterator))
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/models/snmt.py", line 275, in test_performance
+    out = self.forward(batch)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/models/snmt_waitk.py", line 54, in forward
+    log_p, h = self.dec.f_next(state_dict, y_emb[t], h)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/layers/decoders/sconditional.py", line 132, in f_next
+    self.history[f'alpha_{k}'].append(att)
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/site-packages/torch/nn/modules/module.py", line 576, in __getattr__
+    type(self).__name__, name))
+AttributeError: 'SimultaneousConditionalDecoder' object has no attribute 'history'
+
+Mon May  4 17:03:02 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  TITAN Xp            On   | 00000000:1D:00.0 Off |                  N/A |
+| 23%   41C    P0    71W / 250W |      0MiB / 12196MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 17:03:02 up 123 days,  2:17,  4 users,  load average: 17.60, 16.50, 16.99
