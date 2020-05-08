@@ -16,3 +16,9 @@
     - [ ] multimodal vanilla snmt
     - [ ] shuffled images multimodal
 
+| src | target | unimodal vanilla | multimodal vanilla | multimodal shuffled |
+|-----|--------|------------------|--------------------|---------------------|
+| en  | en     |                  |                    |                     |
+| de  | de     |                  |                    |                     |
+| cs  | cs     |                  |                    |                     |
+| fr  | fr     |                  |                    |                     |
