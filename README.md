@@ -19,6 +19,6 @@
 | src | target | unimodal vanilla | multimodal vanilla | multimodal shuffled |
 |-----|--------|------------------|--------------------|---------------------|
 | en  | en     |                  |                    |                     |
-| de  | de     |                  |                    |                     |
+| de  | de     |      92.46       |                    |                     |
 | cs  | cs     |                  |                    |                     |
 | fr  | fr     |                  |                    |                     |
