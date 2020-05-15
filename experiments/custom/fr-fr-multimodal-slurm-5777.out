@@ -1,0 +1,132 @@
+-------
+[train]
+-------
+         num_workers:0
+          pin_memory:False
+                seed:1588965511
+               gclip:1
+              l2_reg:1e-05
+            patience:10
+           optimizer:adam
+                  lr:0.0004
+            lr_decay:plateau
+     lr_decay_revert:False
+     lr_decay_factor:0.5
+   lr_decay_patience:2
+        lr_decay_min:1e-06
+          model_type:SimultaneousNMT
+            momentum:0.0
+            nesterov:False
+           disp_freq:30
+          batch_size:64
+          max_epochs:100
+      max_iterations:1000000
+        eval_metrics:bleu,loss
+        eval_filters:
+                de-bpe
+             de-hyphen
+     eval_batch_size:32
+           eval_freq:0
+        eval_max_len:100
+          eval_start:1
+           eval_zero:False
+   save_best_metrics:True
+           save_path:/homes/al4616/experiments/simnmt/nmtpy/bpe_models/fr-fr
+    save_optim_state:False
+     checkpoint_freq:5000
+       n_checkpoints:0
+     tensorboard_dir:/homes/al4616/experiments/simnmt/nmtpy/bpe_models/fr-fr/tb_dir
+     pretrained_file:
+   pretrained_layers:
+       freeze_layers:
+          handle_oom:False
+           subfolder:fr-fr-multimodal
+              exp_id:simultaneousnmt-r77b5b
+------
+[vars]
+------
+                  sl:en
+                  tl:fr
+-------
+[model]
+-------
+            att_type:mlp
+      att_bottleneck:hid
+             enc_dim:320
+   enc_bidirectional:False
+             dec_dim:320
+             emb_dim:200
+         dropout_emb:0.4
+         dropout_ctx:0.5
+         dropout_out:0.5
+          n_encoders:2
+            tied_emb:2way
+             max_len:None
+           out_logic:deep
+           direction:src:Text, image:Numpy -> trg:Text
+        sampler_type:bucket
+           bucket_by:src
+         aux_dropout:0.5
+        aux_proj_dim:320
+      aux_proj_activ:tanh
+             aux_dim:2048
+       dec_inp_activ:None
+        mm_fusion_op:sum
+   mm_fusion_dropout:0.0
+------
+[data]
+------
+            txt_root:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr
+            img_root:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256
+           train_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/train.lc.norm.tok.fr
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/train-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/train.lc.norm.tok.bpe.fr
+             val_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/val.lc.norm.tok.fr
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/val-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/val.lc.norm.tok.bpe.fr
+test_2016_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/test_2016_flickr.lc.norm.tok.fr
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/test_2016_flickr-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/test_2016_flickr.lc.norm.tok.bpe.fr
+test_2017_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/test_2017_flickr.lc.norm.tok.fr
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/test_2017_flickr-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/test_2017_flickr.lc.norm.tok.bpe.fr
+------------
+[vocabulary]
+------------
+                 src:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/train.lc.norm.tok.vocab.fr
+                 trg:/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/train.lc.norm.tok.bpe.vocab.fr
+----------------------------------------------------------------------
+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 123, in <module>
+    model = getattr(models, opts.train['model_type'])(opts=opts)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/models/snmt.py", line 98, in __init__
+    self.vocabs[name] = Vocabulary(fname, short_list=self.opts.model['short_list'])
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/vocabulary.py", line 61, in __init__
+    with open(self.vocab) as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/vol/bitbucket/al4616/simmt/data/multi30k/fr-fr/train.lc.norm.tok.vocab.fr'
+
+Fri May  8 20:18:31 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  TITAN Xp            On   | 00000000:1A:00.0 Off |                  N/A |
+| 23%   32C    P8     8W / 250W |      0MiB / 12196MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 20:18:31 up 127 days,  5:32,  4 users,  load average: 15.86, 15.47, 16.05

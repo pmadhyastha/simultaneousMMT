@@ -1,0 +1,145 @@
+-------
+[train]
+-------
+         num_workers:0
+          pin_memory:False
+                seed:1588965647
+               gclip:1
+              l2_reg:1e-05
+            patience:10
+           optimizer:adam
+                  lr:0.0004
+            lr_decay:plateau
+     lr_decay_revert:False
+     lr_decay_factor:0.5
+   lr_decay_patience:2
+        lr_decay_min:1e-06
+          model_type:SimultaneousNMT
+            momentum:0.0
+            nesterov:False
+           disp_freq:30
+          batch_size:64
+          max_epochs:100
+      max_iterations:1000000
+        eval_metrics:bleu,loss
+        eval_filters:
+                de-bpe
+             de-hyphen
+     eval_batch_size:32
+           eval_freq:0
+        eval_max_len:100
+          eval_start:1
+           eval_zero:False
+   save_best_metrics:True
+           save_path:/homes/al4616/experiments/simnmt/nmtpy/bpe_models/de-de
+    save_optim_state:False
+     checkpoint_freq:5000
+       n_checkpoints:0
+     tensorboard_dir:/homes/al4616/experiments/simnmt/nmtpy/bpe_models/de-de/tb_dir
+     pretrained_file:
+   pretrained_layers:
+       freeze_layers:
+          handle_oom:False
+           subfolder:de-de-multimodal
+              exp_id:simultaneousnmt-r04117
+------
+[vars]
+------
+                  sl:en
+                  tl:de
+-------
+[model]
+-------
+            att_type:mlp
+      att_bottleneck:hid
+             enc_dim:320
+   enc_bidirectional:False
+             dec_dim:320
+             emb_dim:200
+         dropout_emb:0.4
+         dropout_ctx:0.5
+         dropout_out:0.5
+          n_encoders:2
+            tied_emb:2way
+             max_len:None
+           out_logic:deep
+           direction:src:Text, image:Numpy -> trg:Text
+        sampler_type:bucket
+           bucket_by:src
+         aux_dropout:0.5
+        aux_proj_dim:320
+      aux_proj_activ:tanh
+             aux_dim:2048
+       dec_inp_activ:None
+        mm_fusion_op:sum
+   mm_fusion_dropout:0.0
+------
+[data]
+------
+            txt_root:/vol/bitbucket/al4616/simmt/data/multi30k/en-de
+            img_root:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256
+           train_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok.de
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/train-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok.bpe.de
+             val_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/val.lc.norm.tok.de
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/val-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/val.lc.norm.tok.bpe.de
+test_2016_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2016_flickr.lc.norm.tok.de
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/test_2016_flickr-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2016_flickr.lc.norm.tok.bpe.de
+test_2017_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2017_flickr.lc.norm.tok.de
+                 image:/data/ozan/datasets/multi30k/features/conv/resnet50-256x256/test_2017_flickr-resnet50-res5c_relu-r256-c256-l2norm.npy
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/test_2017_flickr.lc.norm.tok.bpe.de
+------------
+[vocabulary]
+------------
+                 src:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok.vocab.de
+                 trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-de/train.lc.norm.tok.bpe.vocab.de
+----------------------------------------------------------------------
+
+Python 3.7.7 -- torch 1.4.0 with CUDA 10.1 (on machine 'kingfisher.doc.ic.ac.uk')
+nmtpytorch 4.1.0
+DeviceManager(cuda:0, n_gpu=1)
+Seed for further reproducibility: 1588965647
+SLURM Job ID: 5779
+Loading dataset(s)
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]15662sents [00:00, 156576.85sents/s]29000sents [00:00, 154157.01sents/s]
+Initializing dataset for 'image'...
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 134, in <module>
+    loop = MainLoop(model, opts.train, dev_mgr)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/mainloop.py", line 36, in __init__
+    self.model.load_data('train', self.batch_size),
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/models/snmt.py", line 226, in load_data
+    order_file=self.opts.data[split + '_set'].get('ord', None))
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/datasets/multimodal.py", line 80, in __init__
+    vocab=vocabs.get(key, None), bos=ds.trg, **kwargs)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/datasets/numpy.py", line 28, in __init__
+    raise RuntimeError('{} does not exist.'.format(self.path))
+RuntimeError: /data/ozan/datasets/multi30k/features/conv/resnet50-256x256/train-resnet50-res5c_relu-r256-c256-l2norm.npy does not exist.
+
+Fri May  8 20:20:48 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  TITAN Xp            On   | 00000000:1A:00.0 Off |                  N/A |
+| 23%   32C    P8     8W / 250W |      0MiB / 12196MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 20:20:48 up 127 days,  5:34,  4 users,  load average: 15.75, 15.50, 15.98
