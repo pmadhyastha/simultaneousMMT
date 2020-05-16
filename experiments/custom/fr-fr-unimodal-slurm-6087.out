@@ -1,0 +1,2277 @@
+-------
+[train]
+-------
+         num_workers:0
+          pin_memory:False
+                seed:1589572629
+               gclip:1
+              l2_reg:1e-05
+            patience:10
+           optimizer:adam
+                  lr:0.0004
+            lr_decay:plateau
+     lr_decay_revert:False
+     lr_decay_factor:0.5
+   lr_decay_patience:2
+        lr_decay_min:1e-06
+          model_type:SimultaneousNMT
+            momentum:0.0
+            nesterov:False
+           disp_freq:30
+          batch_size:64
+          max_epochs:100
+      max_iterations:1000000
+        eval_metrics:bleu,loss
+        eval_filters:
+                de-bpe
+             de-hyphen
+     eval_batch_size:32
+           eval_freq:0
+        eval_max_len:100
+          eval_start:1
+           eval_zero:False
+   save_best_metrics:True
+           save_path:/homes/al4616/experiments/simnmt/nmtpy/bpe_models/fr-fr
+    save_optim_state:False
+     checkpoint_freq:5000
+       n_checkpoints:0
+     tensorboard_dir:/homes/al4616/experiments/simnmt/nmtpy/bpe_models/fr-fr/tb_dir
+     pretrained_file:
+   pretrained_layers:
+       freeze_layers:
+          handle_oom:False
+           subfolder:fr-fr-unimodal
+              exp_id:simultaneousnmt-r1e55b
+------
+[vars]
+------
+                  sl:en
+                  tl:fr
+-------
+[model]
+-------
+            att_type:mlp
+      att_bottleneck:hid
+             enc_dim:320
+   enc_bidirectional:False
+             dec_dim:320
+             emb_dim:200
+         dropout_emb:0.4
+         dropout_ctx:0.5
+         dropout_out:0.5
+          n_encoders:2
+            tied_emb:2way
+             max_len:None
+           out_logic:deep
+           direction:src:Text -> trg:Text
+        sampler_type:bucket
+           bucket_by:src
+------
+[data]
+------
+            txt_root:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr
+           train_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.fr
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.bpe.fr
+             val_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/val.lc.norm.tok.fr
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/val.lc.norm.tok.bpe.fr
+test_2016_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2016_flickr.lc.norm.tok.fr
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2016_flickr.lc.norm.tok.bpe.fr
+test_2017_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2017_flickr.lc.norm.tok.fr
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2017_flickr.lc.norm.tok.bpe.fr
+------------
+[vocabulary]
+------------
+                 src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.vocab.fr
+                 trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.bpe.vocab.fr
+----------------------------------------------------------------------
+
+Python 3.7.7 -- torch 1.4.0 with CUDA 10.1 (on machine 'kingfisher.doc.ic.ac.uk')
+nmtpytorch 4.1.0
+DeviceManager(cuda:0, n_gpu=1)
+Seed for further reproducibility: 1589572629
+SLURM Job ID: 6087
+Loading dataset(s)
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]7652sents [00:00, 76504.02sents/s]22481sents [00:00, 112389.57sents/s]29000sents [00:00, 116294.79sents/s]
+Initializing dataset for 'trg'...
+0sents [00:00, ?sents/s]8806sents [00:00, 33848.50sents/s]21107sents [00:00, 58606.82sents/s]29000sents [00:00, 69055.84sents/s]
+MultimodalDataset - (1 source(s) / 1 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'train.lc.norm.tok.fr' (29000 sentences)
+  Targets:
+    --> TextDataset 'train.lc.norm.tok.bpe.fr' (29000 sentences)
+
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]1014sents [00:00, 126846.14sents/s]
+Initializing dataset for 'trg'...
+0sents [00:00, ?sents/s]1014sents [00:00, 121282.81sents/s]
+MultimodalDataset - (1 source(s) / 1 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'val.lc.norm.tok.fr' (1014 sentences)
+  Targets:
+    --> TextDataset 'val.lc.norm.tok.bpe.fr' (1014 sentences)
+
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]1014sents [00:00, 121048.08sents/s]
+Skipping 'trg' as target
+MultimodalDataset - (1 source(s) / 0 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'val.lc.norm.tok.fr' (1014 sentences)
+
+SimultaneousNMT(
+  (encoders): ModuleDict(
+    (src): TextEncoder(
+      (do_emb): Dropout(p=0.4, inplace=False)
+      (emb): Embedding(11048, 200, padding_idx=0)
+      (enc): GRU(200, 320, num_layers=2)
+      (output): Sequential(
+        (0): Dropout(p=0.5, inplace=False)
+      )
+    )
+  )
+  (dec): SimultaneousConditionalDecoder(
+    (emb): Embedding(5874, 200, padding_idx=0)
+    (att): ModuleDict(
+      (src): MLPAttention(
+        (hid2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2ctx): Linear(in_features=320, out_features=320, bias=False)
+        (ctx2hid): Linear(in_features=320, out_features=320, bias=False)
+        (mlp): Linear(in_features=320, out_features=1, bias=False)
+      )
+    )
+    (dec0): GRUCell(200, 320)
+    (dec1): GRUCell(320, 320)
+    (do_out): Dropout(p=0.5, inplace=False)
+    (hid2out): FF(in_features=840, out_features=200, activ=tanh, bias=True, bias_zero=True)
+    (out2prob): FF(in_features=200, out_features=5874, activ=linear, bias=True, bias_zero=True)
+    (nll_loss): NLLLoss()
+  )
+)
+Vocabulary of 11048 items ('train.lc.norm.tok.vocab.fr')
+Vocabulary of 5874 items ('train.lc.norm.tok.bpe.vocab.fr')
+# parameters: 6.10M (6.10M learnable)
+
+Optimizer => adam (lr: 0.0004, weight_decay: 1e-05, g_clip: 1, lr_decay: (patience=2, factor=0.5))
+TensorBoard is active
+Training started on 15-05-2020 20:57:16
+Starting Epoch 1
+Epoch 1 - update         30 => loss:   6.449 (#OOM: 0)
+Epoch 1 - update         60 => loss:   5.733 (#OOM: 0)
+Epoch 1 - update         90 => loss:   6.078 (#OOM: 0)
+Epoch 1 - update        120 => loss:   4.675 (#OOM: 0)
+Epoch 1 - update        150 => loss:   4.399 (#OOM: 0)
+Epoch 1 - update        180 => loss:   4.641 (#OOM: 0)
+Epoch 1 - update        210 => loss:   4.348 (#OOM: 0)
+Epoch 1 - update        240 => loss:   3.769 (#OOM: 0)
+Epoch 1 - update        270 => loss:   3.788 (#OOM: 0)
+Epoch 1 - update        300 => loss:   4.187 (#OOM: 0)
+Epoch 1 - update        330 => loss:   3.428 (#OOM: 0)
+Epoch 1 - update        360 => loss:   3.449 (#OOM: 0)
+Epoch 1 - update        390 => loss:   3.637 (#OOM: 0)
+Epoch 1 - update        420 => loss:   3.088 (#OOM: 0)
+Epoch 1 - update        450 => loss:   3.672 (#OOM: 0)
+Epoch 1 - update        480 => loss:   2.885 (#OOM: 0)
+--> Epoch 1 finished with mean loss 4.52574
+--> Overhead/Training/Evaluation: 0.03/0.57/0.00 mins (total: 0.61 mins)   (841 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 47.85batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 47.82batch/s] 44%|█████████████▏                | 15/34 [00:00<00:00, 47.70batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 50.06batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 48.99batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.20batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 14%|████▍                          | 7/49 [00:00<00:00, 68.57batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 69.57batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 71.61batch/s] 63%|██████████████████▉           | 31/49 [00:00<00:00, 68.76batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 66.72batch/s] 96%|████████████████████████████▊ | 47/49 [00:00<00:00, 60.99batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 60.69batch/s]
+Validation 1 -> LOSS = 2.92
+Validation 1 -> BLEU = 24.32, 70.4/37.4/20.3/11.7 (BP=0.864, ratio=0.873, hyp_len=12552, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 2.92 @ validation 1
+--> Best BLEU so far: 24.32 @ validation 1
+Starting Epoch 2
+Epoch 2 - update        510 => loss:   2.536 (#OOM: 0)
+Epoch 2 - update        540 => loss:   2.644 (#OOM: 0)
+Epoch 2 - update        570 => loss:   3.818 (#OOM: 0)
+Epoch 2 - update        600 => loss:   2.891 (#OOM: 0)
+Epoch 2 - update        630 => loss:   3.333 (#OOM: 0)
+Epoch 2 - update        660 => loss:   3.071 (#OOM: 0)
+Epoch 2 - update        690 => loss:   2.748 (#OOM: 0)
+Epoch 2 - update        720 => loss:   2.612 (#OOM: 0)
+Epoch 2 - update        750 => loss:   2.353 (#OOM: 0)
+Epoch 2 - update        780 => loss:   2.493 (#OOM: 0)
+Epoch 2 - update        810 => loss:   2.774 (#OOM: 0)
+Epoch 2 - update        840 => loss:   2.199 (#OOM: 0)
+Epoch 2 - update        870 => loss:   2.076 (#OOM: 0)
+Epoch 2 - update        900 => loss:   2.569 (#OOM: 0)
+Epoch 2 - update        930 => loss:   1.862 (#OOM: 0)
+Epoch 2 - update        960 => loss:   2.501 (#OOM: 0)
+--> Epoch 2 finished with mean loss 2.66529
+--> Overhead/Training/Evaluation: 0.03/0.57/0.00 mins (total: 0.60 mins)   (855 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 39.65batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 44.40batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 48.35batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 50.31batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 49.81batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.32batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 14%|████▍                          | 7/49 [00:00<00:00, 56.62batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 59.56batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 61.72batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 53.41batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 54.52batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 55.61batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 53.42batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 53.40batch/s]
+Validation 2 -> LOSS = 1.62
+Validation 2 -> BLEU = 59.84, 82.6/66.1/54.8/45.6 (BP=0.985, ratio=0.985, hyp_len=14164, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 1.62 @ validation 2
+--> Best BLEU so far: 59.84 @ validation 2
+Starting Epoch 3
+Epoch 3 - update        990 => loss:   1.864 (#OOM: 0)
+Epoch 3 - update       1020 => loss:   1.801 (#OOM: 0)
+Epoch 3 - update       1050 => loss:   1.659 (#OOM: 0)
+Epoch 3 - update       1080 => loss:   1.731 (#OOM: 0)
+Epoch 3 - update       1110 => loss:   1.747 (#OOM: 0)
+Epoch 3 - update       1140 => loss:   1.760 (#OOM: 0)
+Epoch 3 - update       1170 => loss:   1.530 (#OOM: 0)
+Epoch 3 - update       1200 => loss:   1.476 (#OOM: 0)
+Epoch 3 - update       1230 => loss:   1.698 (#OOM: 0)
+Epoch 3 - update       1260 => loss:   1.418 (#OOM: 0)
+Epoch 3 - update       1290 => loss:   1.531 (#OOM: 0)
+Epoch 3 - update       1320 => loss:   1.338 (#OOM: 0)
+Epoch 3 - update       1350 => loss:   1.457 (#OOM: 0)
+Epoch 3 - update       1380 => loss:   1.384 (#OOM: 0)
+Epoch 3 - update       1410 => loss:   1.130 (#OOM: 0)
+Epoch 3 - update       1440 => loss:   1.196 (#OOM: 0)
+--> Epoch 3 finished with mean loss 1.67205
+--> Overhead/Training/Evaluation: 0.04/0.62/0.00 mins (total: 0.66 mins)   (783 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 52.00batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 51.08batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 48.71batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 51.58batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 51.72batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.87batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 14%|████▍                          | 7/49 [00:00<00:00, 59.69batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 62.46batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 62.45batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 61.09batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 59.62batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 54.53batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 51.69batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 51.66batch/s]
+Validation 3 -> LOSS = 1.04
+Validation 3 -> BLEU = 77.80, 90.7/81.7/74.8/68.4 (BP=0.992, ratio=0.992, hyp_len=14262, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 1.04 @ validation 3
+--> Best BLEU so far: 77.80 @ validation 3
+Starting Epoch 4
+Epoch 4 - update       1470 => loss:   1.210 (#OOM: 0)
+Epoch 4 - update       1500 => loss:   1.464 (#OOM: 0)
+Epoch 4 - update       1530 => loss:   1.108 (#OOM: 0)
+Epoch 4 - update       1560 => loss:   1.201 (#OOM: 0)
+Epoch 4 - update       1590 => loss:   1.950 (#OOM: 0)
+Epoch 4 - update       1620 => loss:   1.291 (#OOM: 0)
+Epoch 4 - update       1650 => loss:   1.211 (#OOM: 0)
+Epoch 4 - update       1680 => loss:   1.051 (#OOM: 0)
+Epoch 4 - update       1710 => loss:   1.007 (#OOM: 0)
+Epoch 4 - update       1740 => loss:   1.196 (#OOM: 0)
+Epoch 4 - update       1770 => loss:   0.960 (#OOM: 0)
+Epoch 4 - update       1800 => loss:   1.119 (#OOM: 0)
+Epoch 4 - update       1830 => loss:   1.036 (#OOM: 0)
+Epoch 4 - update       1860 => loss:   0.849 (#OOM: 0)
+Epoch 4 - update       1890 => loss:   0.960 (#OOM: 0)
+Epoch 4 - update       1920 => loss:   0.905 (#OOM: 0)
+--> Epoch 4 finished with mean loss 1.16083
+--> Overhead/Training/Evaluation: 0.04/0.58/0.00 mins (total: 0.62 mins)   (826 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 50.17batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 45.75batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 46.34batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 49.74batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 52.31batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.97batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 14%|████▍                          | 7/49 [00:00<00:00, 64.66batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 47.71batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 49.58batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 52.14batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 52.39batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 48.19batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.16batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.14batch/s]
+Validation 4 -> LOSS = 0.75
+Validation 4 -> BLEU = 84.65, 92.7/86.8/82.1/77.6 (BP=1.000, ratio=1.015, hyp_len=14592, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.75 @ validation 4
+--> Best BLEU so far: 84.65 @ validation 4
+Starting Epoch 5
+Epoch 5 - update       1950 => loss:   0.796 (#OOM: 0)
+Epoch 5 - update       1980 => loss:   0.737 (#OOM: 0)
+Epoch 5 - update       2010 => loss:   0.854 (#OOM: 0)
+Epoch 5 - update       2040 => loss:   0.899 (#OOM: 0)
+Epoch 5 - update       2070 => loss:   0.770 (#OOM: 0)
+Epoch 5 - update       2100 => loss:   0.988 (#OOM: 0)
+Epoch 5 - update       2130 => loss:   1.027 (#OOM: 0)
+Epoch 5 - update       2160 => loss:   0.733 (#OOM: 0)
+Epoch 5 - update       2190 => loss:   0.795 (#OOM: 0)
+Epoch 5 - update       2220 => loss:   0.772 (#OOM: 0)
+Epoch 5 - update       2250 => loss:   0.854 (#OOM: 0)
+Epoch 5 - update       2280 => loss:   0.765 (#OOM: 0)
+Epoch 5 - update       2310 => loss:   0.933 (#OOM: 0)
+Epoch 5 - update       2340 => loss:   0.876 (#OOM: 0)
+Epoch 5 - update       2370 => loss:   0.883 (#OOM: 0)
+Epoch 5 - update       2400 => loss:   0.770 (#OOM: 0)
+--> Epoch 5 finished with mean loss 0.91131
+--> Overhead/Training/Evaluation: 0.04/0.58/0.00 mins (total: 0.62 mins)   (830 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 56.96batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 52.86batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 52.99batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 50.33batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 50.52batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.77batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 57.92batch/s] 27%|███████▉                      | 13/49 [00:00<00:00, 59.43batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 45.80batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 44.52batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 45.28batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 43.36batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 44.39batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 44.75batch/s]
+Validation 5 -> LOSS = 0.62
+Validation 5 -> BLEU = 88.45, 95.0/90.3/86.4/82.6 (BP=1.000, ratio=1.003, hyp_len=14424, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.62 @ validation 5
+--> Best BLEU so far: 88.45 @ validation 5
+Starting Epoch 6
+Epoch 6 - update       2430 => loss:   0.949 (#OOM: 0)
+Epoch 6 - update       2460 => loss:   0.696 (#OOM: 0)
+Epoch 6 - update       2490 => loss:   0.808 (#OOM: 0)
+Epoch 6 - update       2520 => loss:   0.875 (#OOM: 0)
+Epoch 6 - update       2550 => loss:   0.614 (#OOM: 0)
+Epoch 6 - update       2580 => loss:   0.556 (#OOM: 0)
+Epoch 6 - update       2610 => loss:   0.706 (#OOM: 0)
+Epoch 6 - update       2640 => loss:   0.817 (#OOM: 0)
+Epoch 6 - update       2670 => loss:   1.000 (#OOM: 0)
+Epoch 6 - update       2700 => loss:   0.564 (#OOM: 0)
+Epoch 6 - update       2730 => loss:   0.763 (#OOM: 0)
+Epoch 6 - update       2760 => loss:   0.701 (#OOM: 0)
+Epoch 6 - update       2790 => loss:   0.501 (#OOM: 0)
+Epoch 6 - update       2820 => loss:   0.879 (#OOM: 0)
+Epoch 6 - update       2850 => loss:   0.627 (#OOM: 0)
+Epoch 6 - update       2880 => loss:   0.614 (#OOM: 0)
+--> Epoch 6 finished with mean loss 0.75236
+--> Overhead/Training/Evaluation: 0.04/0.59/0.00 mins (total: 0.62 mins)   (821 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 41.45batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 42.85batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 52.06batch/s] 76%|██████████████████████▉       | 26/34 [00:00<00:00, 49.63batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.57batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.51batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 39.86batch/s] 16%|█████                          | 8/49 [00:00<00:01, 26.97batch/s] 24%|███████▎                      | 12/49 [00:00<00:01, 29.99batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 34.94batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 36.88batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 36.28batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 37.33batch/s] 86%|█████████████████████████▋    | 42/49 [00:01<00:00, 39.09batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 37.73batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 37.70batch/s]
+Validation 6 -> LOSS = 0.55
+Validation 6 -> BLEU = 90.01, 95.7/91.6/88.2/85.0 (BP=1.000, ratio=1.002, hyp_len=14406, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.55 @ validation 6
+--> Best BLEU so far: 90.01 @ validation 6
+Starting Epoch 7
+Epoch 7 - update       2910 => loss:   0.823 (#OOM: 0)
+Epoch 7 - update       2940 => loss:   0.563 (#OOM: 0)
+Epoch 7 - update       2970 => loss:   0.572 (#OOM: 0)
+Epoch 7 - update       3000 => loss:   0.421 (#OOM: 0)
+Epoch 7 - update       3030 => loss:   0.587 (#OOM: 0)
+Epoch 7 - update       3060 => loss:   0.594 (#OOM: 0)
+Epoch 7 - update       3090 => loss:   0.695 (#OOM: 0)
+Epoch 7 - update       3120 => loss:   0.442 (#OOM: 0)
+Epoch 7 - update       3150 => loss:   0.625 (#OOM: 0)
+Epoch 7 - update       3180 => loss:   0.582 (#OOM: 0)
+Epoch 7 - update       3210 => loss:   0.596 (#OOM: 0)
+Epoch 7 - update       3240 => loss:   0.507 (#OOM: 0)
+Epoch 7 - update       3270 => loss:   0.722 (#OOM: 0)
+Epoch 7 - update       3300 => loss:   0.487 (#OOM: 0)
+Epoch 7 - update       3330 => loss:   0.652 (#OOM: 0)
+Epoch 7 - update       3360 => loss:   0.556 (#OOM: 0)
+--> Epoch 7 finished with mean loss 0.65041
+--> Overhead/Training/Evaluation: 0.04/0.63/0.00 mins (total: 0.67 mins)   (768 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 43.88batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 45.35batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 48.26batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 50.98batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 51.13batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.39batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.36batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 25.83batch/s] 18%|█████▋                         | 9/49 [00:00<00:01, 33.27batch/s] 29%|████████▌                     | 14/49 [00:00<00:01, 32.91batch/s] 39%|███████████▋                  | 19/49 [00:00<00:00, 35.33batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 33.95batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 35.71batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 37.84batch/s] 84%|█████████████████████████     | 41/49 [00:01<00:00, 38.87batch/s] 96%|████████████████████████████▊ | 47/49 [00:01<00:00, 38.70batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 38.93batch/s]
+Validation 7 -> LOSS = 0.49
+Validation 7 -> BLEU = 91.03, 96.1/92.4/89.4/86.5 (BP=1.000, ratio=1.003, hyp_len=14425, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.49 @ validation 7
+--> Best BLEU so far: 91.03 @ validation 7
+Starting Epoch 8
+Epoch 8 - update       3390 => loss:   0.672 (#OOM: 0)
+Epoch 8 - update       3420 => loss:   0.686 (#OOM: 0)
+Epoch 8 - update       3450 => loss:   1.564 (#OOM: 0)
+Epoch 8 - update       3480 => loss:   0.754 (#OOM: 0)
+Epoch 8 - update       3510 => loss:   0.485 (#OOM: 0)
+Epoch 8 - update       3540 => loss:   1.304 (#OOM: 0)
+Epoch 8 - update       3570 => loss:   0.492 (#OOM: 0)
+Epoch 8 - update       3600 => loss:   0.442 (#OOM: 0)
+Epoch 8 - update       3630 => loss:   0.378 (#OOM: 0)
+Epoch 8 - update       3660 => loss:   0.501 (#OOM: 0)
+Epoch 8 - update       3690 => loss:   0.512 (#OOM: 0)
+Epoch 8 - update       3720 => loss:   0.383 (#OOM: 0)
+Epoch 8 - update       3750 => loss:   0.592 (#OOM: 0)
+Epoch 8 - update       3780 => loss:   0.438 (#OOM: 0)
+Epoch 8 - update       3810 => loss:   0.649 (#OOM: 0)
+Epoch 8 - update       3840 => loss:   0.481 (#OOM: 0)
+--> Epoch 8 finished with mean loss 0.57182
+--> Overhead/Training/Evaluation: 0.04/0.57/0.00 mins (total: 0.60 mins)   (848 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 34.50batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 46.83batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 47.51batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 50.53batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 50.79batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.66batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 39.63batch/s] 18%|█████▋                         | 9/49 [00:00<00:00, 41.66batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 39.84batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 46.04batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 46.41batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 46.50batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 46.26batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.10batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.08batch/s]
+Validation 8 -> LOSS = 0.45
+Validation 8 -> BLEU = 91.76, 96.6/93.1/90.2/87.4 (BP=1.000, ratio=1.000, hyp_len=14383, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.45 @ validation 8
+--> Best BLEU so far: 91.76 @ validation 8
+Starting Epoch 9
+Epoch 9 - update       3870 => loss:   0.658 (#OOM: 0)
+Epoch 9 - update       3900 => loss:   0.569 (#OOM: 0)
+Epoch 9 - update       3930 => loss:   0.575 (#OOM: 0)
+Epoch 9 - update       3960 => loss:   0.474 (#OOM: 0)
+Epoch 9 - update       3990 => loss:   0.476 (#OOM: 0)
+Epoch 9 - update       4020 => loss:   0.595 (#OOM: 0)
+Epoch 9 - update       4050 => loss:   0.548 (#OOM: 0)
+Epoch 9 - update       4080 => loss:   0.610 (#OOM: 0)
+Epoch 9 - update       4110 => loss:   0.488 (#OOM: 0)
+Epoch 9 - update       4140 => loss:   0.567 (#OOM: 0)
+Epoch 9 - update       4170 => loss:   0.361 (#OOM: 0)
+Epoch 9 - update       4200 => loss:   0.481 (#OOM: 0)
+Epoch 9 - update       4230 => loss:   0.475 (#OOM: 0)
+Epoch 9 - update       4260 => loss:   0.445 (#OOM: 0)
+Epoch 9 - update       4290 => loss:   0.366 (#OOM: 0)
+Epoch 9 - update       4320 => loss:   0.462 (#OOM: 0)
+--> Epoch 9 finished with mean loss 0.51397
+--> Overhead/Training/Evaluation: 0.04/0.61/0.00 mins (total: 0.65 mins)   (795 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 47.03batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 45.47batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 48.78batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 47.79batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 50.63batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.12batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 51.52batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 46.59batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 36.11batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 34.21batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 35.35batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 37.06batch/s] 88%|██████████████████████████▎   | 43/49 [00:01<00:00, 39.36batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 39.95batch/s]
+Validation 9 -> LOSS = 0.41
+Validation 9 -> BLEU = 92.09, 96.9/93.5/90.7/88.1 (BP=0.998, ratio=0.998, hyp_len=14360, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.41 @ validation 9
+--> Best BLEU so far: 92.09 @ validation 9
+Starting Epoch 10
+Epoch 10 - update       4350 => loss:   0.699 (#OOM: 0)
+Epoch 10 - update       4380 => loss:   0.526 (#OOM: 0)
+Epoch 10 - update       4410 => loss:   0.403 (#OOM: 0)
+Epoch 10 - update       4440 => loss:   0.805 (#OOM: 0)
+Epoch 10 - update       4470 => loss:   0.430 (#OOM: 0)
+Epoch 10 - update       4500 => loss:   0.335 (#OOM: 0)
+Epoch 10 - update       4530 => loss:   0.433 (#OOM: 0)
+Epoch 10 - update       4560 => loss:   0.411 (#OOM: 0)
+Epoch 10 - update       4590 => loss:   0.389 (#OOM: 0)
+Epoch 10 - update       4620 => loss:   0.528 (#OOM: 0)
+Epoch 10 - update       4650 => loss:   0.350 (#OOM: 0)
+Epoch 10 - update       4680 => loss:   0.278 (#OOM: 0)
+Epoch 10 - update       4710 => loss:   0.360 (#OOM: 0)
+Epoch 10 - update       4740 => loss:   0.315 (#OOM: 0)
+Epoch 10 - update       4770 => loss:   0.381 (#OOM: 0)
+Epoch 10 - update       4800 => loss:   0.575 (#OOM: 0)
+--> Epoch 10 finished with mean loss 0.45618
+--> Overhead/Training/Evaluation: 0.05/0.65/0.00 mins (total: 0.70 mins)   (743 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 48.96batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 51.26batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 50.62batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 51.94batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 53.15batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.59batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 33.32batch/s] 20%|██████                        | 10/49 [00:00<00:00, 44.93batch/s] 33%|█████████▊                    | 16/49 [00:00<00:01, 32.09batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 34.31batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 35.50batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 36.63batch/s] 82%|████████████████████████▍     | 40/49 [00:01<00:00, 37.69batch/s] 94%|████████████████████████████▏ | 46/49 [00:01<00:00, 38.36batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 38.81batch/s]
+Validation 10 -> LOSS = 0.39
+Validation 10 -> BLEU = 92.58, 97.0/93.8/91.3/88.8 (BP=0.999, ratio=0.999, hyp_len=14367, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.39 @ validation 10
+--> Best BLEU so far: 92.58 @ validation 10
+Starting Epoch 11
+Epoch 11 - update       4830 => loss:   0.494 (#OOM: 0)
+Epoch 11 - update       4860 => loss:   0.428 (#OOM: 0)
+Epoch 11 - update       4890 => loss:   0.424 (#OOM: 0)
+Epoch 11 - update       4920 => loss:   0.449 (#OOM: 0)
+Epoch 11 - update       4950 => loss:   0.401 (#OOM: 0)
+Epoch 11 - update       4980 => loss:   0.257 (#OOM: 0)
+Epoch 11 - update       5010 => loss:   0.426 (#OOM: 0)
+Epoch 11 - update       5040 => loss:   0.354 (#OOM: 0)
+Epoch 11 - update       5070 => loss:   0.320 (#OOM: 0)
+Epoch 11 - update       5100 => loss:   0.482 (#OOM: 0)
+Epoch 11 - update       5130 => loss:   0.457 (#OOM: 0)
+Epoch 11 - update       5160 => loss:   0.239 (#OOM: 0)
+Epoch 11 - update       5190 => loss:   0.469 (#OOM: 0)
+Epoch 11 - update       5220 => loss:   0.478 (#OOM: 0)
+Epoch 11 - update       5250 => loss:   0.409 (#OOM: 0)
+Epoch 11 - update       5280 => loss:   0.464 (#OOM: 0)
+--> Epoch 11 finished with mean loss 0.41259
+--> Overhead/Training/Evaluation: 0.03/0.55/0.00 mins (total: 0.58 mins)   (884 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 45.13batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 51.99batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 51.55batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 52.48batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 50.66batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.16batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 43.77batch/s] 20%|██████                        | 10/49 [00:00<00:00, 41.28batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 46.11batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 43.14batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 46.33batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 44.52batch/s] 88%|██████████████████████████▎   | 43/49 [00:01<00:00, 41.57batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 40.26batch/s]
+Validation 11 -> LOSS = 0.36
+Validation 11 -> BLEU = 92.77, 96.9/93.9/91.4/89.0 (BP=1.000, ratio=1.002, hyp_len=14411, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.36 @ validation 11
+--> Best BLEU so far: 92.77 @ validation 11
+Starting Epoch 12
+Epoch 12 - update       5310 => loss:   0.245 (#OOM: 0)
+Epoch 12 - update       5340 => loss:   0.360 (#OOM: 0)
+Epoch 12 - update       5370 => loss:   0.367 (#OOM: 0)
+Epoch 12 - update       5400 => loss:   0.393 (#OOM: 0)
+Epoch 12 - update       5430 => loss:   0.320 (#OOM: 0)
+Epoch 12 - update       5460 => loss:   0.335 (#OOM: 0)
+Epoch 12 - update       5490 => loss:   0.467 (#OOM: 0)
+Epoch 12 - update       5520 => loss:   0.483 (#OOM: 0)
+Epoch 12 - update       5550 => loss:   0.495 (#OOM: 0)
+Epoch 12 - update       5580 => loss:   0.351 (#OOM: 0)
+Epoch 12 - update       5610 => loss:   0.369 (#OOM: 0)
+Epoch 12 - update       5640 => loss:   0.414 (#OOM: 0)
+Epoch 12 - update       5670 => loss:   0.361 (#OOM: 0)
+Epoch 12 - update       5700 => loss:   0.242 (#OOM: 0)
+Epoch 12 - update       5730 => loss:   0.383 (#OOM: 0)
+Epoch 12 - update       5760 => loss:   0.526 (#OOM: 0)
+--> Epoch 12 finished with mean loss 0.37537
+--> Overhead/Training/Evaluation: 0.03/0.55/0.00 mins (total: 0.58 mins)   (883 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 42.08batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 45.66batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 48.20batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 45.62batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 47.03batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.58batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 38.28batch/s] 20%|██████                        | 10/49 [00:00<00:00, 42.57batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 42.56batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 43.38batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 44.90batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 45.39batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 43.67batch/s] 92%|███████████████████████████▌  | 45/49 [00:01<00:00, 44.29batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 44.49batch/s]
+Validation 12 -> LOSS = 0.35
+Validation 12 -> BLEU = 93.21, 97.1/94.3/91.9/89.6 (BP=1.000, ratio=1.002, hyp_len=14405, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.35 @ validation 12
+--> Best BLEU so far: 93.21 @ validation 12
+Starting Epoch 13
+Epoch 13 - update       5790 => loss:   0.375 (#OOM: 0)
+Epoch 13 - update       5820 => loss:   0.478 (#OOM: 0)
+Epoch 13 - update       5850 => loss:   0.407 (#OOM: 0)
+Epoch 13 - update       5880 => loss:   0.410 (#OOM: 0)
+Epoch 13 - update       5910 => loss:   0.301 (#OOM: 0)
+Epoch 13 - update       5940 => loss:   0.199 (#OOM: 0)
+Epoch 13 - update       5970 => loss:   0.366 (#OOM: 0)
+Epoch 13 - update       6000 => loss:   0.272 (#OOM: 0)
+Epoch 13 - update       6030 => loss:   0.378 (#OOM: 0)
+Epoch 13 - update       6060 => loss:   0.375 (#OOM: 0)
+Epoch 13 - update       6090 => loss:   0.511 (#OOM: 0)
+Epoch 13 - update       6120 => loss:   0.355 (#OOM: 0)
+Epoch 13 - update       6150 => loss:   0.292 (#OOM: 0)
+Epoch 13 - update       6180 => loss:   0.188 (#OOM: 0)
+Epoch 13 - update       6210 => loss:   0.206 (#OOM: 0)
+Epoch 13 - update       6240 => loss:   0.225 (#OOM: 0)
+--> Epoch 13 finished with mean loss 0.34388
+--> Overhead/Training/Evaluation: 0.04/0.60/0.00 mins (total: 0.64 mins)   (803 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 47.59batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 48.61batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 48.12batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 48.84batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 49.88batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.08batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 47.69batch/s] 22%|██████▋                       | 11/49 [00:00<00:00, 50.25batch/s] 35%|██████████▍                   | 17/49 [00:00<00:00, 42.25batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 44.04batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 44.42batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 44.83batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 44.54batch/s] 96%|████████████████████████████▊ | 47/49 [00:01<00:00, 45.31batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.77batch/s]
+Validation 13 -> LOSS = 0.47
+Validation 13 -> BLEU = 90.08, 97.5/94.2/91.4/88.7 (BP=0.970, ratio=0.970, hyp_len=13953, ref_len=14382)
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.35 @ validation 12
+--> Best BLEU so far: 93.21 @ validation 12
+Starting Epoch 14
+Epoch 14 - update       6270 => loss:   0.282 (#OOM: 0)
+Epoch 14 - update       6300 => loss:   0.260 (#OOM: 0)
+Epoch 14 - update       6330 => loss:   0.304 (#OOM: 0)
+Epoch 14 - update       6360 => loss:   0.485 (#OOM: 0)
+Epoch 14 - update       6390 => loss:   0.309 (#OOM: 0)
+Epoch 14 - update       6420 => loss:   0.260 (#OOM: 0)
+Epoch 14 - update       6450 => loss:   0.226 (#OOM: 0)
+Epoch 14 - update       6480 => loss:   0.226 (#OOM: 0)
+Epoch 14 - update       6510 => loss:   0.247 (#OOM: 0)
+Epoch 14 - update       6540 => loss:   0.263 (#OOM: 0)
+Epoch 14 - update       6570 => loss:   0.381 (#OOM: 0)
+Epoch 14 - update       6600 => loss:   0.459 (#OOM: 0)
+Epoch 14 - update       6630 => loss:   0.312 (#OOM: 0)
+Epoch 14 - update       6660 => loss:   0.303 (#OOM: 0)
+Epoch 14 - update       6690 => loss:   0.295 (#OOM: 0)
+Epoch 14 - update       6720 => loss:   0.348 (#OOM: 0)
+--> Epoch 14 finished with mean loss 0.31859
+--> Overhead/Training/Evaluation: 0.03/0.54/0.00 mins (total: 0.58 mins)   (888 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 47.21batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 50.81batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 49.30batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 47.76batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 48.70batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.91batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 44.74batch/s] 20%|██████                        | 10/49 [00:00<00:00, 41.55batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 42.46batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 43.88batch/s] 51%|███████████████▎              | 25/49 [00:00<00:00, 43.85batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 40.73batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 42.55batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 43.24batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 41.91batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 41.84batch/s]
+Validation 14 -> LOSS = 0.31
+Validation 14 -> BLEU = 93.97, 97.6/95.0/92.9/90.9 (BP=0.999, ratio=0.999, hyp_len=14367, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.31 @ validation 14
+--> Best BLEU so far: 93.97 @ validation 14
+Starting Epoch 15
+Epoch 15 - update       6750 => loss:   0.241 (#OOM: 0)
+Epoch 15 - update       6780 => loss:   0.218 (#OOM: 0)
+Epoch 15 - update       6810 => loss:   0.242 (#OOM: 0)
+Epoch 15 - update       6840 => loss:   0.253 (#OOM: 0)
+Epoch 15 - update       6870 => loss:   0.346 (#OOM: 0)
+Epoch 15 - update       6900 => loss:   0.288 (#OOM: 0)
+Epoch 15 - update       6930 => loss:   0.271 (#OOM: 0)
+Epoch 15 - update       6960 => loss:   0.234 (#OOM: 0)
+Epoch 15 - update       6990 => loss:   0.337 (#OOM: 0)
+Epoch 15 - update       7020 => loss:   0.188 (#OOM: 0)
+Epoch 15 - update       7050 => loss:   0.311 (#OOM: 0)
+Epoch 15 - update       7080 => loss:   0.273 (#OOM: 0)
+Epoch 15 - update       7110 => loss:   0.297 (#OOM: 0)
+Epoch 15 - update       7140 => loss:   0.235 (#OOM: 0)
+Epoch 15 - update       7170 => loss:   0.197 (#OOM: 0)
+Epoch 15 - update       7200 => loss:   0.241 (#OOM: 0)
+Epoch 15 - update       7230 => loss:   0.335 (#OOM: 0)
+--> Epoch 15 finished with mean loss 0.29446
+--> Overhead/Training/Evaluation: 0.04/0.62/0.00 mins (total: 0.66 mins)   (784 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 52.61batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 51.86batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 53.03batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 54.44batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 53.60batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.28batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 32.55batch/s] 20%|██████                        | 10/49 [00:00<00:01, 33.25batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 38.65batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 40.11batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 42.91batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 43.28batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 43.46batch/s] 94%|████████████████████████████▏ | 46/49 [00:01<00:00, 43.68batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 44.01batch/s]
+Validation 15 -> LOSS = 0.31
+Validation 15 -> BLEU = 94.24, 97.7/95.3/93.3/91.2 (BP=0.999, ratio=0.999, hyp_len=14366, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.31 @ validation 15
+--> Best BLEU so far: 94.24 @ validation 15
+Starting Epoch 16
+Epoch 16 - update       7260 => loss:   0.323 (#OOM: 0)
+Epoch 16 - update       7290 => loss:   0.365 (#OOM: 0)
+Epoch 16 - update       7320 => loss:   0.235 (#OOM: 0)
+Epoch 16 - update       7350 => loss:   0.334 (#OOM: 0)
+Epoch 16 - update       7380 => loss:   0.239 (#OOM: 0)
+Epoch 16 - update       7410 => loss:   0.287 (#OOM: 0)
+Epoch 16 - update       7440 => loss:   0.276 (#OOM: 0)
+Epoch 16 - update       7470 => loss:   0.187 (#OOM: 0)
+Epoch 16 - update       7500 => loss:   0.272 (#OOM: 0)
+Epoch 16 - update       7530 => loss:   0.187 (#OOM: 0)
+Epoch 16 - update       7560 => loss:   0.384 (#OOM: 0)
+Epoch 16 - update       7590 => loss:   0.208 (#OOM: 0)
+Epoch 16 - update       7620 => loss:   0.280 (#OOM: 0)
+Epoch 16 - update       7650 => loss:   0.195 (#OOM: 0)
+Epoch 16 - update       7680 => loss:   0.289 (#OOM: 0)
+Epoch 16 - update       7710 => loss:   0.289 (#OOM: 0)
+--> Epoch 16 finished with mean loss 0.27127
+--> Overhead/Training/Evaluation: 0.04/0.60/0.00 mins (total: 0.64 mins)   (808 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 44.33batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 54.83batch/s] 56%|████████████████▊             | 19/34 [00:00<00:00, 52.75batch/s] 76%|██████████████████████▉       | 26/34 [00:00<00:00, 52.19batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 52.34batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.54batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 14%|████▍                          | 7/49 [00:00<00:00, 66.07batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 52.97batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 52.41batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 49.84batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 47.85batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 47.19batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.69batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.67batch/s]
+Validation 16 -> LOSS = 0.30
+Validation 16 -> BLEU = 94.38, 97.8/95.4/93.5/91.5 (BP=0.999, ratio=0.999, hyp_len=14362, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.30 @ validation 16
+--> Best BLEU so far: 94.38 @ validation 16
+Starting Epoch 17
+Epoch 17 - update       7740 => loss:   0.294 (#OOM: 0)
+Epoch 17 - update       7770 => loss:   0.177 (#OOM: 0)
+Epoch 17 - update       7800 => loss:   0.228 (#OOM: 0)
+Epoch 17 - update       7830 => loss:   0.247 (#OOM: 0)
+Epoch 17 - update       7860 => loss:   0.163 (#OOM: 0)
+Epoch 17 - update       7890 => loss:   0.268 (#OOM: 0)
+Epoch 17 - update       7920 => loss:   0.320 (#OOM: 0)
+Epoch 17 - update       7950 => loss:   0.286 (#OOM: 0)
+Epoch 17 - update       7980 => loss:   0.224 (#OOM: 0)
+Epoch 17 - update       8010 => loss:   0.218 (#OOM: 0)
+Epoch 17 - update       8040 => loss:   0.208 (#OOM: 0)
+Epoch 17 - update       8070 => loss:   0.293 (#OOM: 0)
+Epoch 17 - update       8100 => loss:   0.463 (#OOM: 0)
+Epoch 17 - update       8130 => loss:   0.258 (#OOM: 0)
+Epoch 17 - update       8160 => loss:   0.249 (#OOM: 0)
+Epoch 17 - update       8190 => loss:   0.219 (#OOM: 0)
+--> Epoch 17 finished with mean loss 0.25319
+--> Overhead/Training/Evaluation: 0.03/0.57/0.00 mins (total: 0.61 mins)   (846 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 45.68batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 44.25batch/s] 44%|█████████████▏                | 15/34 [00:00<00:00, 43.90batch/s] 62%|██████████████████▌           | 21/34 [00:00<00:00, 47.42batch/s] 79%|███████████████████████▊      | 27/34 [00:00<00:00, 49.32batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 48.08batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.25batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 36.93batch/s] 18%|█████▋                         | 9/49 [00:00<00:01, 39.20batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 42.52batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 37.56batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 40.50batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 42.12batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 42.73batch/s] 92%|███████████████████████████▌  | 45/49 [00:01<00:00, 42.92batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 41.38batch/s]
+Validation 17 -> LOSS = 0.29
+Validation 17 -> BLEU = 94.54, 97.8/95.5/93.6/91.7 (BP=0.999, ratio=0.999, hyp_len=14368, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.29 @ validation 17
+--> Best BLEU so far: 94.54 @ validation 17
+Starting Epoch 18
+Epoch 18 - update       8220 => loss:   0.155 (#OOM: 0)
+Epoch 18 - update       8250 => loss:   0.190 (#OOM: 0)
+Epoch 18 - update       8280 => loss:   0.209 (#OOM: 0)
+Epoch 18 - update       8310 => loss:   0.259 (#OOM: 0)
+Epoch 18 - update       8340 => loss:   0.140 (#OOM: 0)
+Epoch 18 - update       8370 => loss:   0.182 (#OOM: 0)
+Epoch 18 - update       8400 => loss:   0.202 (#OOM: 0)
+Epoch 18 - update       8430 => loss:   0.313 (#OOM: 0)
+Epoch 18 - update       8460 => loss:   0.211 (#OOM: 0)
+Epoch 18 - update       8490 => loss:   0.319 (#OOM: 0)
+Epoch 18 - update       8520 => loss:   0.306 (#OOM: 0)
+Epoch 18 - update       8550 => loss:   0.445 (#OOM: 0)
+Epoch 18 - update       8580 => loss:   0.299 (#OOM: 0)
+Epoch 18 - update       8610 => loss:   0.207 (#OOM: 0)
+Epoch 18 - update       8640 => loss:   0.243 (#OOM: 0)
+Epoch 18 - update       8670 => loss:   0.489 (#OOM: 0)
+--> Epoch 18 finished with mean loss 0.23983
+--> Overhead/Training/Evaluation: 0.04/0.64/0.00 mins (total: 0.68 mins)   (756 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 49.66batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 50.68batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 56.11batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 52.91batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 53.60batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.41batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 39.47batch/s] 16%|█████                          | 8/49 [00:00<00:01, 38.54batch/s] 27%|███████▉                      | 13/49 [00:00<00:00, 41.48batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 42.34batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 42.99batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 42.96batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 44.78batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 47.68batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 45.52batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.75batch/s]
+Validation 18 -> LOSS = 0.28
+Validation 18 -> BLEU = 94.92, 97.9/95.8/94.0/92.1 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.28 @ validation 18
+--> Best BLEU so far: 94.92 @ validation 18
+Starting Epoch 19
+Epoch 19 - update       8700 => loss:   0.219 (#OOM: 0)
+Epoch 19 - update       8730 => loss:   0.255 (#OOM: 0)
+Epoch 19 - update       8760 => loss:   0.162 (#OOM: 0)
+Epoch 19 - update       8790 => loss:   0.196 (#OOM: 0)
+Epoch 19 - update       8820 => loss:   0.148 (#OOM: 0)
+Epoch 19 - update       8850 => loss:   0.184 (#OOM: 0)
+Epoch 19 - update       8880 => loss:   0.237 (#OOM: 0)
+Epoch 19 - update       8910 => loss:   0.254 (#OOM: 0)
+Epoch 19 - update       8940 => loss:   0.246 (#OOM: 0)
+Epoch 19 - update       8970 => loss:   0.185 (#OOM: 0)
+Epoch 19 - update       9000 => loss:   0.124 (#OOM: 0)
+Epoch 19 - update       9030 => loss:   0.193 (#OOM: 0)
+Epoch 19 - update       9060 => loss:   0.198 (#OOM: 0)
+Epoch 19 - update       9090 => loss:   0.320 (#OOM: 0)
+Epoch 19 - update       9120 => loss:   0.176 (#OOM: 0)
+Epoch 19 - update       9150 => loss:   0.178 (#OOM: 0)
+--> Epoch 19 finished with mean loss 0.22725
+--> Overhead/Training/Evaluation: 0.04/0.62/0.00 mins (total: 0.66 mins)   (778 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 38.54batch/s] 26%|████████▏                      | 9/34 [00:00<00:00, 43.14batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 49.94batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 51.37batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 51.30batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.75batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 33.14batch/s] 20%|██████                        | 10/49 [00:00<00:00, 41.65batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 42.83batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 42.59batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 43.86batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 44.55batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 45.05batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 46.09batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.76batch/s]
+Validation 19 -> LOSS = 0.28
+Validation 19 -> BLEU = 95.04, 98.0/95.9/94.2/92.5 (BP=0.999, ratio=0.999, hyp_len=14370, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.28 @ validation 19
+--> Best BLEU so far: 95.04 @ validation 19
+Starting Epoch 20
+Epoch 20 - update       9180 => loss:   0.180 (#OOM: 0)
+Epoch 20 - update       9210 => loss:   0.263 (#OOM: 0)
+Epoch 20 - update       9240 => loss:   0.196 (#OOM: 0)
+Epoch 20 - update       9270 => loss:   0.234 (#OOM: 0)
+Epoch 20 - update       9300 => loss:   0.209 (#OOM: 0)
+Epoch 20 - update       9330 => loss:   0.188 (#OOM: 0)
+Epoch 20 - update       9360 => loss:   0.184 (#OOM: 0)
+Epoch 20 - update       9390 => loss:   0.306 (#OOM: 0)
+Epoch 20 - update       9420 => loss:   0.234 (#OOM: 0)
+Epoch 20 - update       9450 => loss:   0.262 (#OOM: 0)
+Epoch 20 - update       9480 => loss:   0.135 (#OOM: 0)
+Epoch 20 - update       9510 => loss:   0.155 (#OOM: 0)
+Epoch 20 - update       9540 => loss:   0.208 (#OOM: 0)
+Epoch 20 - update       9570 => loss:   0.232 (#OOM: 0)
+Epoch 20 - update       9600 => loss:   0.236 (#OOM: 0)
+Epoch 20 - update       9630 => loss:   0.271 (#OOM: 0)
+--> Epoch 20 finished with mean loss 0.21272
+--> Overhead/Training/Evaluation: 0.04/0.65/0.00 mins (total: 0.69 mins)   (744 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 43.09batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 47.01batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 48.02batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 49.96batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 49.84batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.44batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 26.30batch/s] 20%|██████                        | 10/49 [00:00<00:00, 39.43batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 42.60batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 43.15batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 43.51batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 43.96batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 44.96batch/s] 94%|████████████████████████████▏ | 46/49 [00:01<00:00, 44.76batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.20batch/s]
+Validation 20 -> LOSS = 0.28
+Validation 20 -> BLEU = 95.19, 98.1/96.0/94.3/92.6 (BP=1.000, ratio=1.000, hyp_len=14376, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.28 @ validation 20
+--> Best BLEU so far: 95.19 @ validation 20
+Starting Epoch 21
+Epoch 21 - update       9660 => loss:   0.115 (#OOM: 0)
+Epoch 21 - update       9690 => loss:   0.116 (#OOM: 0)
+Epoch 21 - update       9720 => loss:   0.272 (#OOM: 0)
+Epoch 21 - update       9750 => loss:   0.291 (#OOM: 0)
+Epoch 21 - update       9780 => loss:   0.185 (#OOM: 0)
+Epoch 21 - update       9810 => loss:   0.167 (#OOM: 0)
+Epoch 21 - update       9840 => loss:   0.240 (#OOM: 0)
+Epoch 21 - update       9870 => loss:   0.173 (#OOM: 0)
+Epoch 21 - update       9900 => loss:   0.239 (#OOM: 0)
+Epoch 21 - update       9930 => loss:   0.313 (#OOM: 0)
+Epoch 21 - update       9960 => loss:   0.196 (#OOM: 0)
+Epoch 21 - update       9990 => loss:   0.184 (#OOM: 0)
+Epoch 21 - update      10020 => loss:   0.375 (#OOM: 0)
+Epoch 21 - update      10050 => loss:   0.210 (#OOM: 0)
+Epoch 21 - update      10080 => loss:   0.127 (#OOM: 0)
+Epoch 21 - update      10110 => loss:   0.231 (#OOM: 0)
+--> Epoch 21 finished with mean loss 0.20305
+--> Overhead/Training/Evaluation: 0.04/0.65/0.00 mins (total: 0.69 mins)   (745 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 52.55batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 54.45batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 52.82batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 52.16batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 49.79batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.78batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 32.99batch/s] 20%|██████                        | 10/49 [00:00<00:00, 39.37batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 40.07batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 46.98batch/s] 65%|███████████████████▌          | 32/49 [00:00<00:00, 44.99batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 42.83batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 43.77batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 43.82batch/s]
+Validation 21 -> LOSS = 0.27
+Validation 21 -> BLEU = 95.29, 98.1/96.1/94.5/92.7 (BP=1.000, ratio=1.000, hyp_len=14375, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.27 @ validation 21
+--> Best BLEU so far: 95.29 @ validation 21
+Starting Epoch 22
+Epoch 22 - update      10140 => loss:   0.141 (#OOM: 0)
+Epoch 22 - update      10170 => loss:   0.190 (#OOM: 0)
+Epoch 22 - update      10200 => loss:   0.246 (#OOM: 0)
+Epoch 22 - update      10230 => loss:   0.156 (#OOM: 0)
+Epoch 22 - update      10260 => loss:   0.161 (#OOM: 0)
+Epoch 22 - update      10290 => loss:   0.179 (#OOM: 0)
+Epoch 22 - update      10320 => loss:   0.202 (#OOM: 0)
+Epoch 22 - update      10350 => loss:   0.135 (#OOM: 0)
+Epoch 22 - update      10380 => loss:   0.222 (#OOM: 0)
+Epoch 22 - update      10410 => loss:   0.162 (#OOM: 0)
+Epoch 22 - update      10440 => loss:   0.195 (#OOM: 0)
+Epoch 22 - update      10470 => loss:   0.096 (#OOM: 0)
+Epoch 22 - update      10500 => loss:   0.240 (#OOM: 0)
+Epoch 22 - update      10530 => loss:   0.168 (#OOM: 0)
+Epoch 22 - update      10560 => loss:   0.238 (#OOM: 0)
+Epoch 22 - update      10590 => loss:   0.128 (#OOM: 0)
+--> Epoch 22 finished with mean loss 0.19073
+--> Overhead/Training/Evaluation: 0.04/0.62/0.00 mins (total: 0.66 mins)   (780 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 45.72batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 49.78batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 51.10batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 52.49batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 52.47batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.15batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 53.06batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 47.15batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 47.16batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 41.34batch/s] 65%|███████████████████▌          | 32/49 [00:00<00:00, 45.63batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 45.41batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 46.04batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.41batch/s]
+Validation 22 -> LOSS = 0.27
+Validation 22 -> BLEU = 95.56, 98.2/96.4/94.9/93.3 (BP=0.999, ratio=0.999, hyp_len=14365, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.27 @ validation 22
+--> Best BLEU so far: 95.56 @ validation 22
+Starting Epoch 23
+Epoch 23 - update      10620 => loss:   0.177 (#OOM: 0)
+Epoch 23 - update      10650 => loss:   0.190 (#OOM: 0)
+Epoch 23 - update      10680 => loss:   0.163 (#OOM: 0)
+Epoch 23 - update      10710 => loss:   0.101 (#OOM: 0)
+Epoch 23 - update      10740 => loss:   0.230 (#OOM: 0)
+Epoch 23 - update      10770 => loss:   0.258 (#OOM: 0)
+Epoch 23 - update      10800 => loss:   0.207 (#OOM: 0)
+Epoch 23 - update      10830 => loss:   0.225 (#OOM: 0)
+Epoch 23 - update      10860 => loss:   0.148 (#OOM: 0)
+Epoch 23 - update      10890 => loss:   0.180 (#OOM: 0)
+Epoch 23 - update      10920 => loss:   0.146 (#OOM: 0)
+Epoch 23 - update      10950 => loss:   0.160 (#OOM: 0)
+Epoch 23 - update      10980 => loss:   0.179 (#OOM: 0)
+Epoch 23 - update      11010 => loss:   0.168 (#OOM: 0)
+Epoch 23 - update      11040 => loss:   0.137 (#OOM: 0)
+Epoch 23 - update      11070 => loss:   0.147 (#OOM: 0)
+--> Epoch 23 finished with mean loss 0.18376
+--> Overhead/Training/Evaluation: 0.04/0.59/0.00 mins (total: 0.63 mins)   (815 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 53.97batch/s] 38%|███████████▍                  | 13/34 [00:00<00:00, 60.80batch/s] 59%|█████████████████▋            | 20/34 [00:00<00:00, 56.74batch/s] 79%|███████████████████████▊      | 27/34 [00:00<00:00, 54.32batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.36batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.27batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 33.88batch/s] 16%|█████                          | 8/49 [00:00<00:01, 36.13batch/s] 24%|███████▎                      | 12/49 [00:00<00:01, 35.07batch/s] 35%|██████████▍                   | 17/49 [00:00<00:00, 34.53batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 40.03batch/s] 63%|██████████████████▉           | 31/49 [00:00<00:00, 42.46batch/s] 78%|███████████████████████▎      | 38/49 [00:00<00:00, 45.04batch/s] 92%|███████████████████████████▌  | 45/49 [00:00<00:00, 45.72batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.21batch/s]
+Validation 23 -> LOSS = 0.26
+Validation 23 -> BLEU = 95.60, 98.3/96.4/94.9/93.3 (BP=0.999, ratio=0.999, hyp_len=14364, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.26 @ validation 23
+--> Best BLEU so far: 95.60 @ validation 23
+Starting Epoch 24
+Epoch 24 - update      11100 => loss:   0.096 (#OOM: 0)
+Epoch 24 - update      11130 => loss:   0.119 (#OOM: 0)
+Epoch 24 - update      11160 => loss:   0.174 (#OOM: 0)
+Epoch 24 - update      11190 => loss:   0.074 (#OOM: 0)
+Epoch 24 - update      11220 => loss:   0.141 (#OOM: 0)
+Epoch 24 - update      11250 => loss:   0.191 (#OOM: 0)
+Epoch 24 - update      11280 => loss:   0.161 (#OOM: 0)
+Epoch 24 - update      11310 => loss:   0.124 (#OOM: 0)
+Epoch 24 - update      11340 => loss:   0.126 (#OOM: 0)
+Epoch 24 - update      11370 => loss:   0.139 (#OOM: 0)
+Epoch 24 - update      11400 => loss:   0.441 (#OOM: 0)
+Epoch 24 - update      11430 => loss:   0.110 (#OOM: 0)
+Epoch 24 - update      11460 => loss:   0.207 (#OOM: 0)
+Epoch 24 - update      11490 => loss:   0.142 (#OOM: 0)
+Epoch 24 - update      11520 => loss:   0.189 (#OOM: 0)
+Epoch 24 - update      11550 => loss:   0.185 (#OOM: 0)
+--> Epoch 24 finished with mean loss 0.17547
+--> Overhead/Training/Evaluation: 0.04/0.62/0.00 mins (total: 0.66 mins)   (785 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 48.82batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 50.68batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 56.10batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 53.10batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 51.20batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.20batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 43.71batch/s] 20%|██████                        | 10/49 [00:00<00:00, 41.69batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 40.96batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 44.44batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 36.52batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 35.18batch/s] 80%|███████████████████████▉      | 39/49 [00:01<00:00, 37.25batch/s] 92%|███████████████████████████▌  | 45/49 [00:01<00:00, 39.06batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 40.06batch/s]
+Validation 24 -> LOSS = 0.27
+Validation 24 -> BLEU = 95.10, 97.8/95.9/94.3/92.6 (BP=1.000, ratio=1.003, hyp_len=14427, ref_len=14382)
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.26 @ validation 23
+--> Best BLEU so far: 95.60 @ validation 23
+Starting Epoch 25
+Epoch 25 - update      11580 => loss:   0.071 (#OOM: 0)
+Epoch 25 - update      11610 => loss:   0.208 (#OOM: 0)
+Epoch 25 - update      11640 => loss:   0.141 (#OOM: 0)
+Epoch 25 - update      11670 => loss:   0.152 (#OOM: 0)
+Epoch 25 - update      11700 => loss:   0.168 (#OOM: 0)
+Epoch 25 - update      11730 => loss:   0.162 (#OOM: 0)
+Epoch 25 - update      11760 => loss:   0.225 (#OOM: 0)
+Epoch 25 - update      11790 => loss:   0.132 (#OOM: 0)
+Epoch 25 - update      11820 => loss:   0.201 (#OOM: 0)
+Epoch 25 - update      11850 => loss:   0.088 (#OOM: 0)
+Epoch 25 - update      11880 => loss:   0.219 (#OOM: 0)
+Epoch 25 - update      11910 => loss:   0.091 (#OOM: 0)
+Epoch 25 - update      11940 => loss:   0.187 (#OOM: 0)
+Epoch 25 - update      11970 => loss:   0.105 (#OOM: 0)
+Epoch 25 - update      12000 => loss:   0.116 (#OOM: 0)
+Epoch 25 - update      12030 => loss:   0.267 (#OOM: 0)
+--> Epoch 25 finished with mean loss 0.16971
+--> Overhead/Training/Evaluation: 0.04/0.64/0.00 mins (total: 0.69 mins)   (750 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 46.80batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 44.62batch/s] 44%|█████████████▏                | 15/34 [00:00<00:00, 43.93batch/s] 62%|██████████████████▌           | 21/34 [00:00<00:00, 47.07batch/s] 79%|███████████████████████▊      | 27/34 [00:00<00:00, 48.53batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.37batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.34batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 48.28batch/s] 20%|██████                        | 10/49 [00:00<00:00, 46.03batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 46.20batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 46.73batch/s] 53%|███████████████▉              | 26/49 [00:00<00:00, 48.15batch/s] 65%|███████████████████▌          | 32/49 [00:00<00:00, 46.26batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 45.59batch/s] 94%|████████████████████████████▏ | 46/49 [00:01<00:00, 45.20batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.07batch/s]
+Validation 25 -> LOSS = 0.26
+Validation 25 -> BLEU = 95.81, 98.4/96.6/95.2/93.7 (BP=0.998, ratio=0.998, hyp_len=14358, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.26 @ validation 25
+--> Best BLEU so far: 95.81 @ validation 25
+Starting Epoch 26
+Epoch 26 - update      12060 => loss:   0.207 (#OOM: 0)
+Epoch 26 - update      12090 => loss:   0.552 (#OOM: 0)
+Epoch 26 - update      12120 => loss:   0.188 (#OOM: 0)
+Epoch 26 - update      12150 => loss:   0.147 (#OOM: 0)
+Epoch 26 - update      12180 => loss:   0.129 (#OOM: 0)
+Epoch 26 - update      12210 => loss:   0.101 (#OOM: 0)
+Epoch 26 - update      12240 => loss:   0.159 (#OOM: 0)
+Epoch 26 - update      12270 => loss:   0.161 (#OOM: 0)
+Epoch 26 - update      12300 => loss:   0.194 (#OOM: 0)
+Epoch 26 - update      12330 => loss:   0.148 (#OOM: 0)
+Epoch 26 - update      12360 => loss:   0.095 (#OOM: 0)
+Epoch 26 - update      12390 => loss:   0.179 (#OOM: 0)
+Epoch 26 - update      12420 => loss:   0.205 (#OOM: 0)
+Epoch 26 - update      12450 => loss:   0.168 (#OOM: 0)
+Epoch 26 - update      12480 => loss:   0.116 (#OOM: 0)
+Epoch 26 - update      12510 => loss:   0.180 (#OOM: 0)
+--> Epoch 26 finished with mean loss 0.16315
+--> Overhead/Training/Evaluation: 0.03/0.56/0.00 mins (total: 0.59 mins)   (863 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 41.61batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 41.21batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 48.34batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 48.03batch/s] 91%|███████████████████████████▎  | 31/34 [00:00<00:00, 48.29batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.04batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 42.63batch/s] 20%|██████                        | 10/49 [00:00<00:00, 39.94batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 39.94batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 41.40batch/s] 51%|███████████████▎              | 25/49 [00:00<00:00, 42.75batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 43.03batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 44.11batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 42.75batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 44.01batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 44.27batch/s]
+Validation 26 -> LOSS = 0.26
+Validation 26 -> BLEU = 95.98, 98.4/96.7/95.2/93.7 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.26 @ validation 25
+--> Best BLEU so far: 95.98 @ validation 26
+Starting Epoch 27
+Epoch 27 - update      12540 => loss:   0.138 (#OOM: 0)
+Epoch 27 - update      12570 => loss:   0.136 (#OOM: 0)
+Epoch 27 - update      12600 => loss:   0.092 (#OOM: 0)
+Epoch 27 - update      12630 => loss:   0.152 (#OOM: 0)
+Epoch 27 - update      12660 => loss:   0.135 (#OOM: 0)
+Epoch 27 - update      12690 => loss:   0.235 (#OOM: 0)
+Epoch 27 - update      12720 => loss:   0.139 (#OOM: 0)
+Epoch 27 - update      12750 => loss:   0.198 (#OOM: 0)
+Epoch 27 - update      12780 => loss:   0.138 (#OOM: 0)
+Epoch 27 - update      12810 => loss:   0.143 (#OOM: 0)
+Epoch 27 - update      12840 => loss:   0.129 (#OOM: 0)
+Epoch 27 - update      12870 => loss:   0.181 (#OOM: 0)
+Epoch 27 - update      12900 => loss:   0.186 (#OOM: 0)
+Epoch 27 - update      12930 => loss:   0.164 (#OOM: 0)
+Epoch 27 - update      12960 => loss:   0.189 (#OOM: 0)
+Epoch 27 - update      12990 => loss:   0.146 (#OOM: 0)
+--> Epoch 27 finished with mean loss 0.15625
+--> Overhead/Training/Evaluation: 0.05/0.67/0.00 mins (total: 0.71 mins)   (724 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 39.87batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 47.61batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 46.35batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 48.16batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 48.51batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.80batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.77batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 45.81batch/s] 20%|██████                        | 10/49 [00:00<00:00, 44.12batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 45.06batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 47.17batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 42.23batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 42.46batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 42.31batch/s] 92%|███████████████████████████▌  | 45/49 [00:01<00:00, 43.46batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 43.81batch/s]
+Validation 27 -> LOSS = 0.26
+Validation 27 -> BLEU = 95.92, 98.4/96.7/95.3/93.8 (BP=0.999, ratio=0.999, hyp_len=14367, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.26 @ validation 27
+--> Best BLEU so far: 95.98 @ validation 26
+Starting Epoch 28
+Epoch 28 - update      13020 => loss:   0.116 (#OOM: 0)
+Epoch 28 - update      13050 => loss:   0.129 (#OOM: 0)
+Epoch 28 - update      13080 => loss:   0.208 (#OOM: 0)
+Epoch 28 - update      13110 => loss:   0.113 (#OOM: 0)
+Epoch 28 - update      13140 => loss:   0.095 (#OOM: 0)
+Epoch 28 - update      13170 => loss:   0.158 (#OOM: 0)
+Epoch 28 - update      13200 => loss:   0.155 (#OOM: 0)
+Epoch 28 - update      13230 => loss:   0.099 (#OOM: 0)
+Epoch 28 - update      13260 => loss:   0.125 (#OOM: 0)
+Epoch 28 - update      13290 => loss:   0.148 (#OOM: 0)
+Epoch 28 - update      13320 => loss:   0.143 (#OOM: 0)
+Epoch 28 - update      13350 => loss:   0.149 (#OOM: 0)
+Epoch 28 - update      13380 => loss:   0.283 (#OOM: 0)
+Epoch 28 - update      13410 => loss:   0.128 (#OOM: 0)
+Epoch 28 - update      13440 => loss:   0.158 (#OOM: 0)
+Epoch 28 - update      13470 => loss:   0.052 (#OOM: 0)
+--> Epoch 28 finished with mean loss 0.15374
+--> Overhead/Training/Evaluation: 0.03/0.54/0.00 mins (total: 0.57 mins)   (893 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 53.80batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 47.33batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 50.65batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 50.33batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 51.10batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.69batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 39.74batch/s] 20%|██████                        | 10/49 [00:00<00:00, 46.76batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 43.35batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 44.35batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 45.02batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 45.86batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 47.88batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 47.20batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.45batch/s]
+Validation 28 -> LOSS = 0.26
+Validation 28 -> BLEU = 96.00, 98.4/96.7/95.3/93.8 (BP=0.999, ratio=0.999, hyp_len=14374, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.26 @ validation 28
+--> Best BLEU so far: 96.00 @ validation 28
+Starting Epoch 29
+Epoch 29 - update      13500 => loss:   0.122 (#OOM: 0)
+Epoch 29 - update      13530 => loss:   0.197 (#OOM: 0)
+Epoch 29 - update      13560 => loss:   0.089 (#OOM: 0)
+Epoch 29 - update      13590 => loss:   0.124 (#OOM: 0)
+Epoch 29 - update      13620 => loss:   0.113 (#OOM: 0)
+Epoch 29 - update      13650 => loss:   0.075 (#OOM: 0)
+Epoch 29 - update      13680 => loss:   0.147 (#OOM: 0)
+Epoch 29 - update      13710 => loss:   0.083 (#OOM: 0)
+Epoch 29 - update      13740 => loss:   0.077 (#OOM: 0)
+Epoch 29 - update      13770 => loss:   0.148 (#OOM: 0)
+Epoch 29 - update      13800 => loss:   0.143 (#OOM: 0)
+Epoch 29 - update      13830 => loss:   0.752 (#OOM: 0)
+Epoch 29 - update      13860 => loss:   0.074 (#OOM: 0)
+Epoch 29 - update      13890 => loss:   0.099 (#OOM: 0)
+Epoch 29 - update      13920 => loss:   0.148 (#OOM: 0)
+Epoch 29 - update      13950 => loss:   0.134 (#OOM: 0)
+--> Epoch 29 finished with mean loss 0.14872
+--> Overhead/Training/Evaluation: 0.04/0.56/0.00 mins (total: 0.60 mins)   (863 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 38.67batch/s] 26%|████████▏                      | 9/34 [00:00<00:00, 42.00batch/s] 44%|█████████████▏                | 15/34 [00:00<00:00, 46.53batch/s] 62%|██████████████████▌           | 21/34 [00:00<00:00, 48.75batch/s] 79%|███████████████████████▊      | 27/34 [00:00<00:00, 49.56batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 50.64batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.28batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 52.37batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 49.14batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 46.42batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 45.56batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 47.50batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 48.73batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 48.09batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 46.71batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.10batch/s]
+Validation 29 -> LOSS = 0.25
+Validation 29 -> BLEU = 96.11, 98.4/96.8/95.4/94.0 (BP=1.000, ratio=1.000, hyp_len=14376, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 29
+--> Best BLEU so far: 96.11 @ validation 29
+Starting Epoch 30
+Epoch 30 - update      13980 => loss:   0.192 (#OOM: 0)
+Epoch 30 - update      14010 => loss:   0.128 (#OOM: 0)
+Epoch 30 - update      14040 => loss:   0.150 (#OOM: 0)
+Epoch 30 - update      14070 => loss:   0.072 (#OOM: 0)
+Epoch 30 - update      14100 => loss:   0.134 (#OOM: 0)
+Epoch 30 - update      14130 => loss:   0.157 (#OOM: 0)
+Epoch 30 - update      14160 => loss:   0.147 (#OOM: 0)
+Epoch 30 - update      14190 => loss:   0.069 (#OOM: 0)
+Epoch 30 - update      14220 => loss:   0.184 (#OOM: 0)
+Epoch 30 - update      14250 => loss:   0.175 (#OOM: 0)
+Epoch 30 - update      14280 => loss:   0.131 (#OOM: 0)
+Epoch 30 - update      14310 => loss:   0.137 (#OOM: 0)
+Epoch 30 - update      14340 => loss:   0.064 (#OOM: 0)
+Epoch 30 - update      14370 => loss:   0.155 (#OOM: 0)
+Epoch 30 - update      14400 => loss:   0.092 (#OOM: 0)
+Epoch 30 - update      14430 => loss:   0.144 (#OOM: 0)
+Epoch 30 - update      14460 => loss:   0.148 (#OOM: 0)
+--> Epoch 30 finished with mean loss 0.14415
+--> Overhead/Training/Evaluation: 0.03/0.52/0.00 mins (total: 0.55 mins)   (931 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 39.43batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 46.21batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 50.22batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 50.75batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 51.84batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.43batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.41batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 44.09batch/s] 20%|██████                        | 10/49 [00:00<00:01, 36.97batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 37.92batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 40.32batch/s] 53%|███████████████▉              | 26/49 [00:00<00:00, 42.54batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 45.84batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 46.53batch/s] 96%|████████████████████████████▊ | 47/49 [00:01<00:00, 45.77batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.54batch/s]
+Validation 30 -> LOSS = 0.26
+Validation 30 -> BLEU = 95.97, 98.3/96.6/95.3/93.8 (BP=1.000, ratio=1.002, hyp_len=14404, ref_len=14382)
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 29
+--> Best BLEU so far: 96.11 @ validation 29
+Starting Epoch 31
+Epoch 31 - update      14490 => loss:   0.168 (#OOM: 0)
+Epoch 31 - update      14520 => loss:   0.091 (#OOM: 0)
+Epoch 31 - update      14550 => loss:   0.186 (#OOM: 0)
+Epoch 31 - update      14580 => loss:   0.147 (#OOM: 0)
+Epoch 31 - update      14610 => loss:   0.145 (#OOM: 0)
+Epoch 31 - update      14640 => loss:   0.134 (#OOM: 0)
+Epoch 31 - update      14670 => loss:   0.126 (#OOM: 0)
+Epoch 31 - update      14700 => loss:   0.189 (#OOM: 0)
+Epoch 31 - update      14730 => loss:   0.320 (#OOM: 0)
+Epoch 31 - update      14760 => loss:   0.078 (#OOM: 0)
+Epoch 31 - update      14790 => loss:   0.186 (#OOM: 0)
+Epoch 31 - update      14820 => loss:   0.100 (#OOM: 0)
+Epoch 31 - update      14850 => loss:   0.128 (#OOM: 0)
+Epoch 31 - update      14880 => loss:   0.090 (#OOM: 0)
+Epoch 31 - update      14910 => loss:   0.196 (#OOM: 0)
+Epoch 31 - update      14940 => loss:   0.053 (#OOM: 0)
+--> Epoch 31 finished with mean loss 0.14017
+--> Overhead/Training/Evaluation: 0.03/0.54/0.00 mins (total: 0.57 mins)   (898 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 51.89batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 46.21batch/s] 56%|████████████████▊             | 19/34 [00:00<00:00, 50.89batch/s] 76%|██████████████████████▉       | 26/34 [00:00<00:00, 50.06batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 52.04batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 53.13batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 45.99batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 51.90batch/s] 39%|███████████▋                  | 19/49 [00:00<00:00, 47.30batch/s] 53%|███████████████▉              | 26/49 [00:00<00:00, 46.56batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 45.83batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 45.82batch/s] 96%|████████████████████████████▊ | 47/49 [00:00<00:00, 47.95batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.86batch/s]
+Validation 31 -> LOSS = 0.26
+Validation 31 -> BLEU = 96.26, 98.5/96.9/95.6/94.2 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 29
+--> Best BLEU so far: 96.26 @ validation 31
+Starting Epoch 32
+Epoch 32 - update      14970 => loss:   0.117 (#OOM: 0)
+Epoch 32 - update      15000 => loss:   0.131 (#OOM: 0)
+Epoch 32 - update      15030 => loss:   0.163 (#OOM: 0)
+Epoch 32 - update      15060 => loss:   0.141 (#OOM: 0)
+Epoch 32 - update      15090 => loss:   0.161 (#OOM: 0)
+Epoch 32 - update      15120 => loss:   0.083 (#OOM: 0)
+Epoch 32 - update      15150 => loss:   0.135 (#OOM: 0)
+Epoch 32 - update      15180 => loss:   0.135 (#OOM: 0)
+Epoch 32 - update      15210 => loss:   0.163 (#OOM: 0)
+Epoch 32 - update      15240 => loss:   0.114 (#OOM: 0)
+Epoch 32 - update      15270 => loss:   0.149 (#OOM: 0)
+Epoch 32 - update      15300 => loss:   0.130 (#OOM: 0)
+Epoch 32 - update      15330 => loss:   0.135 (#OOM: 0)
+Epoch 32 - update      15360 => loss:   0.118 (#OOM: 0)
+Epoch 32 - update      15390 => loss:   0.100 (#OOM: 0)
+Epoch 32 - update      15420 => loss:   0.124 (#OOM: 0)
+--> Epoch 32 finished with mean loss 0.13746
+--> Overhead/Training/Evaluation: 0.04/0.63/0.00 mins (total: 0.67 mins)   (772 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 56.05batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 52.24batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 54.05batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 55.48batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 52.87batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.69batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 34.65batch/s] 18%|█████▋                         | 9/49 [00:00<00:01, 37.70batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 39.66batch/s] 39%|███████████▋                  | 19/49 [00:00<00:00, 41.62batch/s] 51%|███████████████▎              | 25/49 [00:00<00:00, 43.62batch/s] 63%|██████████████████▉           | 31/49 [00:00<00:00, 45.33batch/s] 78%|███████████████████████▎      | 38/49 [00:00<00:00, 47.20batch/s] 92%|███████████████████████████▌  | 45/49 [00:00<00:00, 47.65batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.58batch/s]
+Validation 32 -> LOSS = 0.25
+Validation 32 -> BLEU = 96.23, 98.5/96.9/95.6/94.2 (BP=1.000, ratio=1.000, hyp_len=14376, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 32
+--> Best BLEU so far: 96.26 @ validation 31
+Starting Epoch 33
+Epoch 33 - update      15450 => loss:   0.133 (#OOM: 0)
+Epoch 33 - update      15480 => loss:   0.184 (#OOM: 0)
+Epoch 33 - update      15510 => loss:   0.098 (#OOM: 0)
+Epoch 33 - update      15540 => loss:   0.122 (#OOM: 0)
+Epoch 33 - update      15570 => loss:   0.125 (#OOM: 0)
+Epoch 33 - update      15600 => loss:   0.083 (#OOM: 0)
+Epoch 33 - update      15630 => loss:   0.154 (#OOM: 0)
+Epoch 33 - update      15660 => loss:   0.128 (#OOM: 0)
+Epoch 33 - update      15690 => loss:   0.137 (#OOM: 0)
+Epoch 33 - update      15720 => loss:   0.093 (#OOM: 0)
+Epoch 33 - update      15750 => loss:   0.126 (#OOM: 0)
+Epoch 33 - update      15780 => loss:   0.139 (#OOM: 0)
+Epoch 33 - update      15810 => loss:   0.114 (#OOM: 0)
+Epoch 33 - update      15840 => loss:   0.156 (#OOM: 0)
+Epoch 33 - update      15870 => loss:   0.092 (#OOM: 0)
+Epoch 33 - update      15900 => loss:   0.112 (#OOM: 0)
+--> Epoch 33 finished with mean loss 0.13096
+--> Overhead/Training/Evaluation: 0.04/0.63/0.00 mins (total: 0.67 mins)   (769 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 48.60batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 48.96batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 51.10batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 49.27batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 51.20batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.58batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.56batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 44.91batch/s] 20%|██████                        | 10/49 [00:00<00:00, 47.27batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 47.63batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 51.07batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 45.54batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 45.66batch/s] 88%|██████████████████████████▎   | 43/49 [00:00<00:00, 46.31batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.17batch/s]
+Validation 33 -> LOSS = 0.25
+Validation 33 -> BLEU = 96.23, 98.5/96.9/95.6/94.3 (BP=0.999, ratio=0.999, hyp_len=14370, ref_len=14382)
+Early stopping patience: 8
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 32
+--> Best BLEU so far: 96.26 @ validation 31
+Starting Epoch 34
+Epoch 34 - update      15930 => loss:   0.148 (#OOM: 0)
+Epoch 34 - update      15960 => loss:   0.119 (#OOM: 0)
+Epoch 34 - update      15990 => loss:   0.037 (#OOM: 0)
+Epoch 34 - update      16020 => loss:   0.180 (#OOM: 0)
+Epoch 34 - update      16050 => loss:   0.126 (#OOM: 0)
+Epoch 34 - update      16080 => loss:   0.157 (#OOM: 0)
+Epoch 34 - update      16110 => loss:   0.134 (#OOM: 0)
+Epoch 34 - update      16140 => loss:   0.119 (#OOM: 0)
+Epoch 34 - update      16170 => loss:   0.149 (#OOM: 0)
+Epoch 34 - update      16200 => loss:   0.071 (#OOM: 0)
+Epoch 34 - update      16230 => loss:   0.178 (#OOM: 0)
+Epoch 34 - update      16260 => loss:   0.153 (#OOM: 0)
+Epoch 34 - update      16290 => loss:   0.108 (#OOM: 0)
+Epoch 34 - update      16320 => loss:   0.110 (#OOM: 0)
+Epoch 34 - update      16350 => loss:   0.096 (#OOM: 0)
+Epoch 34 - update      16380 => loss:   0.513 (#OOM: 0)
+--> Epoch 34 finished with mean loss 0.12904
+--> Overhead/Training/Evaluation: 0.02/0.44/0.00 mins (total: 0.47 mins)   (1088 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 45.03batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 50.24batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 47.80batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 48.93batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 49.35batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.62batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 39.31batch/s] 18%|█████▋                         | 9/49 [00:00<00:00, 43.51batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 37.25batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 42.58batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 43.88batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 44.71batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 47.28batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.41batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.39batch/s]
+Validation 34 -> LOSS = 0.25
+Validation 34 -> BLEU = 96.19, 98.5/96.9/95.6/94.3 (BP=0.999, ratio=0.999, hyp_len=14367, ref_len=14382)
+** Learning rate changed -> 0.0002
+Saving best model based on LOSS
+Early stopping patience: 7
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 34
+--> Best BLEU so far: 96.26 @ validation 31
+Starting Epoch 35
+Epoch 35 - update      16410 => loss:   0.165 (#OOM: 0)
+Epoch 35 - update      16440 => loss:   0.116 (#OOM: 0)
+Epoch 35 - update      16470 => loss:   0.109 (#OOM: 0)
+Epoch 35 - update      16500 => loss:   0.245 (#OOM: 0)
+Epoch 35 - update      16530 => loss:   0.088 (#OOM: 0)
+Epoch 35 - update      16560 => loss:   0.072 (#OOM: 0)
+Epoch 35 - update      16590 => loss:   0.143 (#OOM: 0)
+Epoch 35 - update      16620 => loss:   0.119 (#OOM: 0)
+Epoch 35 - update      16650 => loss:   0.074 (#OOM: 0)
+Epoch 35 - update      16680 => loss:   0.130 (#OOM: 0)
+Epoch 35 - update      16710 => loss:   0.065 (#OOM: 0)
+Epoch 35 - update      16740 => loss:   0.117 (#OOM: 0)
+Epoch 35 - update      16770 => loss:   0.096 (#OOM: 0)
+Epoch 35 - update      16800 => loss:   0.100 (#OOM: 0)
+Epoch 35 - update      16830 => loss:   0.110 (#OOM: 0)
+Epoch 35 - update      16860 => loss:   0.131 (#OOM: 0)
+--> Epoch 35 finished with mean loss 0.11775
+--> Overhead/Training/Evaluation: 0.04/0.61/0.00 mins (total: 0.65 mins)   (792 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 57.61batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 55.55batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 51.09batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 49.26batch/s] 91%|███████████████████████████▎  | 31/34 [00:00<00:00, 50.94batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.52batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 57.24batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 49.93batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 41.37batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 43.73batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 42.88batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 43.62batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 44.54batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 45.94batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.23batch/s]
+Validation 35 -> LOSS = 0.25
+Validation 35 -> BLEU = 96.33, 98.5/97.0/95.8/94.4 (BP=0.999, ratio=0.999, hyp_len=14369, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 35
+--> Best BLEU so far: 96.33 @ validation 35
+Starting Epoch 36
+Epoch 36 - update      16890 => loss:   0.105 (#OOM: 0)
+Epoch 36 - update      16920 => loss:   0.130 (#OOM: 0)
+Epoch 36 - update      16950 => loss:   0.089 (#OOM: 0)
+Epoch 36 - update      16980 => loss:   0.065 (#OOM: 0)
+Epoch 36 - update      17010 => loss:   0.108 (#OOM: 0)
+Epoch 36 - update      17040 => loss:   0.087 (#OOM: 0)
+Epoch 36 - update      17070 => loss:   0.097 (#OOM: 0)
+Epoch 36 - update      17100 => loss:   0.110 (#OOM: 0)
+Epoch 36 - update      17130 => loss:   0.075 (#OOM: 0)
+Epoch 36 - update      17160 => loss:   0.119 (#OOM: 0)
+Epoch 36 - update      17190 => loss:   0.115 (#OOM: 0)
+Epoch 36 - update      17220 => loss:   0.109 (#OOM: 0)
+Epoch 36 - update      17250 => loss:   0.073 (#OOM: 0)
+Epoch 36 - update      17280 => loss:   0.149 (#OOM: 0)
+Epoch 36 - update      17310 => loss:   0.142 (#OOM: 0)
+Epoch 36 - update      17340 => loss:   0.091 (#OOM: 0)
+--> Epoch 36 finished with mean loss 0.11025
+--> Overhead/Training/Evaluation: 0.04/0.59/0.00 mins (total: 0.63 mins)   (817 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 46.84batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 49.62batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 48.48batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 50.56batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 52.45batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.70batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 46.89batch/s] 20%|██████                        | 10/49 [00:00<00:00, 43.54batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 47.28batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 47.98batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 42.22batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 42.45batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 43.64batch/s] 96%|████████████████████████████▊ | 47/49 [00:01<00:00, 45.39batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.18batch/s]
+Validation 36 -> LOSS = 0.25
+Validation 36 -> BLEU = 96.25, 98.4/96.9/95.6/94.2 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 36
+--> Best BLEU so far: 96.33 @ validation 35
+Starting Epoch 37
+Epoch 37 - update      17370 => loss:   0.097 (#OOM: 0)
+Epoch 37 - update      17400 => loss:   0.110 (#OOM: 0)
+Epoch 37 - update      17430 => loss:   0.109 (#OOM: 0)
+Epoch 37 - update      17460 => loss:   0.154 (#OOM: 0)
+Epoch 37 - update      17490 => loss:   0.078 (#OOM: 0)
+Epoch 37 - update      17520 => loss:   0.109 (#OOM: 0)
+Epoch 37 - update      17550 => loss:   0.105 (#OOM: 0)
+Epoch 37 - update      17580 => loss:   0.148 (#OOM: 0)
+Epoch 37 - update      17610 => loss:   0.050 (#OOM: 0)
+Epoch 37 - update      17640 => loss:   0.117 (#OOM: 0)
+Epoch 37 - update      17670 => loss:   0.094 (#OOM: 0)
+Epoch 37 - update      17700 => loss:   0.191 (#OOM: 0)
+Epoch 37 - update      17730 => loss:   0.063 (#OOM: 0)
+Epoch 37 - update      17760 => loss:   0.090 (#OOM: 0)
+Epoch 37 - update      17790 => loss:   0.098 (#OOM: 0)
+Epoch 37 - update      17820 => loss:   0.066 (#OOM: 0)
+--> Epoch 37 finished with mean loss 0.10620
+--> Overhead/Training/Evaluation: 0.03/0.53/0.00 mins (total: 0.56 mins)   (908 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 53.73batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 55.37batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 56.64batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 53.57batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 53.14batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.27batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 48.21batch/s] 22%|██████▋                       | 11/49 [00:00<00:00, 50.86batch/s] 35%|██████████▍                   | 17/49 [00:00<00:00, 47.08batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 47.07batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 46.33batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 46.19batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 45.28batch/s] 96%|████████████████████████████▊ | 47/49 [00:01<00:00, 45.95batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.16batch/s]
+Validation 37 -> LOSS = 0.25
+Validation 37 -> BLEU = 96.29, 98.5/96.9/95.6/94.2 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Early stopping patience: 8
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 36
+--> Best BLEU so far: 96.33 @ validation 35
+Starting Epoch 38
+Epoch 38 - update      17850 => loss:   0.055 (#OOM: 0)
+Epoch 38 - update      17880 => loss:   0.107 (#OOM: 0)
+Epoch 38 - update      17910 => loss:   0.095 (#OOM: 0)
+Epoch 38 - update      17940 => loss:   0.111 (#OOM: 0)
+Epoch 38 - update      17970 => loss:   0.069 (#OOM: 0)
+Epoch 38 - update      18000 => loss:   0.105 (#OOM: 0)
+Epoch 38 - update      18030 => loss:   0.133 (#OOM: 0)
+Epoch 38 - update      18060 => loss:   0.056 (#OOM: 0)
+Epoch 38 - update      18090 => loss:   0.114 (#OOM: 0)
+Epoch 38 - update      18120 => loss:   0.096 (#OOM: 0)
+Epoch 38 - update      18150 => loss:   0.081 (#OOM: 0)
+Epoch 38 - update      18180 => loss:   0.142 (#OOM: 0)
+Epoch 38 - update      18210 => loss:   0.076 (#OOM: 0)
+Epoch 38 - update      18240 => loss:   0.137 (#OOM: 0)
+Epoch 38 - update      18270 => loss:   0.175 (#OOM: 0)
+Epoch 38 - update      18300 => loss:   0.087 (#OOM: 0)
+--> Epoch 38 finished with mean loss 0.10380
+--> Overhead/Training/Evaluation: 0.03/0.55/0.00 mins (total: 0.59 mins)   (875 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 49.80batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 51.38batch/s] 56%|████████████████▊             | 19/34 [00:00<00:00, 52.53batch/s] 76%|██████████████████████▉       | 26/34 [00:00<00:00, 53.84batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 53.04batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.93batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 51.21batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 49.88batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 49.45batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 45.59batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 46.00batch/s] 76%|██████████████████████▋       | 37/49 [00:00<00:00, 48.06batch/s] 90%|██████████████████████████▉   | 44/49 [00:00<00:00, 47.02batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.91batch/s]
+Validation 38 -> LOSS = 0.25
+Validation 38 -> BLEU = 96.38, 98.5/97.0/95.7/94.4 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 36
+--> Best BLEU so far: 96.38 @ validation 38
+Starting Epoch 39
+Epoch 39 - update      18330 => loss:   0.112 (#OOM: 0)
+Epoch 39 - update      18360 => loss:   0.078 (#OOM: 0)
+Epoch 39 - update      18390 => loss:   0.119 (#OOM: 0)
+Epoch 39 - update      18420 => loss:   0.059 (#OOM: 0)
+Epoch 39 - update      18450 => loss:   0.061 (#OOM: 0)
+Epoch 39 - update      18480 => loss:   0.085 (#OOM: 0)
+Epoch 39 - update      18510 => loss:   0.095 (#OOM: 0)
+Epoch 39 - update      18540 => loss:   0.119 (#OOM: 0)
+Epoch 39 - update      18570 => loss:   0.061 (#OOM: 0)
+Epoch 39 - update      18600 => loss:   0.067 (#OOM: 0)
+Epoch 39 - update      18630 => loss:   0.119 (#OOM: 0)
+Epoch 39 - update      18660 => loss:   0.110 (#OOM: 0)
+Epoch 39 - update      18690 => loss:   0.089 (#OOM: 0)
+Epoch 39 - update      18720 => loss:   0.109 (#OOM: 0)
+Epoch 39 - update      18750 => loss:   0.113 (#OOM: 0)
+Epoch 39 - update      18780 => loss:   0.039 (#OOM: 0)
+--> Epoch 39 finished with mean loss 0.10233
+--> Overhead/Training/Evaluation: 0.04/0.60/0.00 mins (total: 0.64 mins)   (801 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 42.82batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 52.95batch/s] 56%|████████████████▊             | 19/34 [00:00<00:00, 49.02batch/s] 76%|██████████████████████▉       | 26/34 [00:00<00:00, 51.13batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 52.57batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.46batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 45.18batch/s] 20%|██████                        | 10/49 [00:00<00:00, 42.21batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 41.29batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 46.57batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 43.94batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 46.38batch/s] 88%|██████████████████████████▎   | 43/49 [00:00<00:00, 48.16batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.09batch/s]
+Validation 39 -> LOSS = 0.25
+Validation 39 -> BLEU = 96.45, 98.6/97.0/95.8/94.5 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 36
+--> Best BLEU so far: 96.45 @ validation 39
+Starting Epoch 40
+Epoch 40 - update      18810 => loss:   0.074 (#OOM: 0)
+Epoch 40 - update      18840 => loss:   0.094 (#OOM: 0)
+Epoch 40 - update      18870 => loss:   0.094 (#OOM: 0)
+Epoch 40 - update      18900 => loss:   0.068 (#OOM: 0)
+Epoch 40 - update      18930 => loss:   0.061 (#OOM: 0)
+Epoch 40 - update      18960 => loss:   0.134 (#OOM: 0)
+Epoch 40 - update      18990 => loss:   0.076 (#OOM: 0)
+Epoch 40 - update      19020 => loss:   0.104 (#OOM: 0)
+Epoch 40 - update      19050 => loss:   0.068 (#OOM: 0)
+Epoch 40 - update      19080 => loss:   0.127 (#OOM: 0)
+Epoch 40 - update      19110 => loss:   0.350 (#OOM: 0)
+Epoch 40 - update      19140 => loss:   0.068 (#OOM: 0)
+Epoch 40 - update      19170 => loss:   0.109 (#OOM: 0)
+Epoch 40 - update      19200 => loss:   0.072 (#OOM: 0)
+Epoch 40 - update      19230 => loss:   0.192 (#OOM: 0)
+Epoch 40 - update      19260 => loss:   0.097 (#OOM: 0)
+--> Epoch 40 finished with mean loss 0.09993
+--> Overhead/Training/Evaluation: 0.04/0.65/0.00 mins (total: 0.69 mins)   (745 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 48.14batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 50.53batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 52.39batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 51.69batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 51.32batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.06batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 38.16batch/s] 18%|█████▋                         | 9/49 [00:00<00:00, 40.58batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 41.88batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 46.83batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 47.45batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 48.18batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 48.53batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.65batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.60batch/s]
+Validation 40 -> LOSS = 0.25
+Validation 40 -> BLEU = 96.56, 98.6/97.1/95.9/94.6 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.25 @ validation 40
+--> Best BLEU so far: 96.56 @ validation 40
+Starting Epoch 41
+Epoch 41 - update      19290 => loss:   0.080 (#OOM: 0)
+Epoch 41 - update      19320 => loss:   0.102 (#OOM: 0)
+Epoch 41 - update      19350 => loss:   0.138 (#OOM: 0)
+Epoch 41 - update      19380 => loss:   0.090 (#OOM: 0)
+Epoch 41 - update      19410 => loss:   0.066 (#OOM: 0)
+Epoch 41 - update      19440 => loss:   0.142 (#OOM: 0)
+Epoch 41 - update      19470 => loss:   0.073 (#OOM: 0)
+Epoch 41 - update      19500 => loss:   0.145 (#OOM: 0)
+Epoch 41 - update      19530 => loss:   0.125 (#OOM: 0)
+Epoch 41 - update      19560 => loss:   0.116 (#OOM: 0)
+Epoch 41 - update      19590 => loss:   0.095 (#OOM: 0)
+Epoch 41 - update      19620 => loss:   0.088 (#OOM: 0)
+Epoch 41 - update      19650 => loss:   0.125 (#OOM: 0)
+Epoch 41 - update      19680 => loss:   0.112 (#OOM: 0)
+Epoch 41 - update      19710 => loss:   0.046 (#OOM: 0)
+Epoch 41 - update      19740 => loss:   0.130 (#OOM: 0)
+--> Epoch 41 finished with mean loss 0.09910
+--> Overhead/Training/Evaluation: 0.04/0.66/0.00 mins (total: 0.70 mins)   (736 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 50.88batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 51.78batch/s] 56%|████████████████▊             | 19/34 [00:00<00:00, 54.04batch/s] 76%|██████████████████████▉       | 26/34 [00:00<00:00, 57.06batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 53.31batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.54batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 37.36batch/s] 18%|█████▋                         | 9/49 [00:00<00:00, 40.28batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 44.63batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 45.44batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 44.64batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 44.58batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 46.05batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 48.56batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.33batch/s]
+Validation 41 -> LOSS = 0.24
+Validation 41 -> BLEU = 96.57, 98.6/97.1/96.0/94.7 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.57 @ validation 41
+Starting Epoch 42
+Epoch 42 - update      19770 => loss:   0.103 (#OOM: 0)
+Epoch 42 - update      19800 => loss:   0.048 (#OOM: 0)
+Epoch 42 - update      19830 => loss:   0.081 (#OOM: 0)
+Epoch 42 - update      19860 => loss:   0.122 (#OOM: 0)
+Epoch 42 - update      19890 => loss:   0.104 (#OOM: 0)
+Epoch 42 - update      19920 => loss:   0.130 (#OOM: 0)
+Epoch 42 - update      19950 => loss:   0.087 (#OOM: 0)
+Epoch 42 - update      19980 => loss:   0.082 (#OOM: 0)
+Epoch 42 - update      20010 => loss:   0.100 (#OOM: 0)
+Epoch 42 - update      20040 => loss:   0.129 (#OOM: 0)
+Epoch 42 - update      20070 => loss:   0.088 (#OOM: 0)
+Epoch 42 - update      20100 => loss:   0.035 (#OOM: 0)
+Epoch 42 - update      20130 => loss:   0.085 (#OOM: 0)
+Epoch 42 - update      20160 => loss:   0.084 (#OOM: 0)
+Epoch 42 - update      20190 => loss:   0.060 (#OOM: 0)
+Epoch 42 - update      20220 => loss:   0.135 (#OOM: 0)
+--> Epoch 42 finished with mean loss 0.09719
+--> Overhead/Training/Evaluation: 0.04/0.60/0.00 mins (total: 0.64 mins)   (809 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 38.90batch/s] 26%|████████▏                      | 9/34 [00:00<00:00, 42.46batch/s] 41%|████████████▎                 | 14/34 [00:00<00:00, 43.61batch/s] 56%|████████████████▊             | 19/34 [00:00<00:00, 41.69batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 43.57batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 48.23batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.63batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 48.45batch/s] 20%|██████                        | 10/49 [00:00<00:00, 44.36batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 42.49batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 45.52batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 45.84batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 47.29batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 45.16batch/s] 92%|███████████████████████████▌  | 45/49 [00:01<00:00, 42.46batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 42.84batch/s]
+Validation 42 -> LOSS = 0.24
+Validation 42 -> BLEU = 96.53, 98.6/97.1/95.9/94.6 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.57 @ validation 41
+Starting Epoch 43
+Epoch 43 - update      20250 => loss:   0.073 (#OOM: 0)
+Epoch 43 - update      20280 => loss:   0.083 (#OOM: 0)
+Epoch 43 - update      20310 => loss:   0.137 (#OOM: 0)
+Epoch 43 - update      20340 => loss:   0.071 (#OOM: 0)
+Epoch 43 - update      20370 => loss:   0.078 (#OOM: 0)
+Epoch 43 - update      20400 => loss:   0.068 (#OOM: 0)
+Epoch 43 - update      20430 => loss:   0.024 (#OOM: 0)
+Epoch 43 - update      20460 => loss:   0.126 (#OOM: 0)
+Epoch 43 - update      20490 => loss:   0.090 (#OOM: 0)
+Epoch 43 - update      20520 => loss:   0.083 (#OOM: 0)
+Epoch 43 - update      20550 => loss:   0.063 (#OOM: 0)
+Epoch 43 - update      20580 => loss:   0.830 (#OOM: 0)
+Epoch 43 - update      20610 => loss:   0.108 (#OOM: 0)
+Epoch 43 - update      20640 => loss:   0.002 (#OOM: 0)
+Epoch 43 - update      20670 => loss:   0.129 (#OOM: 0)
+Epoch 43 - update      20700 => loss:   0.035 (#OOM: 0)
+--> Epoch 43 finished with mean loss 0.09613
+--> Overhead/Training/Evaluation: 0.03/0.53/0.00 mins (total: 0.57 mins)   (904 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 57.87batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 52.06batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 51.76batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 51.38batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 50.75batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.15batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 53.88batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 49.85batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 44.70batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 45.56batch/s] 63%|██████████████████▉           | 31/49 [00:00<00:00, 48.81batch/s] 78%|███████████████████████▎      | 38/49 [00:00<00:00, 45.99batch/s] 92%|███████████████████████████▌  | 45/49 [00:00<00:00, 45.78batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.12batch/s]
+Validation 43 -> LOSS = 0.24
+Validation 43 -> BLEU = 96.69, 98.7/97.2/96.1/94.8 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.69 @ validation 43
+Starting Epoch 44
+Epoch 44 - update      20730 => loss:   0.121 (#OOM: 0)
+Epoch 44 - update      20760 => loss:   0.096 (#OOM: 0)
+Epoch 44 - update      20790 => loss:   0.141 (#OOM: 0)
+Epoch 44 - update      20820 => loss:   0.073 (#OOM: 0)
+Epoch 44 - update      20850 => loss:   0.067 (#OOM: 0)
+Epoch 44 - update      20880 => loss:   0.107 (#OOM: 0)
+Epoch 44 - update      20910 => loss:   0.061 (#OOM: 0)
+Epoch 44 - update      20940 => loss:   0.128 (#OOM: 0)
+Epoch 44 - update      20970 => loss:   0.095 (#OOM: 0)
+Epoch 44 - update      21000 => loss:   0.100 (#OOM: 0)
+Epoch 44 - update      21030 => loss:   0.088 (#OOM: 0)
+Epoch 44 - update      21060 => loss:   0.152 (#OOM: 0)
+Epoch 44 - update      21090 => loss:   0.063 (#OOM: 0)
+Epoch 44 - update      21120 => loss:   0.035 (#OOM: 0)
+Epoch 44 - update      21150 => loss:   0.133 (#OOM: 0)
+Epoch 44 - update      21180 => loss:   0.080 (#OOM: 0)
+--> Epoch 44 finished with mean loss 0.09341
+--> Overhead/Training/Evaluation: 0.04/0.59/0.00 mins (total: 0.63 mins)   (818 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 51.51batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 45.17batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 45.41batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 46.15batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 46.39batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.70batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 54.78batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 55.05batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 48.70batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 47.06batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 47.06batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 47.19batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 46.51batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 46.40batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.57batch/s]
+Validation 44 -> LOSS = 0.25
+Validation 44 -> BLEU = 96.71, 98.7/97.3/96.1/94.9 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.71 @ validation 44
+Starting Epoch 45
+Epoch 45 - update      21210 => loss:   0.130 (#OOM: 0)
+Epoch 45 - update      21240 => loss:   0.082 (#OOM: 0)
+Epoch 45 - update      21270 => loss:   0.094 (#OOM: 0)
+Epoch 45 - update      21300 => loss:   0.062 (#OOM: 0)
+Epoch 45 - update      21330 => loss:   0.130 (#OOM: 0)
+Epoch 45 - update      21360 => loss:   0.159 (#OOM: 0)
+Epoch 45 - update      21390 => loss:   0.097 (#OOM: 0)
+Epoch 45 - update      21420 => loss:   0.054 (#OOM: 0)
+Epoch 45 - update      21450 => loss:   0.074 (#OOM: 0)
+Epoch 45 - update      21480 => loss:   0.056 (#OOM: 0)
+Epoch 45 - update      21510 => loss:   0.133 (#OOM: 0)
+Epoch 45 - update      21540 => loss:   0.045 (#OOM: 0)
+Epoch 45 - update      21570 => loss:   0.091 (#OOM: 0)
+Epoch 45 - update      21600 => loss:   0.076 (#OOM: 0)
+Epoch 45 - update      21630 => loss:   0.066 (#OOM: 0)
+Epoch 45 - update      21660 => loss:   0.122 (#OOM: 0)
+Epoch 45 - update      21690 => loss:   0.081 (#OOM: 0)
+--> Epoch 45 finished with mean loss 0.09302
+--> Overhead/Training/Evaluation: 0.03/0.57/0.00 mins (total: 0.60 mins)   (855 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 44.35batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 48.87batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 49.22batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 52.90batch/s] 91%|███████████████████████████▎  | 31/34 [00:00<00:00, 51.10batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.05batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 49.66batch/s] 27%|███████▉                      | 13/49 [00:00<00:00, 55.87batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 54.29batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 50.32batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 46.31batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 46.95batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 47.11batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.95batch/s]
+Validation 45 -> LOSS = 0.24
+Validation 45 -> BLEU = 96.57, 98.6/97.2/96.0/94.8 (BP=0.999, ratio=0.999, hyp_len=14370, ref_len=14382)
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.71 @ validation 44
+Starting Epoch 46
+Epoch 46 - update      21720 => loss:   0.101 (#OOM: 0)
+Epoch 46 - update      21750 => loss:   0.126 (#OOM: 0)
+Epoch 46 - update      21780 => loss:   0.084 (#OOM: 0)
+Epoch 46 - update      21810 => loss:   0.076 (#OOM: 0)
+Epoch 46 - update      21840 => loss:   0.087 (#OOM: 0)
+Epoch 46 - update      21870 => loss:   0.073 (#OOM: 0)
+Epoch 46 - update      21900 => loss:   0.050 (#OOM: 0)
+Epoch 46 - update      21930 => loss:   0.090 (#OOM: 0)
+Epoch 46 - update      21960 => loss:   0.055 (#OOM: 0)
+Epoch 46 - update      21990 => loss:   0.076 (#OOM: 0)
+Epoch 46 - update      22020 => loss:   0.120 (#OOM: 0)
+Epoch 46 - update      22050 => loss:   0.076 (#OOM: 0)
+Epoch 46 - update      22080 => loss:   0.076 (#OOM: 0)
+Epoch 46 - update      22110 => loss:   0.079 (#OOM: 0)
+Epoch 46 - update      22140 => loss:   0.077 (#OOM: 0)
+Epoch 46 - update      22170 => loss:   0.087 (#OOM: 0)
+--> Epoch 46 finished with mean loss 0.09230
+--> Overhead/Training/Evaluation: 0.04/0.61/0.00 mins (total: 0.65 mins)   (788 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 31.30batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 40.76batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 41.07batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 46.17batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 49.23batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.11batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 42.71batch/s] 20%|██████                        | 10/49 [00:00<00:00, 44.12batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 46.22batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 49.60batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 49.79batch/s] 76%|██████████████████████▋       | 37/49 [00:00<00:00, 49.34batch/s] 90%|██████████████████████████▉   | 44/49 [00:00<00:00, 50.21batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 49.18batch/s]
+Validation 46 -> LOSS = 0.24
+Validation 46 -> BLEU = 96.66, 98.6/97.2/96.1/94.8 (BP=1.000, ratio=1.000, hyp_len=14381, ref_len=14382)
+Early stopping patience: 8
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.71 @ validation 44
+Starting Epoch 47
+Epoch 47 - update      22200 => loss:   0.061 (#OOM: 0)
+Epoch 47 - update      22230 => loss:   0.090 (#OOM: 0)
+Epoch 47 - update      22260 => loss:   0.074 (#OOM: 0)
+Epoch 47 - update      22290 => loss:   0.146 (#OOM: 0)
+Epoch 47 - update      22320 => loss:   0.067 (#OOM: 0)
+Epoch 47 - update      22350 => loss:   0.092 (#OOM: 0)
+Epoch 47 - update      22380 => loss:   0.124 (#OOM: 0)
+Epoch 47 - update      22410 => loss:   0.107 (#OOM: 0)
+Epoch 47 - update      22440 => loss:   0.085 (#OOM: 0)
+Epoch 47 - update      22470 => loss:   0.111 (#OOM: 0)
+Epoch 47 - update      22500 => loss:   0.132 (#OOM: 0)
+Epoch 47 - update      22530 => loss:   0.106 (#OOM: 0)
+Epoch 47 - update      22560 => loss:   0.084 (#OOM: 0)
+Epoch 47 - update      22590 => loss:   0.147 (#OOM: 0)
+Epoch 47 - update      22620 => loss:   0.104 (#OOM: 0)
+Epoch 47 - update      22650 => loss:   0.111 (#OOM: 0)
+--> Epoch 47 finished with mean loss 0.09135
+--> Overhead/Training/Evaluation: 0.03/0.55/0.00 mins (total: 0.58 mins)   (879 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 43.61batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 43.05batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 48.09batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 49.95batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 52.78batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.68batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 48.23batch/s] 20%|██████                        | 10/49 [00:00<00:00, 48.57batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 48.04batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 49.55batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 49.58batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 47.85batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 47.86batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 48.39batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 49.27batch/s]
+Validation 47 -> LOSS = 0.24
+Validation 47 -> BLEU = 96.69, 98.7/97.2/96.1/94.9 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+** Learning rate changed -> 0.0001
+Early stopping patience: 7
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.71 @ validation 44
+Starting Epoch 48
+Epoch 48 - update      22680 => loss:   0.112 (#OOM: 0)
+Epoch 48 - update      22710 => loss:   0.061 (#OOM: 0)
+Epoch 48 - update      22740 => loss:   0.062 (#OOM: 0)
+Epoch 48 - update      22770 => loss:   0.071 (#OOM: 0)
+Epoch 48 - update      22800 => loss:   0.052 (#OOM: 0)
+Epoch 48 - update      22830 => loss:   0.167 (#OOM: 0)
+Epoch 48 - update      22860 => loss:   0.056 (#OOM: 0)
+Epoch 48 - update      22890 => loss:   0.071 (#OOM: 0)
+Epoch 48 - update      22920 => loss:   0.056 (#OOM: 0)
+Epoch 48 - update      22950 => loss:   0.062 (#OOM: 0)
+Epoch 48 - update      22980 => loss:   0.132 (#OOM: 0)
+Epoch 48 - update      23010 => loss:   0.085 (#OOM: 0)
+Epoch 48 - update      23040 => loss:   0.044 (#OOM: 0)
+Epoch 48 - update      23070 => loss:   0.091 (#OOM: 0)
+Epoch 48 - update      23100 => loss:   0.059 (#OOM: 0)
+Epoch 48 - update      23130 => loss:   0.000 (#OOM: 0)
+--> Epoch 48 finished with mean loss 0.08642
+--> Overhead/Training/Evaluation: 0.02/0.46/0.00 mins (total: 0.49 mins)   (1044 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 46.26batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 55.54batch/s] 56%|████████████████▊             | 19/34 [00:00<00:00, 54.19batch/s] 76%|██████████████████████▉       | 26/34 [00:00<00:00, 55.24batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 53.88batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.96batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 40.51batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 48.80batch/s] 39%|███████████▋                  | 19/49 [00:00<00:00, 48.53batch/s] 53%|███████████████▉              | 26/49 [00:00<00:00, 48.28batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 47.59batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 47.51batch/s] 96%|████████████████████████████▊ | 47/49 [00:00<00:00, 48.98batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 49.20batch/s]
+Validation 48 -> LOSS = 0.24
+Validation 48 -> BLEU = 96.69, 98.7/97.2/96.1/94.9 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Early stopping patience: 6
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 41
+--> Best BLEU so far: 96.71 @ validation 44
+Starting Epoch 49
+Epoch 49 - update      23160 => loss:   0.068 (#OOM: 0)
+Epoch 49 - update      23190 => loss:   0.073 (#OOM: 0)
+Epoch 49 - update      23220 => loss:   0.070 (#OOM: 0)
+Epoch 49 - update      23250 => loss:   0.066 (#OOM: 0)
+Epoch 49 - update      23280 => loss:   0.102 (#OOM: 0)
+Epoch 49 - update      23310 => loss:   0.112 (#OOM: 0)
+Epoch 49 - update      23340 => loss:   0.098 (#OOM: 0)
+Epoch 49 - update      23370 => loss:   0.078 (#OOM: 0)
+Epoch 49 - update      23400 => loss:   0.071 (#OOM: 0)
+Epoch 49 - update      23430 => loss:   0.127 (#OOM: 0)
+Epoch 49 - update      23460 => loss:   0.083 (#OOM: 0)
+Epoch 49 - update      23490 => loss:   0.083 (#OOM: 0)
+Epoch 49 - update      23520 => loss:   0.066 (#OOM: 0)
+Epoch 49 - update      23550 => loss:   0.086 (#OOM: 0)
+Epoch 49 - update      23580 => loss:   0.178 (#OOM: 0)
+Epoch 49 - update      23610 => loss:   0.042 (#OOM: 0)
+--> Epoch 49 finished with mean loss 0.08476
+--> Overhead/Training/Evaluation: 0.03/0.54/0.00 mins (total: 0.57 mins)   (895 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 49.68batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 48.31batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 47.30batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 50.05batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 50.17batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.80batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 39.40batch/s] 22%|██████▋                       | 11/49 [00:00<00:00, 51.73batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 48.48batch/s] 51%|███████████████▎              | 25/49 [00:00<00:00, 48.92batch/s] 65%|███████████████████▌          | 32/49 [00:00<00:00, 45.43batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 46.77batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 46.68batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.86batch/s]
+Validation 49 -> LOSS = 0.24
+Validation 49 -> BLEU = 96.65, 98.7/97.3/96.2/94.9 (BP=0.999, ratio=0.999, hyp_len=14367, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 5
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 49
+--> Best BLEU so far: 96.71 @ validation 44
+Starting Epoch 50
+Epoch 50 - update      23640 => loss:   0.046 (#OOM: 0)
+Epoch 50 - update      23670 => loss:   0.078 (#OOM: 0)
+Epoch 50 - update      23700 => loss:   0.127 (#OOM: 0)
+Epoch 50 - update      23730 => loss:   0.039 (#OOM: 0)
+Epoch 50 - update      23760 => loss:   0.067 (#OOM: 0)
+Epoch 50 - update      23790 => loss:   0.073 (#OOM: 0)
+Epoch 50 - update      23820 => loss:   0.080 (#OOM: 0)
+Epoch 50 - update      23850 => loss:   0.076 (#OOM: 0)
+Epoch 50 - update      23880 => loss:   0.039 (#OOM: 0)
+Epoch 50 - update      23910 => loss:   0.083 (#OOM: 0)
+Epoch 50 - update      23940 => loss:   0.078 (#OOM: 0)
+Epoch 50 - update      23970 => loss:   0.063 (#OOM: 0)
+Epoch 50 - update      24000 => loss:   0.074 (#OOM: 0)
+Epoch 50 - update      24030 => loss:   0.087 (#OOM: 0)
+Epoch 50 - update      24060 => loss:   0.029 (#OOM: 0)
+Epoch 50 - update      24090 => loss:   0.118 (#OOM: 0)
+--> Epoch 50 finished with mean loss 0.08223
+--> Overhead/Training/Evaluation: 0.03/0.51/0.00 mins (total: 0.54 mins)   (953 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 21%|██████▍                        | 7/34 [00:00<00:00, 53.37batch/s] 41%|████████████▎                 | 14/34 [00:00<00:00, 47.19batch/s] 62%|██████████████████▌           | 21/34 [00:00<00:00, 45.95batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 47.92batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.16batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 40.15batch/s] 22%|██████▋                       | 11/49 [00:00<00:00, 45.75batch/s] 35%|██████████▍                   | 17/49 [00:00<00:00, 46.89batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 48.49batch/s] 63%|██████████████████▉           | 31/49 [00:00<00:00, 49.92batch/s] 78%|███████████████████████▎      | 38/49 [00:00<00:00, 48.42batch/s] 92%|███████████████████████████▌  | 45/49 [00:00<00:00, 46.77batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.56batch/s]
+Validation 50 -> LOSS = 0.24
+Validation 50 -> BLEU = 96.69, 98.7/97.2/96.1/94.9 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+** Learning rate changed -> 5e-05
+Early stopping patience: 4
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 49
+--> Best BLEU so far: 96.71 @ validation 44
+Starting Epoch 51
+Epoch 51 - update      24120 => loss:   0.086 (#OOM: 0)
+Epoch 51 - update      24150 => loss:   0.039 (#OOM: 0)
+Epoch 51 - update      24180 => loss:   0.045 (#OOM: 0)
+Epoch 51 - update      24210 => loss:   0.052 (#OOM: 0)
+Epoch 51 - update      24240 => loss:   0.076 (#OOM: 0)
+Epoch 51 - update      24270 => loss:   0.080 (#OOM: 0)
+Epoch 51 - update      24300 => loss:   0.045 (#OOM: 0)
+Epoch 51 - update      24330 => loss:   0.101 (#OOM: 0)
+Epoch 51 - update      24360 => loss:   0.067 (#OOM: 0)
+Epoch 51 - update      24390 => loss:   0.057 (#OOM: 0)
+Epoch 51 - update      24420 => loss:   0.133 (#OOM: 0)
+Epoch 51 - update      24450 => loss:   0.062 (#OOM: 0)
+Epoch 51 - update      24480 => loss:   0.078 (#OOM: 0)
+Epoch 51 - update      24510 => loss:   0.052 (#OOM: 0)
+Epoch 51 - update      24540 => loss:   0.050 (#OOM: 0)
+Epoch 51 - update      24570 => loss:   0.087 (#OOM: 0)
+--> Epoch 51 finished with mean loss 0.07988
+--> Overhead/Training/Evaluation: 0.04/0.61/0.00 mins (total: 0.65 mins)   (791 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 39.87batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 45.15batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 46.96batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 45.70batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 47.40batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.28batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 28.60batch/s] 20%|██████                        | 10/49 [00:00<00:00, 39.18batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 38.29batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 41.52batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 45.31batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 45.43batch/s] 88%|██████████████████████████▎   | 43/49 [00:00<00:00, 46.30batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.19batch/s]
+Validation 51 -> LOSS = 0.24
+Validation 51 -> BLEU = 96.75, 98.7/97.3/96.2/94.9 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Saving best model based on BLEU
+Saving best model based on LOSS
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 51
+--> Best BLEU so far: 96.75 @ validation 51
+Starting Epoch 52
+Epoch 52 - update      24600 => loss:   0.059 (#OOM: 0)
+Epoch 52 - update      24630 => loss:   0.107 (#OOM: 0)
+Epoch 52 - update      24660 => loss:   0.075 (#OOM: 0)
+Epoch 52 - update      24690 => loss:   0.065 (#OOM: 0)
+Epoch 52 - update      24720 => loss:   0.027 (#OOM: 0)
+Epoch 52 - update      24750 => loss:   0.089 (#OOM: 0)
+Epoch 52 - update      24780 => loss:   0.081 (#OOM: 0)
+Epoch 52 - update      24810 => loss:   0.057 (#OOM: 0)
+Epoch 52 - update      24840 => loss:   0.061 (#OOM: 0)
+Epoch 52 - update      24870 => loss:   0.084 (#OOM: 0)
+Epoch 52 - update      24900 => loss:   0.053 (#OOM: 0)
+Epoch 52 - update      24930 => loss:   0.072 (#OOM: 0)
+Epoch 52 - update      24960 => loss:   0.070 (#OOM: 0)
+Epoch 52 - update      24990 => loss:   0.065 (#OOM: 0)
+Epoch 52 - update      25020 => loss:   0.055 (#OOM: 0)
+Epoch 52 - update      25050 => loss:   0.102 (#OOM: 0)
+--> Epoch 52 finished with mean loss 0.07950
+--> Overhead/Training/Evaluation: 0.04/0.58/0.00 mins (total: 0.61 mins)   (839 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 52.92batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 51.63batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 49.61batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 52.55batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 53.16batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 53.46batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 41.21batch/s] 20%|██████                        | 10/49 [00:00<00:00, 42.68batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 43.37batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 40.42batch/s] 53%|███████████████▉              | 26/49 [00:00<00:00, 43.00batch/s] 67%|████████████████████▏         | 33/49 [00:00<00:00, 45.36batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 45.62batch/s] 96%|████████████████████████████▊ | 47/49 [00:00<00:00, 47.02batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.35batch/s]
+Validation 52 -> LOSS = 0.24
+Validation 52 -> BLEU = 96.65, 98.7/97.3/96.2/94.9 (BP=0.999, ratio=0.999, hyp_len=14367, ref_len=14382)
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 51
+--> Best BLEU so far: 96.75 @ validation 51
+Starting Epoch 53
+Epoch 53 - update      25080 => loss:   0.123 (#OOM: 0)
+Epoch 53 - update      25110 => loss:   0.083 (#OOM: 0)
+Epoch 53 - update      25140 => loss:   0.046 (#OOM: 0)
+Epoch 53 - update      25170 => loss:   0.048 (#OOM: 0)
+Epoch 53 - update      25200 => loss:   0.061 (#OOM: 0)
+Epoch 53 - update      25230 => loss:   0.079 (#OOM: 0)
+Epoch 53 - update      25260 => loss:   0.089 (#OOM: 0)
+Epoch 53 - update      25290 => loss:   0.072 (#OOM: 0)
+Epoch 53 - update      25320 => loss:   0.066 (#OOM: 0)
+Epoch 53 - update      25350 => loss:   0.097 (#OOM: 0)
+Epoch 53 - update      25380 => loss:   0.067 (#OOM: 0)
+Epoch 53 - update      25410 => loss:   0.076 (#OOM: 0)
+Epoch 53 - update      25440 => loss:   0.050 (#OOM: 0)
+Epoch 53 - update      25470 => loss:   0.092 (#OOM: 0)
+Epoch 53 - update      25500 => loss:   0.091 (#OOM: 0)
+Epoch 53 - update      25530 => loss:   0.045 (#OOM: 0)
+--> Epoch 53 finished with mean loss 0.07848
+--> Overhead/Training/Evaluation: 0.02/0.47/0.00 mins (total: 0.49 mins)   (1033 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 49.25batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 46.97batch/s] 44%|█████████████▏                | 15/34 [00:00<00:00, 46.91batch/s] 62%|██████████████████▌           | 21/34 [00:00<00:00, 49.64batch/s] 79%|███████████████████████▊      | 27/34 [00:00<00:00, 49.56batch/s] 97%|█████████████████████████████ | 33/34 [00:00<00:00, 49.47batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 50.16batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 44.69batch/s] 20%|██████                        | 10/49 [00:00<00:00, 44.62batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 44.56batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 45.75batch/s] 51%|███████████████▎              | 25/49 [00:00<00:00, 41.77batch/s] 63%|██████████████████▉           | 31/49 [00:00<00:00, 44.25batch/s] 76%|██████████████████████▋       | 37/49 [00:00<00:00, 44.67batch/s] 88%|██████████████████████████▎   | 43/49 [00:00<00:00, 44.44batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.10batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 45.09batch/s]
+Validation 53 -> LOSS = 0.24
+Validation 53 -> BLEU = 96.77, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 51
+--> Best BLEU so far: 96.77 @ validation 53
+Starting Epoch 54
+Epoch 54 - update      25560 => loss:   0.063 (#OOM: 0)
+Epoch 54 - update      25590 => loss:   0.062 (#OOM: 0)
+Epoch 54 - update      25620 => loss:   0.058 (#OOM: 0)
+Epoch 54 - update      25650 => loss:   0.075 (#OOM: 0)
+Epoch 54 - update      25680 => loss:   0.083 (#OOM: 0)
+Epoch 54 - update      25710 => loss:   0.059 (#OOM: 0)
+Epoch 54 - update      25740 => loss:   0.081 (#OOM: 0)
+Epoch 54 - update      25770 => loss:   0.078 (#OOM: 0)
+Epoch 54 - update      25800 => loss:   0.085 (#OOM: 0)
+Epoch 54 - update      25830 => loss:   0.063 (#OOM: 0)
+Epoch 54 - update      25860 => loss:   0.047 (#OOM: 0)
+Epoch 54 - update      25890 => loss:   0.096 (#OOM: 0)
+Epoch 54 - update      25920 => loss:   0.079 (#OOM: 0)
+Epoch 54 - update      25950 => loss:   0.047 (#OOM: 0)
+Epoch 54 - update      25980 => loss:   0.107 (#OOM: 0)
+Epoch 54 - update      26010 => loss:   0.101 (#OOM: 0)
+--> Epoch 54 finished with mean loss 0.07738
+--> Overhead/Training/Evaluation: 0.02/0.43/0.00 mins (total: 0.45 mins)   (1118 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 49.19batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 51.54batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 51.17batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 52.27batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 51.37batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.08batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 49.77batch/s] 22%|██████▋                       | 11/49 [00:00<00:00, 54.33batch/s] 35%|██████████▍                   | 17/49 [00:00<00:00, 45.14batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 46.18batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 47.06batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 47.23batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 47.31batch/s] 96%|████████████████████████████▊ | 47/49 [00:01<00:00, 46.28batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.46batch/s]
+Validation 54 -> LOSS = 0.24
+Validation 54 -> BLEU = 96.68, 98.7/97.3/96.2/95.0 (BP=0.999, ratio=0.999, hyp_len=14367, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 54
+--> Best BLEU so far: 96.77 @ validation 53
+Starting Epoch 55
+Epoch 55 - update      26040 => loss:   0.060 (#OOM: 0)
+Epoch 55 - update      26070 => loss:   0.073 (#OOM: 0)
+Epoch 55 - update      26100 => loss:   0.040 (#OOM: 0)
+Epoch 55 - update      26130 => loss:   0.138 (#OOM: 0)
+Epoch 55 - update      26160 => loss:   0.093 (#OOM: 0)
+Epoch 55 - update      26190 => loss:   0.043 (#OOM: 0)
+Epoch 55 - update      26220 => loss:   0.067 (#OOM: 0)
+Epoch 55 - update      26250 => loss:   0.043 (#OOM: 0)
+Epoch 55 - update      26280 => loss:   0.065 (#OOM: 0)
+Epoch 55 - update      26310 => loss:   0.085 (#OOM: 0)
+Epoch 55 - update      26340 => loss:   0.029 (#OOM: 0)
+Epoch 55 - update      26370 => loss:   0.072 (#OOM: 0)
+Epoch 55 - update      26400 => loss:   0.074 (#OOM: 0)
+Epoch 55 - update      26430 => loss:   0.042 (#OOM: 0)
+Epoch 55 - update      26460 => loss:   0.035 (#OOM: 0)
+Epoch 55 - update      26490 => loss:   0.056 (#OOM: 0)
+--> Epoch 55 finished with mean loss 0.07693
+--> Overhead/Training/Evaluation: 0.02/0.44/0.00 mins (total: 0.47 mins)   (1088 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 47.61batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 49.54batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 48.55batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 49.44batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 49.84batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.64batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 49.54batch/s] 20%|██████                        | 10/49 [00:00<00:00, 43.38batch/s] 35%|██████████▍                   | 17/49 [00:00<00:00, 48.20batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 49.97batch/s] 63%|██████████████████▉           | 31/49 [00:00<00:00, 48.94batch/s] 78%|███████████████████████▎      | 38/49 [00:00<00:00, 48.91batch/s] 92%|███████████████████████████▌  | 45/49 [00:00<00:00, 48.18batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.99batch/s]
+Validation 55 -> LOSS = 0.24
+Validation 55 -> BLEU = 96.77, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Early stopping patience: 8
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 54
+--> Best BLEU so far: 96.77 @ validation 53
+Starting Epoch 56
+Epoch 56 - update      26520 => loss:   0.066 (#OOM: 0)
+Epoch 56 - update      26550 => loss:   0.088 (#OOM: 0)
+Epoch 56 - update      26580 => loss:   0.035 (#OOM: 0)
+Epoch 56 - update      26610 => loss:   0.035 (#OOM: 0)
+Epoch 56 - update      26640 => loss:   0.101 (#OOM: 0)
+Epoch 56 - update      26670 => loss:   0.067 (#OOM: 0)
+Epoch 56 - update      26700 => loss:   0.097 (#OOM: 0)
+Epoch 56 - update      26730 => loss:   0.050 (#OOM: 0)
+Epoch 56 - update      26760 => loss:   0.061 (#OOM: 0)
+Epoch 56 - update      26790 => loss:   0.050 (#OOM: 0)
+Epoch 56 - update      26820 => loss:   0.076 (#OOM: 0)
+Epoch 56 - update      26850 => loss:   0.081 (#OOM: 0)
+Epoch 56 - update      26880 => loss:   0.114 (#OOM: 0)
+Epoch 56 - update      26910 => loss:   0.065 (#OOM: 0)
+Epoch 56 - update      26940 => loss:   0.079 (#OOM: 0)
+Epoch 56 - update      26970 => loss:   0.083 (#OOM: 0)
+--> Epoch 56 finished with mean loss 0.07705
+--> Overhead/Training/Evaluation: 0.04/0.62/0.00 mins (total: 0.66 mins)   (778 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 46.62batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 47.25batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 46.83batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 47.34batch/s] 91%|███████████████████████████▎  | 31/34 [00:00<00:00, 48.96batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 49.04batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 43.18batch/s] 22%|██████▋                       | 11/49 [00:00<00:00, 49.85batch/s] 35%|██████████▍                   | 17/49 [00:00<00:00, 43.99batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 46.24batch/s] 59%|█████████████████▊            | 29/49 [00:00<00:00, 46.00batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 47.58batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 46.02batch/s] 96%|████████████████████████████▊ | 47/49 [00:01<00:00, 46.09batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.13batch/s]
+Validation 56 -> LOSS = 0.24
+Validation 56 -> BLEU = 96.76, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+** Learning rate changed -> 2.5e-05
+Early stopping patience: 7
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 54
+--> Best BLEU so far: 96.77 @ validation 53
+Starting Epoch 57
+Epoch 57 - update      27000 => loss:   0.075 (#OOM: 0)
+Epoch 57 - update      27030 => loss:   0.114 (#OOM: 0)
+Epoch 57 - update      27060 => loss:   0.096 (#OOM: 0)
+Epoch 57 - update      27090 => loss:   0.057 (#OOM: 0)
+Epoch 57 - update      27120 => loss:   0.050 (#OOM: 0)
+Epoch 57 - update      27150 => loss:   0.071 (#OOM: 0)
+Epoch 57 - update      27180 => loss:   0.123 (#OOM: 0)
+Epoch 57 - update      27210 => loss:   0.082 (#OOM: 0)
+Epoch 57 - update      27240 => loss:   0.081 (#OOM: 0)
+Epoch 57 - update      27270 => loss:   0.117 (#OOM: 0)
+Epoch 57 - update      27300 => loss:   0.087 (#OOM: 0)
+Epoch 57 - update      27330 => loss:   0.218 (#OOM: 0)
+Epoch 57 - update      27360 => loss:   0.069 (#OOM: 0)
+Epoch 57 - update      27390 => loss:   0.050 (#OOM: 0)
+Epoch 57 - update      27420 => loss:   0.070 (#OOM: 0)
+Epoch 57 - update      27450 => loss:   0.024 (#OOM: 0)
+--> Epoch 57 finished with mean loss 0.07609
+--> Overhead/Training/Evaluation: 0.03/0.55/0.00 mins (total: 0.59 mins)   (871 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 37.18batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 44.18batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 45.09batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 44.14batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 44.19batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 46.47batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 56.12batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 54.96batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 53.58batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 48.02batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 47.75batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 46.12batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 46.15batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 46.13batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.09batch/s]
+Validation 57 -> LOSS = 0.24
+Validation 57 -> BLEU = 96.76, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 6
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 57
+--> Best BLEU so far: 96.77 @ validation 53
+Starting Epoch 58
+Epoch 58 - update      27480 => loss:   0.064 (#OOM: 0)
+Epoch 58 - update      27510 => loss:   0.120 (#OOM: 0)
+Epoch 58 - update      27540 => loss:   0.101 (#OOM: 0)
+Epoch 58 - update      27570 => loss:   0.080 (#OOM: 0)
+Epoch 58 - update      27600 => loss:   0.061 (#OOM: 0)
+Epoch 58 - update      27630 => loss:   0.104 (#OOM: 0)
+Epoch 58 - update      27660 => loss:   0.072 (#OOM: 0)
+Epoch 58 - update      27690 => loss:   0.081 (#OOM: 0)
+Epoch 58 - update      27720 => loss:   0.094 (#OOM: 0)
+Epoch 58 - update      27750 => loss:   0.097 (#OOM: 0)
+Epoch 58 - update      27780 => loss:   0.036 (#OOM: 0)
+Epoch 58 - update      27810 => loss:   0.079 (#OOM: 0)
+Epoch 58 - update      27840 => loss:   0.086 (#OOM: 0)
+Epoch 58 - update      27870 => loss:   0.090 (#OOM: 0)
+Epoch 58 - update      27900 => loss:   0.061 (#OOM: 0)
+Epoch 58 - update      27930 => loss:   0.066 (#OOM: 0)
+--> Epoch 58 finished with mean loss 0.07574
+--> Overhead/Training/Evaluation: 0.04/0.63/0.00 mins (total: 0.68 mins)   (761 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 41.92batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 43.45batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 49.71batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 51.52batch/s] 91%|███████████████████████████▎  | 31/34 [00:00<00:00, 53.95batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.65batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 52.45batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 53.00batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 53.58batch/s] 51%|███████████████▎              | 25/49 [00:00<00:00, 54.69batch/s] 65%|███████████████████▌          | 32/49 [00:00<00:00, 51.39batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 50.33batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 49.26batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.92batch/s]
+Validation 58 -> LOSS = 0.24
+Validation 58 -> BLEU = 96.76, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Early stopping patience: 5
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 57
+--> Best BLEU so far: 96.77 @ validation 53
+Starting Epoch 59
+Epoch 59 - update      27960 => loss:   0.105 (#OOM: 0)
+Epoch 59 - update      27990 => loss:   0.076 (#OOM: 0)
+Epoch 59 - update      28020 => loss:   0.084 (#OOM: 0)
+Epoch 59 - update      28050 => loss:   0.049 (#OOM: 0)
+Epoch 59 - update      28080 => loss:   0.068 (#OOM: 0)
+Epoch 59 - update      28110 => loss:   0.040 (#OOM: 0)
+Epoch 59 - update      28140 => loss:   0.074 (#OOM: 0)
+Epoch 59 - update      28170 => loss:   0.077 (#OOM: 0)
+Epoch 59 - update      28200 => loss:   0.058 (#OOM: 0)
+Epoch 59 - update      28230 => loss:   0.092 (#OOM: 0)
+Epoch 59 - update      28260 => loss:   0.073 (#OOM: 0)
+Epoch 59 - update      28290 => loss:   0.077 (#OOM: 0)
+Epoch 59 - update      28320 => loss:   0.085 (#OOM: 0)
+Epoch 59 - update      28350 => loss:   0.230 (#OOM: 0)
+Epoch 59 - update      28380 => loss:   0.104 (#OOM: 0)
+Epoch 59 - update      28410 => loss:   0.038 (#OOM: 0)
+--> Epoch 59 finished with mean loss 0.07497
+--> Overhead/Training/Evaluation: 0.04/0.60/0.00 mins (total: 0.64 mins)   (799 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 48.60batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 46.46batch/s] 44%|█████████████▏                | 15/34 [00:00<00:00, 47.02batch/s] 62%|██████████████████▌           | 21/34 [00:00<00:00, 48.88batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 51.08batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.41batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 38.56batch/s] 18%|█████▋                         | 9/49 [00:00<00:00, 41.73batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 49.24batch/s] 47%|██████████████                | 23/49 [00:00<00:00, 51.84batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 50.42batch/s] 76%|██████████████████████▋       | 37/49 [00:00<00:00, 47.95batch/s] 90%|██████████████████████████▉   | 44/49 [00:00<00:00, 47.19batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.24batch/s]
+Validation 59 -> LOSS = 0.24
+Validation 59 -> BLEU = 96.82, 98.7/97.4/96.3/95.0 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Saving best model based on BLEU
+Early stopping patience: 10
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 57
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 60
+Epoch 60 - update      28440 => loss:   0.094 (#OOM: 0)
+Epoch 60 - update      28470 => loss:   0.084 (#OOM: 0)
+Epoch 60 - update      28500 => loss:   0.070 (#OOM: 0)
+Epoch 60 - update      28530 => loss:   0.087 (#OOM: 0)
+Epoch 60 - update      28560 => loss:   0.114 (#OOM: 0)
+Epoch 60 - update      28590 => loss:   0.095 (#OOM: 0)
+Epoch 60 - update      28620 => loss:   0.178 (#OOM: 0)
+Epoch 60 - update      28650 => loss:   0.065 (#OOM: 0)
+Epoch 60 - update      28680 => loss:   0.052 (#OOM: 0)
+Epoch 60 - update      28710 => loss:   0.076 (#OOM: 0)
+Epoch 60 - update      28740 => loss:   0.093 (#OOM: 0)
+Epoch 60 - update      28770 => loss:   0.089 (#OOM: 0)
+Epoch 60 - update      28800 => loss:   0.102 (#OOM: 0)
+Epoch 60 - update      28830 => loss:   0.072 (#OOM: 0)
+Epoch 60 - update      28860 => loss:   0.034 (#OOM: 0)
+Epoch 60 - update      28890 => loss:   0.093 (#OOM: 0)
+Epoch 60 - update      28920 => loss:   0.149 (#OOM: 0)
+--> Epoch 60 finished with mean loss 0.07437
+--> Overhead/Training/Evaluation: 0.03/0.52/0.00 mins (total: 0.55 mins)   (936 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 45.47batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 43.54batch/s] 44%|█████████████▏                | 15/34 [00:00<00:00, 45.33batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 50.80batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 51.26batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.94batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 46.04batch/s] 27%|███████▉                      | 13/49 [00:00<00:00, 53.52batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 53.67batch/s] 55%|████████████████▌             | 27/49 [00:00<00:00, 50.71batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 48.76batch/s] 84%|█████████████████████████     | 41/49 [00:00<00:00, 47.92batch/s] 98%|█████████████████████████████▍| 48/49 [00:00<00:00, 48.59batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.56batch/s]
+Validation 60 -> LOSS = 0.24
+Validation 60 -> BLEU = 96.79, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+Early stopping patience: 9
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 57
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 61
+Epoch 61 - update      28950 => loss:   0.071 (#OOM: 0)
+Epoch 61 - update      28980 => loss:   0.045 (#OOM: 0)
+Epoch 61 - update      29010 => loss:   0.098 (#OOM: 0)
+Epoch 61 - update      29040 => loss:   0.039 (#OOM: 0)
+Epoch 61 - update      29070 => loss:   0.107 (#OOM: 0)
+Epoch 61 - update      29100 => loss:   0.107 (#OOM: 0)
+Epoch 61 - update      29130 => loss:   0.038 (#OOM: 0)
+Epoch 61 - update      29160 => loss:   0.043 (#OOM: 0)
+Epoch 61 - update      29190 => loss:   0.038 (#OOM: 0)
+Epoch 61 - update      29220 => loss:   0.067 (#OOM: 0)
+Epoch 61 - update      29250 => loss:   0.081 (#OOM: 0)
+Epoch 61 - update      29280 => loss:   0.067 (#OOM: 0)
+Epoch 61 - update      29310 => loss:   0.084 (#OOM: 0)
+Epoch 61 - update      29340 => loss:   0.062 (#OOM: 0)
+Epoch 61 - update      29370 => loss:   0.064 (#OOM: 0)
+Epoch 61 - update      29400 => loss:   0.076 (#OOM: 0)
+--> Epoch 61 finished with mean loss 0.07412
+--> Overhead/Training/Evaluation: 0.05/0.66/0.00 mins (total: 0.71 mins)   (729 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 57.32batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 52.15batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 49.67batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 52.51batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 52.91batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.92batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 14%|████▍                          | 7/49 [00:00<00:00, 58.65batch/s] 29%|████████▌                     | 14/49 [00:00<00:00, 55.62batch/s] 43%|████████████▊                 | 21/49 [00:00<00:00, 49.29batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 50.47batch/s] 71%|█████████████████████▍        | 35/49 [00:00<00:00, 48.35batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 47.56batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.60batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.59batch/s]
+Validation 61 -> LOSS = 0.24
+Validation 61 -> BLEU = 96.77, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Early stopping patience: 8
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 57
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 62
+Epoch 62 - update      29430 => loss:   0.063 (#OOM: 0)
+Epoch 62 - update      29460 => loss:   0.097 (#OOM: 0)
+Epoch 62 - update      29490 => loss:   0.067 (#OOM: 0)
+Epoch 62 - update      29520 => loss:   0.055 (#OOM: 0)
+Epoch 62 - update      29550 => loss:   0.033 (#OOM: 0)
+Epoch 62 - update      29580 => loss:   0.055 (#OOM: 0)
+Epoch 62 - update      29610 => loss:   0.081 (#OOM: 0)
+Epoch 62 - update      29640 => loss:   0.082 (#OOM: 0)
+Epoch 62 - update      29670 => loss:   0.038 (#OOM: 0)
+Epoch 62 - update      29700 => loss:   0.061 (#OOM: 0)
+Epoch 62 - update      29730 => loss:   0.052 (#OOM: 0)
+Epoch 62 - update      29760 => loss:   0.044 (#OOM: 0)
+Epoch 62 - update      29790 => loss:   0.032 (#OOM: 0)
+Epoch 62 - update      29820 => loss:   0.083 (#OOM: 0)
+Epoch 62 - update      29850 => loss:   0.065 (#OOM: 0)
+Epoch 62 - update      29880 => loss:   0.082 (#OOM: 0)
+--> Epoch 62 finished with mean loss 0.07373
+--> Overhead/Training/Evaluation: 0.04/0.58/0.00 mins (total: 0.62 mins)   (833 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 43.35batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 46.02batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 50.86batch/s] 74%|██████████████████████        | 25/34 [00:00<00:00, 51.26batch/s] 94%|████████████████████████████▏ | 32/34 [00:00<00:00, 51.70batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.07batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 41.58batch/s] 20%|██████                        | 10/49 [00:00<00:00, 40.62batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 43.19batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 45.77batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 44.99batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 45.92batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 47.22batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 48.36batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.80batch/s]
+Validation 62 -> LOSS = 0.24
+Validation 62 -> BLEU = 96.76, 98.7/97.3/96.2/94.9 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+** Learning rate changed -> 1.25e-05
+Early stopping patience: 7
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 57
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 63
+Epoch 63 - update      29910 => loss:   0.068 (#OOM: 0)
+Epoch 63 - update      29940 => loss:   0.094 (#OOM: 0)
+Epoch 63 - update      29970 => loss:   0.065 (#OOM: 0)
+Epoch 63 - update      30000 => loss:   0.064 (#OOM: 0)
+Epoch 63 - update      30030 => loss:   0.083 (#OOM: 0)
+Epoch 63 - update      30060 => loss:   0.069 (#OOM: 0)
+Epoch 63 - update      30090 => loss:   0.054 (#OOM: 0)
+Epoch 63 - update      30120 => loss:   0.058 (#OOM: 0)
+Epoch 63 - update      30150 => loss:   0.092 (#OOM: 0)
+Epoch 63 - update      30180 => loss:   0.082 (#OOM: 0)
+Epoch 63 - update      30210 => loss:   0.074 (#OOM: 0)
+Epoch 63 - update      30240 => loss:   0.097 (#OOM: 0)
+Epoch 63 - update      30270 => loss:   0.079 (#OOM: 0)
+Epoch 63 - update      30300 => loss:   0.087 (#OOM: 0)
+Epoch 63 - update      30330 => loss:   0.075 (#OOM: 0)
+Epoch 63 - update      30360 => loss:   0.041 (#OOM: 0)
+--> Epoch 63 finished with mean loss 0.07374
+--> Overhead/Training/Evaluation: 0.04/0.59/0.00 mins (total: 0.62 mins)   (823 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 39.76batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 49.04batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 51.67batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 51.27batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 52.13batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 53.17batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 53.13batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 50.58batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 47.12batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 49.60batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 48.64batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 48.49batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 47.39batch/s] 88%|██████████████████████████▎   | 43/49 [00:00<00:00, 49.24batch/s]100%|██████████████████████████████| 49/49 [00:00<00:00, 49.09batch/s]
+Validation 63 -> LOSS = 0.24
+Validation 63 -> BLEU = 96.75, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 6
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 63
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 64
+Epoch 64 - update      30390 => loss:   0.070 (#OOM: 0)
+Epoch 64 - update      30420 => loss:   0.097 (#OOM: 0)
+Epoch 64 - update      30450 => loss:   0.064 (#OOM: 0)
+Epoch 64 - update      30480 => loss:   0.085 (#OOM: 0)
+Epoch 64 - update      30510 => loss:   0.072 (#OOM: 0)
+Epoch 64 - update      30540 => loss:   0.069 (#OOM: 0)
+Epoch 64 - update      30570 => loss:   0.095 (#OOM: 0)
+Epoch 64 - update      30600 => loss:   0.097 (#OOM: 0)
+Epoch 64 - update      30630 => loss:   0.058 (#OOM: 0)
+Epoch 64 - update      30660 => loss:   0.078 (#OOM: 0)
+Epoch 64 - update      30690 => loss:   0.056 (#OOM: 0)
+Epoch 64 - update      30720 => loss:   0.090 (#OOM: 0)
+Epoch 64 - update      30750 => loss:   0.046 (#OOM: 0)
+Epoch 64 - update      30780 => loss:   0.102 (#OOM: 0)
+Epoch 64 - update      30810 => loss:   0.067 (#OOM: 0)
+Epoch 64 - update      30840 => loss:   0.080 (#OOM: 0)
+--> Epoch 64 finished with mean loss 0.07324
+--> Overhead/Training/Evaluation: 0.04/0.61/0.00 mins (total: 0.65 mins)   (786 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 57.72batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 52.92batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 53.81batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 51.28batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 52.42batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.72batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:01, 43.29batch/s] 20%|██████                        | 10/49 [00:00<00:00, 44.80batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 48.74batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 50.51batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 46.97batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 46.80batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 47.57batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 48.69batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.50batch/s]
+Validation 64 -> LOSS = 0.24
+Validation 64 -> BLEU = 96.80, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 5
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 64
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 65
+Epoch 65 - update      30870 => loss:   0.044 (#OOM: 0)
+Epoch 65 - update      30900 => loss:   0.080 (#OOM: 0)
+Epoch 65 - update      30930 => loss:   0.078 (#OOM: 0)
+Epoch 65 - update      30960 => loss:   0.082 (#OOM: 0)
+Epoch 65 - update      30990 => loss:   0.036 (#OOM: 0)
+Epoch 65 - update      31020 => loss:   0.043 (#OOM: 0)
+Epoch 65 - update      31050 => loss:   0.102 (#OOM: 0)
+Epoch 65 - update      31080 => loss:   0.079 (#OOM: 0)
+Epoch 65 - update      31110 => loss:   0.079 (#OOM: 0)
+Epoch 65 - update      31140 => loss:   0.064 (#OOM: 0)
+Epoch 65 - update      31170 => loss:   0.012 (#OOM: 0)
+Epoch 65 - update      31200 => loss:   0.107 (#OOM: 0)
+Epoch 65 - update      31230 => loss:   0.052 (#OOM: 0)
+Epoch 65 - update      31260 => loss:   0.076 (#OOM: 0)
+Epoch 65 - update      31290 => loss:   0.085 (#OOM: 0)
+Epoch 65 - update      31320 => loss:   0.060 (#OOM: 0)
+--> Epoch 65 finished with mean loss 0.07294
+--> Overhead/Training/Evaluation: 0.05/0.67/0.00 mins (total: 0.71 mins)   (724 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 37.45batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 45.28batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 47.08batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 45.30batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 47.87batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.78batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 44.62batch/s] 20%|██████                        | 10/49 [00:00<00:00, 46.18batch/s] 31%|█████████▏                    | 15/49 [00:00<00:00, 43.05batch/s] 41%|████████████▏                 | 20/49 [00:00<00:00, 44.53batch/s] 51%|███████████████▎              | 25/49 [00:00<00:00, 44.38batch/s] 65%|███████████████████▌          | 32/49 [00:00<00:00, 45.92batch/s] 80%|███████████████████████▉      | 39/49 [00:00<00:00, 45.35batch/s] 94%|████████████████████████████▏ | 46/49 [00:01<00:00, 45.44batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.11batch/s]
+Validation 65 -> LOSS = 0.24
+Validation 65 -> BLEU = 96.81, 98.7/97.4/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14380, ref_len=14382)
+** Learning rate changed -> 6.25e-06
+Early stopping patience: 4
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 64
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 66
+Epoch 66 - update      31350 => loss:   0.087 (#OOM: 0)
+Epoch 66 - update      31380 => loss:   0.071 (#OOM: 0)
+Epoch 66 - update      31410 => loss:   0.023 (#OOM: 0)
+Epoch 66 - update      31440 => loss:   0.053 (#OOM: 0)
+Epoch 66 - update      31470 => loss:   0.071 (#OOM: 0)
+Epoch 66 - update      31500 => loss:   0.068 (#OOM: 0)
+Epoch 66 - update      31530 => loss:   0.058 (#OOM: 0)
+Epoch 66 - update      31560 => loss:   0.069 (#OOM: 0)
+Epoch 66 - update      31590 => loss:   0.068 (#OOM: 0)
+Epoch 66 - update      31620 => loss:   0.049 (#OOM: 0)
+Epoch 66 - update      31650 => loss:   0.028 (#OOM: 0)
+Epoch 66 - update      31680 => loss:   0.100 (#OOM: 0)
+Epoch 66 - update      31710 => loss:   0.046 (#OOM: 0)
+Epoch 66 - update      31740 => loss:   0.103 (#OOM: 0)
+Epoch 66 - update      31770 => loss:   0.089 (#OOM: 0)
+Epoch 66 - update      31800 => loss:   0.102 (#OOM: 0)
+--> Epoch 66 finished with mean loss 0.07285
+--> Overhead/Training/Evaluation: 0.04/0.59/0.00 mins (total: 0.63 mins)   (817 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 12%|███▋                           | 4/34 [00:00<00:00, 37.94batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 45.89batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 49.45batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 49.37batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 46.72batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.79batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 51.33batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 47.84batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 48.08batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 45.92batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 46.97batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 46.58batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 46.45batch/s] 98%|█████████████████████████████▍| 48/49 [00:01<00:00, 46.01batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.27batch/s]
+Validation 66 -> LOSS = 0.24
+Validation 66 -> BLEU = 96.78, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 3
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 66
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 67
+Epoch 67 - update      31830 => loss:   0.064 (#OOM: 0)
+Epoch 67 - update      31860 => loss:   0.074 (#OOM: 0)
+Epoch 67 - update      31890 => loss:   0.047 (#OOM: 0)
+Epoch 67 - update      31920 => loss:   0.067 (#OOM: 0)
+Epoch 67 - update      31950 => loss:   0.104 (#OOM: 0)
+Epoch 67 - update      31980 => loss:   0.060 (#OOM: 0)
+Epoch 67 - update      32010 => loss:   0.066 (#OOM: 0)
+Epoch 67 - update      32040 => loss:   0.041 (#OOM: 0)
+Epoch 67 - update      32070 => loss:   0.069 (#OOM: 0)
+Epoch 67 - update      32100 => loss:   0.086 (#OOM: 0)
+Epoch 67 - update      32130 => loss:   0.065 (#OOM: 0)
+Epoch 67 - update      32160 => loss:   0.048 (#OOM: 0)
+Epoch 67 - update      32190 => loss:   0.072 (#OOM: 0)
+Epoch 67 - update      32220 => loss:   0.074 (#OOM: 0)
+Epoch 67 - update      32250 => loss:   0.183 (#OOM: 0)
+Epoch 67 - update      32280 => loss:   0.037 (#OOM: 0)
+--> Epoch 67 finished with mean loss 0.07303
+--> Overhead/Training/Evaluation: 0.04/0.65/0.00 mins (total: 0.69 mins)   (743 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 18%|█████▍                         | 6/34 [00:00<00:00, 58.56batch/s] 35%|██████████▌                   | 12/34 [00:00<00:00, 52.05batch/s] 53%|███████████████▉              | 18/34 [00:00<00:00, 52.44batch/s] 71%|█████████████████████▏        | 24/34 [00:00<00:00, 53.43batch/s] 88%|██████████████████████████▍   | 30/34 [00:00<00:00, 51.79batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 52.47batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s]  8%|██▌                            | 4/49 [00:00<00:01, 38.78batch/s] 20%|██████                        | 10/49 [00:00<00:00, 45.60batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 47.24batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 46.23batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 44.98batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 46.66batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 46.93batch/s] 94%|████████████████████████████▏ | 46/49 [00:00<00:00, 48.30batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 48.86batch/s]
+Validation 67 -> LOSS = 0.24
+Validation 67 -> BLEU = 96.76, 98.7/97.3/96.2/94.9 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Saving best model based on LOSS
+Early stopping patience: 2
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 67
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 68
+Epoch 68 - update      32310 => loss:   0.064 (#OOM: 0)
+Epoch 68 - update      32340 => loss:   0.057 (#OOM: 0)
+Epoch 68 - update      32370 => loss:   0.107 (#OOM: 0)
+Epoch 68 - update      32400 => loss:   0.031 (#OOM: 0)
+Epoch 68 - update      32430 => loss:   0.120 (#OOM: 0)
+Epoch 68 - update      32460 => loss:   0.113 (#OOM: 0)
+Epoch 68 - update      32490 => loss:   0.028 (#OOM: 0)
+Epoch 68 - update      32520 => loss:   0.092 (#OOM: 0)
+Epoch 68 - update      32550 => loss:   0.093 (#OOM: 0)
+Epoch 68 - update      32580 => loss:   0.085 (#OOM: 0)
+Epoch 68 - update      32610 => loss:   0.047 (#OOM: 0)
+Epoch 68 - update      32640 => loss:   0.068 (#OOM: 0)
+Epoch 68 - update      32670 => loss:   0.089 (#OOM: 0)
+Epoch 68 - update      32700 => loss:   0.083 (#OOM: 0)
+Epoch 68 - update      32730 => loss:   0.021 (#OOM: 0)
+Epoch 68 - update      32760 => loss:   0.138 (#OOM: 0)
+--> Epoch 68 finished with mean loss 0.07280
+--> Overhead/Training/Evaluation: 0.03/0.56/0.00 mins (total: 0.60 mins)   (859 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 44.40batch/s] 32%|█████████▋                    | 11/34 [00:00<00:00, 49.60batch/s] 50%|███████████████               | 17/34 [00:00<00:00, 51.55batch/s] 68%|████████████████████▎         | 23/34 [00:00<00:00, 49.55batch/s] 85%|█████████████████████████▌    | 29/34 [00:00<00:00, 50.85batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 51.77batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 12%|███▊                           | 6/49 [00:00<00:00, 58.95batch/s] 24%|███████▎                      | 12/49 [00:00<00:00, 54.62batch/s] 37%|███████████                   | 18/49 [00:00<00:00, 49.54batch/s] 49%|██████████████▋               | 24/49 [00:00<00:00, 48.07batch/s] 61%|██████████████████▎           | 30/49 [00:00<00:00, 48.61batch/s] 73%|██████████████████████        | 36/49 [00:00<00:00, 47.06batch/s] 86%|█████████████████████████▋    | 42/49 [00:00<00:00, 47.01batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.79batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 47.77batch/s]
+Validation 68 -> LOSS = 0.24
+Validation 68 -> BLEU = 96.78, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+** Learning rate changed -> 3.125e-06
+Saving best model based on LOSS
+Early stopping patience: 1
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 68
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 69
+Epoch 69 - update      32790 => loss:   0.070 (#OOM: 0)
+Epoch 69 - update      32820 => loss:   0.073 (#OOM: 0)
+Epoch 69 - update      32850 => loss:   0.045 (#OOM: 0)
+Epoch 69 - update      32880 => loss:   0.098 (#OOM: 0)
+Epoch 69 - update      32910 => loss:   0.049 (#OOM: 0)
+Epoch 69 - update      32940 => loss:   0.071 (#OOM: 0)
+Epoch 69 - update      32970 => loss:   0.065 (#OOM: 0)
+Epoch 69 - update      33000 => loss:   0.053 (#OOM: 0)
+Epoch 69 - update      33030 => loss:   0.088 (#OOM: 0)
+Epoch 69 - update      33060 => loss:   0.059 (#OOM: 0)
+Epoch 69 - update      33090 => loss:   0.088 (#OOM: 0)
+Epoch 69 - update      33120 => loss:   0.037 (#OOM: 0)
+Epoch 69 - update      33150 => loss:   0.063 (#OOM: 0)
+Epoch 69 - update      33180 => loss:   0.098 (#OOM: 0)
+Epoch 69 - update      33210 => loss:   0.055 (#OOM: 0)
+Epoch 69 - update      33240 => loss:   0.062 (#OOM: 0)
+--> Epoch 69 finished with mean loss 0.07301
+--> Overhead/Training/Evaluation: 0.04/0.65/0.00 mins (total: 0.69 mins)   (743 samples/sec)
+Computing evaluation loss...
+  0%|                                       | 0/34 [00:00<?, ?batch/s] 15%|████▌                          | 5/34 [00:00<00:00, 44.54batch/s] 29%|████████▊                     | 10/34 [00:00<00:00, 44.61batch/s] 47%|██████████████                | 16/34 [00:00<00:00, 46.37batch/s] 65%|███████████████████▍          | 22/34 [00:00<00:00, 46.44batch/s] 82%|████████████████████████▋     | 28/34 [00:00<00:00, 48.44batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.91batch/s]100%|██████████████████████████████| 34/34 [00:00<00:00, 48.89batch/s]
+Performing greedy search (args: {})
+  0%|                                       | 0/49 [00:00<?, ?batch/s] 10%|███▏                           | 5/49 [00:00<00:00, 46.66batch/s] 20%|██████                        | 10/49 [00:00<00:00, 43.82batch/s] 33%|█████████▊                    | 16/49 [00:00<00:00, 47.31batch/s] 45%|█████████████▍                | 22/49 [00:00<00:00, 44.89batch/s] 57%|█████████████████▏            | 28/49 [00:00<00:00, 44.40batch/s] 69%|████████████████████▊         | 34/49 [00:00<00:00, 46.13batch/s] 82%|████████████████████████▍     | 40/49 [00:00<00:00, 46.06batch/s] 94%|████████████████████████████▏ | 46/49 [00:01<00:00, 45.38batch/s]100%|██████████████████████████████| 49/49 [00:01<00:00, 46.08batch/s]
+Validation 69 -> LOSS = 0.24
+Validation 69 -> BLEU = 96.78, 98.7/97.3/96.2/95.0 (BP=1.000, ratio=1.000, hyp_len=14379, ref_len=14382)
+Early stopping patience: 0
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 68
+--> Best BLEU so far: 96.82 @ validation 59
+Starting Epoch 70
+Early stopped.
+--> This is model: simultaneousnmt-r1e55b
+--> Best LOSS so far: 0.24 @ validation 68
+--> Best BLEU so far: 96.82 @ validation 59
+Training finished on 15-05-2020 21:43
+Fri May 15 21:43:24 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  TITAN Xp            On   | 00000000:1A:00.0 Off |                  N/A |
+| 30%   50C    P0    62W / 250W |      0MiB / 12196MiB |     22%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 21:43:24 up 134 days,  6:57,  2 users,  load average: 8.53, 8.56, 9.92
