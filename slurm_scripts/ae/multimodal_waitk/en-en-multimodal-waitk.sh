@@ -12,7 +12,7 @@ cd simmt
 TERM=xterm
 for k in 1 2 3 5 7
 do
-    CUDA_VISIBLE_DEVICES=0 nmtpy train -C ../simultaneousMMT/custom_configs/en-en-multimodal-w2bpe-wait{$k}.conf train.seed:0
+    CUDA_VISIBLE_DEVICES=0 nmtpy train -C ../simultaneousMMT/custom_configs/en-en-multimodal-w2bpe-wait$k.conf train.seed:0
     /usr/bin/nvidia-smi
 done
 uptime
