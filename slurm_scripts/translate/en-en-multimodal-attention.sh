@@ -3,7 +3,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=al4616
-#SBATCH -o ./simultaneousMMT/experiments/custom/en-en-unimodal-dump-attention-slurm-%j.out
+#SBATCH -o ./simultaneousMMT/experiments/custom/en-en-multimodal-wait1-dump-attention-slurm-%j.out
 
 export PATH=/vol/bitbucket/al4616/miniconda3/bin/:$PATH
 source activate
