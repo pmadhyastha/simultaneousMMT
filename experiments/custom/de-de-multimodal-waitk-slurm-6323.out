@@ -1,0 +1,126 @@
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 85, in <module>
+    opts = Options(args.config, args.overrides)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/config.py", line 127, in __init__
+    with open(self.filename) as fhandle:
+FileNotFoundError: [Errno 2] No such file or directory: '../simultaneousMMT/custom_configs/de-de-multimodal-w2bpe-wait$k.conf'
+Wed May 20 21:17:52 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K80           On   | 00000000:0D:00.0 Off |                    0 |
+| N/A   17C    P8    26W / 149W |      0MiB / 11441MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 85, in <module>
+    opts = Options(args.config, args.overrides)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/config.py", line 127, in __init__
+    with open(self.filename) as fhandle:
+FileNotFoundError: [Errno 2] No such file or directory: '../simultaneousMMT/custom_configs/de-de-multimodal-w2bpe-wait$k.conf'
+Wed May 20 21:18:42 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K80           On   | 00000000:0D:00.0 Off |                    0 |
+| N/A   17C    P8    26W / 149W |      0MiB / 11441MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 85, in <module>
+    opts = Options(args.config, args.overrides)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/config.py", line 127, in __init__
+    with open(self.filename) as fhandle:
+FileNotFoundError: [Errno 2] No such file or directory: '../simultaneousMMT/custom_configs/de-de-multimodal-w2bpe-wait$k.conf'
+Wed May 20 21:18:57 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K80           On   | 00000000:0D:00.0 Off |                    0 |
+| N/A   16C    P8    26W / 149W |      0MiB / 11441MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 85, in <module>
+    opts = Options(args.config, args.overrides)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/config.py", line 127, in __init__
+    with open(self.filename) as fhandle:
+FileNotFoundError: [Errno 2] No such file or directory: '../simultaneousMMT/custom_configs/de-de-multimodal-w2bpe-wait$k.conf'
+Wed May 20 21:19:09 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K80           On   | 00000000:0D:00.0 Off |                    0 |
+| N/A   16C    P8    27W / 149W |      0MiB / 11441MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 85, in <module>
+    opts = Options(args.config, args.overrides)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/config.py", line 127, in __init__
+    with open(self.filename) as fhandle:
+FileNotFoundError: [Errno 2] No such file or directory: '../simultaneousMMT/custom_configs/de-de-multimodal-w2bpe-wait$k.conf'
+Wed May 20 21:19:21 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla K80           On   | 00000000:0D:00.0 Off |                    0 |
+| N/A   17C    P8    27W / 149W |      0MiB / 11441MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 21:19:21 up 27 days,  6:11,  3 users,  load average: 31.92, 36.41, 37.44
