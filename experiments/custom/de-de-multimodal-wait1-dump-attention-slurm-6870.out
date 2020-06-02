@@ -1,0 +1,32 @@
+-- disable_filters -> False
+-- batch_size -> 16
+-- max_len -> 100
+-- device_id -> gpu
+-- override -> []
+-- stochastic -> False
+-- splits -> test_2016_flickr
+-- source -> None
+-- output -> ../simultaneousMMT/decoding_results/de_de_multimodal_wait1/de_de_multimodal_wait1
+-- func -> wk
+-- delta -> 
+-- n_init_tokens -> 1,2,3,5,7
+-- criteria -> 
+-- model -> ../simultaneousMMT/experiments/bpe_models/de-de-multimodal-w2bpe-wait1/simultaneouswaitknmt-r61b57.best.bleu.ckpt
+STranslator: setting batch_size=1 for 'wk' decoding
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 99, in <module>
+    stranslator = STranslator(**args.__dict__)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/stranslator.py", line 41, in __init__
+    data = load_pt_file(self.model)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/utils/misc.py", line 72, in load_pt_file
+    data = torch.load(fname, map_location=device)
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/site-packages/torch/serialization.py", line 525, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/site-packages/torch/serialization.py", line 212, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/site-packages/torch/serialization.py", line 193, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '../simultaneousMMT/experiments/bpe_models/de-de-multimodal-w2bpe-wait1/simultaneouswaitknmt-r61b57.best.bleu.ckpt'
+

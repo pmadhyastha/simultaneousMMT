@@ -1,0 +1,156 @@
+-------
+[train]
+-------
+         num_workers:0
+          pin_memory:False
+                seed:1590976217
+               gclip:1
+              l2_reg:1e-05
+            patience:10
+           optimizer:adam
+                  lr:0.0004
+            lr_decay:plateau
+     lr_decay_revert:False
+     lr_decay_factor:0.5
+   lr_decay_patience:2
+        lr_decay_min:1e-06
+          model_type:SimultaneousNMT
+            momentum:0.0
+            nesterov:False
+           disp_freq:30
+          batch_size:64
+          max_epochs:100
+      max_iterations:1000000
+        eval_metrics:bleu,loss
+        eval_filters:
+             de-hyphen
+     eval_batch_size:32
+           eval_freq:0
+        eval_max_len:100
+          eval_start:1
+           eval_zero:False
+   save_best_metrics:True
+           save_path:/homes/al4616/experiments/simnmt/nmtpy/word2word/en-fr
+    save_optim_state:False
+     checkpoint_freq:5000
+       n_checkpoints:0
+     tensorboard_dir:/homes/al4616/experiments/simnmt/nmtpy/word2word/en-fr/tb_dir
+     pretrained_file:
+   pretrained_layers:
+       freeze_layers:
+          handle_oom:False
+           subfolder:snmt-rnn-unimodal
+              exp_id:simultaneousnmt-r570d2
+------
+[vars]
+------
+                  sl:en
+                  tl:fr
+-------
+[model]
+-------
+            att_type:mlp
+      att_bottleneck:hid
+             enc_dim:320
+   enc_bidirectional:False
+             dec_dim:320
+             emb_dim:200
+         dropout_emb:0.4
+         dropout_ctx:0.5
+         dropout_out:0.5
+          n_encoders:2
+            tied_emb:2way
+             max_len:None
+           out_logic:deep
+           direction:src:Text -> trg:Text
+        sampler_type:bucket
+           bucket_by:src
+------
+[data]
+------
+            txt_root:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr
+           train_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.en
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.fr
+             val_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/val.lc.norm.tok.en
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/val.lc.norm.tok.fr
+test_2016_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2016_flickr.lc.norm.tok.en
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2016_flickr.lc.norm.tok.fr
+test_2017_flickr_set:
+                   src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2017_flickr.lc.norm.tok.en
+                   trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/test_2017_flickr.lc.norm.tok.fr
+------------
+[vocabulary]
+------------
+                 src:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.vocab.en
+                 trg:/vol/bitbucket/al4616/simmt/data/multi30k/en-fr/train.lc.norm.tok.vocab.fr
+----------------------------------------------------------------------
+
+Python 3.7.7 -- torch 1.4.0 with CUDA 10.1 (on machine 'cloud-vm-40-190.doc.ic.ac.uk')
+nmtpytorch 4.1.0
+DeviceManager(cuda:0, n_gpu=1)
+Seed for further reproducibility: 1590976217
+SLURM Job ID: 7039
+Loading dataset(s)
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]17076sents [00:00, 170700.34sents/s]29000sents [00:00, 172609.27sents/s]
+Initializing dataset for 'trg'...
+0sents [00:00, ?sents/s]13752sents [00:00, 137476.21sents/s]27504sents [00:00, 105358.36sents/s]29000sents [00:00, 106680.83sents/s]
+MultimodalDataset - (1 source(s) / 1 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'train.lc.norm.tok.en' (29000 sentences)
+  Targets:
+    --> TextDataset 'train.lc.norm.tok.fr' (29000 sentences)
+
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]1014sents [00:00, 157758.98sents/s]
+Initializing dataset for 'trg'...
+0sents [00:00, ?sents/s]1014sents [00:00, 136135.98sents/s]
+MultimodalDataset - (1 source(s) / 1 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'val.lc.norm.tok.en' (1014 sentences)
+  Targets:
+    --> TextDataset 'val.lc.norm.tok.fr' (1014 sentences)
+
+Initializing dataset for 'src'...
+0sents [00:00, ?sents/s]1014sents [00:00, 168283.32sents/s]
+Skipping 'trg' as target
+MultimodalDataset - (1 source(s) / 0 target(s))
+  Sampler type: bucket, bucket_by: src
+  Sources:
+    --> TextDataset 'val.lc.norm.tok.en' (1014 sentences)
+
+Ignoring batch_size 32 for simultaneous greedy search
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt-ozan/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 134, in <module>
+    loop = MainLoop(model, opts.train, dev_mgr)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/mainloop.py", line 63, in __init__
+    max_len=self.eval_max_len)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/translators/simrl_greedy.py", line 49, in __init__
+    weights, _, opts = data['model'], data['history'], data['opts']
+NameError: name 'data' is not defined
+
+Mon Jun  1 02:50:18 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla T4            On   | 00000000:00:09.0 Off |                    0 |
+| N/A   36C    P8    10W /  70W |      0MiB / 15109MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 02:50:18 up 44 days, 14:53,  1 user,  load average: 9.10, 8.78, 8.75

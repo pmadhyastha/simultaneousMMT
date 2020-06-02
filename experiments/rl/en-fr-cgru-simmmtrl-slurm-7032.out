@@ -1,0 +1,77 @@
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1268, in mkdir
+    self._accessor.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/data2/jive/simnmt2/nmtpy/models/en-fr/en_fr-cgru-simrl-unidir'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1268, in mkdir
+    self._accessor.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/data2/jive/simnmt2/nmtpy/models/en-fr'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1268, in mkdir
+    self._accessor.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/data2/jive/simnmt2/nmtpy/models'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1268, in mkdir
+    self._accessor.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/data2/jive/simnmt2/nmtpy'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1268, in mkdir
+    self._accessor.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/data2/jive/simnmt2'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1268, in mkdir
+    self._accessor.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/data2/jive'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 88, in <module>
+    setup_experiment(opts, args.suffix)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/utils/misc.py", line 196, in setup_experiment
+    folder.mkdir(parents=True, exist_ok=True)
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1272, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1272, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1272, in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+  [Previous line repeated 3 more times]
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt/lib/python3.7/pathlib.py", line 1268, in mkdir
+    self._accessor.mkdir(self, mode)
+PermissionError: [Errno 13] Permission denied: '/data2'
+Mon Jun  1 02:03:25 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla T4            On   | 00000000:00:09.0 Off |                    0 |
+| N/A   36C    P8    11W /  70W |      0MiB / 15109MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 02:03:25 up 44 days, 14:06,  1 user,  load average: 9.90, 9.43, 10.16

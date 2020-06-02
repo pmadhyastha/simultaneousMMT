@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt-ozan/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 85, in <module>
+    opts = Options(args.config, args.overrides)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/config.py", line 127, in __init__
+    with open(self.filename) as fhandle:
+IsADirectoryError: [Errno 21] Is a directory: 'configs/en-fr/'
+/var/spool/slurm/d/job07036/slurm_script: line 14: rd2word/snmt-rnn-unimodal.conf: No such file or directory
+Mon Jun  1 02:42:12 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla T4            On   | 00000000:00:09.0 Off |                    0 |
+| N/A   36C    P8     9W /  70W |      0MiB / 15109MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 02:42:12 up 44 days, 14:45,  1 user,  load average: 8.93, 8.65, 8.73
