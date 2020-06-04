@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/vol/bitbucket/al4616/miniconda3/envs/simnmt-ozan/bin/nmtpy", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/vol/bitbucket/al4616/simmt/bin/nmtpy", line 85, in <module>
+    opts = Options(args.config, args.overrides)
+  File "/vol/bitbucket/al4616/simmt/nmtpytorch/config.py", line 127, in __init__
+    with open(self.filename) as fhandle:
+FileNotFoundError: [Errno 2] No such file or directory: '../simultaneousMMT/custom_configs/en-fr-simrl-multimodal-full.conf'
+Thu Jun  4 15:17:34 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  TITAN Xp            On   | 00000000:1C:00.0 Off |                  N/A |
+| 23%   26C    P8     8W / 250W |      0MiB / 12196MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+ 15:17:34 up 16 days,  6:06,  2 users,  load average: 14.24, 14.43, 14.44
