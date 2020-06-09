@@ -1,7 +1,9 @@
+import re
 from collections import defaultdict
-
+import os
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pprint as pp
 
 unimodal_out = """
 AVL score: AVL = 10.39
@@ -513,32 +515,43 @@ AVL score: AVL = 5.06
 AVP score: AVP = 0.79
 Validation 71 -> LOSS = -0.42
 Validation 71 -> BLEU = 50.07, 74.1/57.3/45.7/36.6 (BP=0.970, ratio=0.971, hyp_len=13958, ref_len=14382)"""
+length_rew_uni = '../experiments/rl/en-fr-unimodal-rl-length-coeff-0.0005.out'
+with open(length_rew_uni) as input:
+    build_metrics = re.compile(r'AVL.*AVL.*\n.*\n.*\n.*\n.*\n')
+    metric_lines = re.findall(build_metrics, ''.join(input.readlines()))
+
+extracted_length_rew_out = ''.join(metric_lines)
 
 scores = defaultdict(list)
-metrics = ['LOSS', 'AVP', 'AVL', 'BLEU']
-for line in unimodal_out.split('\n'):
+metrics = ['AVP', 'AVL', 'SDIFF', 'BLEU']
+for line in extracted_length_rew_out.split('\n'):
     for metric in metrics:
         if metric in line:
             i = line.index('=')
             scores[metric].append(float(line[i + 1:i + 6]))
 
-qd_ratio = [q / d for q, d in zip(scores['BLEU'], scores['AVL'])]
-xs = range(len(qd_ratio))
-f, axes = plt.subplots(2, 2)
-plt.suptitle('Unimodal simnmt RL', size=16)
+scores['BLEU AVL ratio'] = [q / d for q, d in zip(scores['BLEU'], scores['AVL'])]
+scores['BLEU AVP ratio'] = [q / d for q, d in zip(scores['BLEU'], scores['AVP'])]
+xs = range(len(scores['BLEU']))
+h, w = (2, 3)
+f, axes = plt.subplots(h, w)
+plt.suptitle('Unimodal simnmt RL, length_coeff = 0.0005', size=16)
 
-sns.lineplot(x=xs, y=qd_ratio, ax=axes[0, 0], color='plum')
-axes[0, 0].set_xlabel('Epoch')
-axes[0, 0].set_ylabel('BLEU AVP Ratio')
-sns.lineplot(x=xs, y=scores['BLEU'], ax=axes[0, 1], color='steelblue')
-axes[0, 1].set_xlabel('Epoch')
-axes[0, 1].set_ylabel('BLEU')
-sns.lineplot(x=xs, y=scores['AVL'], ax=axes[1, 0], color='palegreen')
-axes[1, 0].set_xlabel('Epoch')
-axes[1, 0].set_ylabel('Average latency')
-sns.lineplot(x=xs, y=scores['AVP'], ax=axes[1, 1], color='palegoldenrod')
-axes[1, 1].set_xlabel('Epoch')
-axes[1, 1].set_ylabel('Average Proportion')
+
+def metric_subplot(ax, data, name, color):
+    sns.lineplot(x=xs, y=data, ax=ax, color=color)
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel(name)
+
+
+score_it = iter(scores.items())
+colors_it = iter(sns.color_palette('muted', n_colors=h * w))
+# generate subplot for each name, data pair in scores
+for y in range(h):
+    for x in range(w):
+        name, data = next(score_it)
+        metric_subplot(axes[y, x], data, name, next(colors_it))
+
 f.tight_layout()
-plt.subplots_adjust(top=0.5, hspace=0.2)
+plt.subplots_adjust(top=0.2, hspace=0.5)
 plt.show()
