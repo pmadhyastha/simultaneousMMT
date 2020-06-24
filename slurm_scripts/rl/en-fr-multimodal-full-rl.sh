@@ -10,6 +10,6 @@ source activate
 conda activate simnmt-ozan
 cd simmt
 TERM=xterm
-CUDA_VISIBLE_DEVICES=0 nmtpy train -C ../simultaneousMMT/custom_configs/en-fr/en-fr-simrl-multimodal-full.conf train.seed:0
+CUDA_VISIBLE_DEVICES=0 nmtpy train -C ../simultaneousMMT/custom_configs/en-fr/en-fr-simrl-multimodal-full.conf train.seed:2
 /usr/bin/nvidia-smi
 uptime

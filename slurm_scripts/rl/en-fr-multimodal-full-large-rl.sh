@@ -1,11 +1,6 @@
 #!/bin/bash
 
-#SBATCH --gres=gpu:1
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=al4616
-#SBATCH -o ./simultaneousMMT/experiments/rl/en-fr-cgru-simmmtrl-multimodal-full-large-slurm-%j.out
 
-export PATH=/vol/bitbucket/al4616/miniconda3/bin/:$PATH
 source activate
 conda activate simnmt-ozan
 cd simmt
