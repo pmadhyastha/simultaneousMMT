@@ -1,0 +1,58 @@
+simultaneousMMT/slurm_scripts/rl/en-fr-multimodal-full-large-rl.sh: line 4: activate: No such file or directory
+simultaneousMMT/slurm_scripts/rl/en-fr-multimodal-full-large-rl.sh: line 5: conda: command not found
+simultaneousMMT/slurm_scripts/rl/en-fr-multimodal-full-large-rl.sh: line 8: nmtpy: command not found
+Thu Jun 25 03:38:46 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 435.21       Driver Version: 435.21       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce RTX 208...  On   | 00000000:3D:00.0 Off |                  N/A |
+| 40%   51C    P2    77W / 260W |   9243MiB / 11019MiB |     14%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  GeForce RTX 208...  On   | 00000000:3E:00.0 Off |                  N/A |
+|ERR!   80C    P2   140W / 260W |  10665MiB / 11019MiB |     86%      Default |
++-------------------------------+----------------------+----------------------+
+|   2  GeForce RTX 208...  On   | 00000000:3F:00.0 Off |                  N/A |
+| 41%   38C    P8     1W / 260W |      0MiB / 11019MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   3  GeForce RTX 208...  On   | 00000000:40:00.0 Off |                  N/A |
+| 42%   64C    P2    84W / 260W |  10541MiB / 11019MiB |     21%      Default |
++-------------------------------+----------------------+----------------------+
+|   4  Tesla V100-PCIE...  On   | 00000000:41:00.0 Off |                  Off |
+| N/A   41C    P0    52W / 250W |   4170MiB / 32510MiB |     99%      Default |
++-------------------------------+----------------------+----------------------+
+|   5  GeForce RTX 208...  On   | 00000000:60:00.0 Off |                  N/A |
+| 64%   84C    P2   187W / 260W |  10701MiB / 11019MiB |     84%      Default |
++-------------------------------+----------------------+----------------------+
+|   6  GeForce RTX 208...  On   | 00000000:61:00.0 Off |                  N/A |
+|ERR!   82C    P2   159W / 260W |   7251MiB / 11019MiB |     90%      Default |
++-------------------------------+----------------------+----------------------+
+|   7  GeForce RTX 208...  On   | 00000000:62:00.0 Off |                  N/A |
+| 41%   60C    P2    79W / 260W |  10205MiB / 11019MiB |     17%      Default |
++-------------------------------+----------------------+----------------------+
+|   8  GeForce RTX 208...  On   | 00000000:63:00.0 Off |                  N/A |
+|ERR!   80C    P2   142W / 260W |   7711MiB / 11019MiB |     90%      Default |
++-------------------------------+----------------------+----------------------+
+|   9  Tesla V100-PCIE...  On   | 00000000:64:00.0 Off |                    0 |
+| N/A   41C    P0    63W / 250W |   9122MiB / 32510MiB |     32%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0     23005      C   .../jive/miniconda2/envs/simnmt/bin/python  9233MiB |
+|    1     17663      C   /data/zli/anaconda3/envs/torch/bin/python  10655MiB |
+|    3     36977      C   .../jive/miniconda2/envs/simnmt/bin/python 10531MiB |
+|    4     21018      C   ...a/miniconda/envs/simnmt-andy/bin/python  1505MiB |
+|    4     22233      C   ...a/miniconda/envs/simnmt-andy/bin/python  1499MiB |
+|    4     41969      C   ...a/miniconda/envs/simnmt-andy/bin/python  1155MiB |
+|    5     17664      C   /data/zli/anaconda3/envs/torch/bin/python  10691MiB |
+|    6     17665      C   /data/zli/anaconda3/envs/torch/bin/python   7241MiB |
+|    7     23339      C   .../jive/miniconda2/envs/simnmt/bin/python 10195MiB |
+|    8     17666      C   /data/zli/anaconda3/envs/torch/bin/python   7701MiB |
+|    9     32380      C   .../jive/miniconda2/envs/simnmt/bin/python  9111MiB |
++-----------------------------------------------------------------------------+
+ 03:38:47 up 20 days, 16:10,  9 users,  load average: 12.75, 14.23, 14.08
