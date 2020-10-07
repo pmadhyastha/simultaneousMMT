@@ -1,0 +1,134 @@
+Best Bleu
+a boy jumping to hit a tennis ball with his racket
+un garçon sautant pour frapper une balle de tennis avec sa raquette
+un garçon sautant pour frapper une balle de tennis avec sa raquette
+100.0
+2.746153846153846
+0 0 1 1 0 0 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman with a drink and a woman with a cellphone .
+une femme avec une boisson et une femme avec un téléphone portable .
+une femme avec une boisson et une femme avec un téléphone portable .
+100.0
+3.507936507936508
+0 0 1 1 0 0 0 1 0 1 0 1 0 0 1 0 1 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man and a woman are standing on the street in the city .
+un homme et une femme sont debout dans la rue en ville .
+un homme et une femme sont debout dans la rue en ville .
+100.0
+2.097402597402598
+0 0 1 1 0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 1 0 1 0 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man and a boy on a rocky beach .
+un homme et un garçon sur une plage rocheuse .
+un homme et un garçon sur une plage rocheuse .
+100.0
+2.5
+0 0 1 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a dog jumps over an obstacle outside .
+un chien saute par-dessus un obstacle dehors .
+un chien saute par-dessus un obstacle dehors .
+100.0
+2.9740259740259742
+0 0 1 1 0 0 1 0 0 1 0 1 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+Worst Bleu
+two motocross bikers wearing full protective gear , with one in midair after a jump and the other looking down at his motorcycle .
+deux pilotes de motocross
+deux coureurs de motocross en tenues de protection intégrales , l&apos; un dans les airs après un saut et l&apos; autre regardant en bas vers sa moto .
+0.0
+1.1999999999999997
+0 1 0 0 1 1 1 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two males seem to be conversing while standing in front of a truck &apos;s back , and behind a metal item , while four people stand around them .
+deux hommes vêtus semblent être en train de discuter debout devant un camion .
+deux hommes semblent discuter , debout devant l&apos; arrière d&apos; un camion et derrière un objet métallique , tandis que quatre personnes sont debout autour d&apos; eux .
+2.1
+0.46666666666666695
+0 1 0 1 0 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3
+#######
+a large bull targets a man , inches away , in a rodeo with his horns , while a rodeo clown runs to help .
+un grand taureau répare un homme , les airs , dans un rodéo avec ses cornes
+lors d&apos; un rodéo , un gros taureau se dirige les cornes en avant vers un homme à quelques centimètres , tandis qu&apos; un clown de rodéo court pour aider .
+2.3
+0.21875
+0 0 1 1 0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1
+#######
+the gentleman is scanning the image that the woman in the blue shirt is providing him .
+le monsieur est projeté par la photo qui est en t-shirt bleu est pour le toucher .
+l&apos; homme scanne l&apos; image que la femme en chemise bleue lui présente .
+2.5
+5.3500000000000005
+0 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 1 1 1 3 3 3
+#######
+dirt biker makes a sloping turn in a forest during the fall .
+un pilote de motocross pilote une motocross .
+un vététiste prend un virage incliné dans une forêt pendant l&apos; automne .
+2.7
+-0.4444444444444444
+0 0 1 1 1 1 1 0 1 1 0 0 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+Best Lag
+a person in blue is the only person currently throwing their ball at a bowling alley .
+une personne en bleu est au-dessus de ma personne , en train de lancer sa balle sur une piste de bowling
+une personne en bleu est la seule personne en train de lancer sa boule dans un bowling .
+35.6
+6.378260869565217
+0 0 1 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+a woman with a push-to-talk cellphone and headset waiting at a crosswalk .
+une femme avec un bouc , à genoux , avec un téléphone portable et des écouteurs attendant sur un passage piéton .
+une femme avec un téléphone portable push-to-talk et un casque attendant à un passage piéton .
+32.7
+6.178260869565217
+0 0 1 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+a boy with a bruised nose and writing on his hands is standing in a video rental store .
+un garçon avec un nez de natation et écrit sur ses mains est debout dans un magasin de coiffure .
+un garçon avec un nez meurtri et des choses écrites sur sa main est debout dans un vidéo-club .
+32.3
+6.095238095238095
+0 0 1 1 0 0 0 0 1 0 0 1 0 0 1 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1
+a gray-haired man wearing black gloves is moving the lawn .
+un homme aux cheveux gris avec des gants noirs prépare la pelouse .
+un homme aux cheveux gris avec des gants noirs tond la pelouse .
+76.1
+5.666666666666667
+0 0 1 0 0 0 1 0 0 1 0 1 0 0 0 0 0 1 0 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+a red-haired young man drinks from a water fountain shaped like a woman .
+un chef roux boit un verre dans une fontaine en forme d&apos; eau , en train d&apos; être une femme .
+un jeune homme roux boit à une fontaine en forme de femme .
+12.1
+5.622727272727273
+0 0 1 0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3
+Worst Lag
+costumed onlookers watch as a uniformed policeman makes a speech and a man in a suit holds a bowl of fruit .
+des spectateurs en tenues de regardent des spectateurs regardent tandis qu&apos; ils sont en uniforme fait un discours et un homme
+des spectateurs déguisés regardent tandis qu&apos; un policier en uniforme fait un discours et qu&apos; un homme en costume tient une corbeille de fruits .
+33.5
+-3.619047619047618
+0 1 0 1 0 1 1 1 1 1 0 1 1 1 1 1 0 1 0 1 0 1 0 0 1 0 1 1 0 0 1 0 1 0 1 0 0 0 0 0 0
+people playing pool , one is a man wearing a blue shirt and the others are women but their heads are not within the camera shot .
+des gens jouant au billard , l&apos; un portant un t-shirt bleu et les
+des gens jouant au billard , l&apos; un est un homme vêtu d&apos; une chemise bleue et les autres sont des femmes , mais leurs têtes n&apos; apparaissent pas sur la photo .
+15.3
+-1.53125
+0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 0 0
+a british gentleman , dressed in full military uniform , waving his hat with a background of people sitting back and looking out onto the waterway .
+un technicien de 10 ans , vêtu de tenue militaire , agitant son chapeau avec un arrière
+un gentleman britannique , en tenue militaire complète , agitant son chapeau avec un arrière-plan de gens assis et regardant le cours d&apos; eau .
+18.0
+-1.3529411764705876
+0 0 1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0
+two girls , one older and in black and one younger and in white , are performing the same ballet move in front of decorations made from balloons .
+deux filles filles , un plus âgé et un noir et un jeune fille et blanc ,
+deux filles , une plus âgée en noir et une plus jeune en blanc , font le même mouvement de ballet devant des décorations en ballons .
+5.2
+-1.1764705882352935
+0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0
+a view of a pedestrian thoroughfare , featuring a man in a black apron and a white baseball cap standing in the middle of the image .
+une vue aérienne d&apos; une vue sur une passerelle piétonne , avec un homme en tablier noir et
+une vue d&apos; une artère piétonne , avec un homme en tablier noir et casquette blanche debout au milieu de la photo .
+46.0
+-0.9722222222222219
+0 0 1 1 1 0 1 1 1 0 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0

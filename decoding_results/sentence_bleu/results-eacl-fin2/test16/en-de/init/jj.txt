@@ -1,0 +1,134 @@
+Best Bleu
+a brown dog jumping over a hurdle .
+ein brauner hund springt über eine hürde .
+ein brauner hund springt über eine hürde .
+100.0
+3.0
+0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a boy stands with three girls .
+ein junge steht mit drei mädchen .
+ein junge steht mit drei mädchen .
+100.0
+2.8
+0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+an officer stands next to a car on a city street .
+ein polizist steht neben einem auto auf einer städtischen straße .
+ein polizist steht neben einem auto auf einer städtischen straße .
+100.0
+2.6666666666666665
+0 1 0 0 1 0 0 1 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man sings and plays the guitar into a microphone .
+ein mann singt und spielt gitarre in ein mikrofon .
+ein mann singt und spielt gitarre in ein mikrofon .
+100.0
+3.584415584415584
+0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two men sitting in a restaurant .
+zwei männer sitzen in einem restaurant .
+zwei männer sitzen in einem restaurant .
+100.0
+2.142857142857143
+0 1 0 0 1 0 0 1 0 1 1 0 1 0 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+Worst Bleu
+parked cars with a school bus behind them .
+geparkten geparkten personen sind neben geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten geparkten see
+geparkte autos mit einem schulbus dahinter .
+0.5
+1.0
+0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#######
+people walking down the street with a street vendor .
+leute , die leute , die zu fuß stehen , die leute zu sehen sind , die in der nähe von leuten stehen
+menschen gehen auf einer straße mit einem straßenhändler .
+0.8
+-0.3541666666666667
+0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+marathon runners are racing on a city street , with other people standing around .
+ein marathon , bei dem marathon einen marathon
+marathonläuferinnen laufen auf einer städtischen straße während andere personen um sie herum stehen .
+1.3
+-0.1111111111111111
+0 1 1 1 1 1 1 1 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+while visiting the mayan ruins , a guide points in the direction of more attractions .
+ein mann macht bei der fahrt mit dem kopf nach unten , während er dabei ist , während er zu sehen ist , während er ist
+beim besuch von maya-ruinen zeigt ein führer in richtung weiterer sehenswürdigkeiten .
+1.4
+-0.25925925925925924
+0 1 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 1 3 3 3 3 3
+#######
+this band is getting ready to perform in front of an audience at church .
+dieser mann ist mit dem gesicht nach unten gebeugt
+diese band bereitet sich auf einen auftritt vor publikum in einer kirche vor .
+1.4
+-0.85
+0 1 1 1 1 1 1 1 1 1 0 0 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+Best Lag
+one man holds another man &apos;s head down and prepares to punch him in the face .
+ein mann hält einen anderen mann den kopf und bereitet sich auf das gesicht zu , der sich im gesicht zu schlagen hat
+ein mann drückt den kopf eines anderen mannes nach unten und will ihm ins gesicht schlagen .
+5.5
+6.378260869565217
+0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+two female members of team usa performing a jump high-five surrounded by two other female members .
+zwei weibliche mitglieder einer teams geben eine schanze von zwei anderen frauen , die von zwei anderen weiblichen spieler sind .
+zwei spielerinnen der us-nationalmannschaft klatschen im sprung ab , umgeben von zwei weiteren spielerinnen .
+4.6
+6.147186147186147
+0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1
+a small boy plays with plastic blocks , cars , and animals with an adult watching closely .
+ein kleiner junge spielt mit plastik , autos und tiere , die sich mit einem erwachsenen mann beobachten , während sie ihm
+ein kleiner junge spielt mit plastikklötzen , autos und tieren während eine erwachsene ihn aufmerksam beobachtet .
+22.3
+6.113636363636363
+0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1
+a clerk in a convenience store asks a customer buying alcohol for his age and identification .
+ein mitarbeiter in einem lebensmittelgeschäft macht ein kunde mit alkohol , der sich und ein clown zu kaufen trinkt .
+ein mitarbeiter in einem laden fragt einen kunden , der alkohol kauft , nach seinem alter und einem ausweis .
+15.8
+6.042857142857143
+0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 3 3
+a young boy , wearing a chef &apos;s hat and apron , is cutting sausages in a kitchen .
+ein kleiner junge trägt einen koch , der eine schürze trägt , schneidet in einer küche hamburger zu .
+ein kleiner junge mit kochmütze und schürze schneidet in einer küche würstchen .
+19.5
+5.909090909090909
+0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 3
+Worst Lag
+people jump over a mountain crevasse on a rope .
+leute , die leute , die zu fuß stehen , die leute zu sehen sind , die in der nähe von leuten springen .
+leute springen an einem seil über eine gletscherspalte .
+2.1
+-1.88
+0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3
+the red car is ahead of the two cars in the background .
+die person ist im begriff , die rote mannschaft auf dem roten auto versammelt .
+das rote auto fährt vor den beiden autos im hintergrund .
+3.7
+-1.875
+0 1 1 1 1 1 1 1 0 1 1 1 1 1 0 0 1 0 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+a woman in a floral dress talks to children in front of a van .
+ein mann , der eine pause , in der ein foto von sich , der in der hocke ist , macht eine frau .
+eine frau in einem kleid mit blumenmuster spricht mit kindern vor einem kleinbus .
+3.7
+-1.8
+0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3
+an oriental person in a red shirt and black pants crouching over a purse on concrete .
+ein orientalischer mensch in einer orientalischen person , die einen spektakulären person in einem roten hemd und schwarzer hose trägt .
+eine person orientalischen aussehens in einem roten shirt und schwarzer hose hockt über einer handtasche auf dem beton .
+12.9
+-1.753246753246753
+0 1 0 0 1 1 1 1 1 1 1 1 1 1 0 0 1 0 1 0 1 0 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 3
+a lady dressed in blue running a marathon .
+ein mann , der eine pause , in der ein foto von sich , der in der hocke ist .
+eine blau gekleidete frau läuft einen marathon .
+2.3
+-1.7142857142857142
+0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3
