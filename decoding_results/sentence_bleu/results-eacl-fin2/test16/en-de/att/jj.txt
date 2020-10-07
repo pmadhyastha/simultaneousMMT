@@ -1,0 +1,799 @@
+Best Bleu
+people sit inside a train .
+leute sitzen in einem zug .
+leute sitzen in einem zug .
+100.0
+2.0
+0 1 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two children are playing on a bicycle .
+zwei kinder spielen auf einem fahrrad .
+zwei kinder spielen auf einem fahrrad .
+100.0
+2.5208333333333335
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a brown dog jumping over a hurdle .
+ein brauner hund springt über eine hürde .
+ein brauner hund springt über eine hürde .
+100.0
+2.8333333333333335
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman is playing volleyball .
+eine frau spielt volleyball .
+eine frau spielt volleyball .
+100.0
+2.5
+0 0 1 0 1 0 0 1 0 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a black and white dog is playing with a white ball .
+ein schwarz-weißer hund spielt mit einem weißen ball .
+ein schwarz-weißer hund spielt mit einem weißen ball .
+100.0
+2.3333333333333335
+0 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two men playing guitar in front of a large audience .
+zwei männer spielen gitarre vor einem großen publikum .
+zwei männer spielen gitarre vor einem großen publikum .
+100.0
+2.9714285714285715
+0 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+three girls are smiling for a picture .
+drei mädchen lächeln für ein foto .
+drei mädchen lächeln für ein foto .
+100.0
+2.95
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+an officer stands next to a car on a city street .
+ein polizist steht neben einem auto auf einer städtischen straße .
+ein polizist steht neben einem auto auf einer städtischen straße .
+100.0
+3.892857142857143
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two rockers are singing and playing on a dark stage .
+zwei rocker singen und spielen auf einer dunklen bühne .
+zwei rocker singen und spielen auf einer dunklen bühne .
+100.0
+3.7272727272727266
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+the two kids are playing at the playground .
+die zwei kinder spielen auf dem spielplatz .
+die zwei kinder spielen auf dem spielplatz .
+100.0
+2.722222222222222
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a young girl in a red dress is wearing a black cowboy hat .
+ein junges mädchen in einem roten kleid trägt einen schwarzen cowboyhut .
+ein junges mädchen in einem roten kleid trägt einen schwarzen cowboyhut .
+100.0
+2.5944055944055946
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two cars are driving on a racetrack .
+zwei autos fahren auf einer rennstrecke .
+zwei autos fahren auf einer rennstrecke .
+100.0
+2.5208333333333335
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two women in military uniform are standing with other soldiers in formation .
+zwei frauen in militäruniformen stehen mit anderen soldaten in formation .
+zwei frauen in militäruniformen stehen mit anderen soldaten in formation .
+100.0
+3.4166666666666665
+0 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two men wearing black in a city
+zwei männer in schwarz in einer stadt
+zwei männer in schwarz in einer stadt
+100.0
+2.8
+0 0 1 0 1 0 0 1 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man in a black leather coat is standing in front of a sign .
+ein mann in einer schwarzen lederjacke steht vor einem schild .
+ein mann in einer schwarzen lederjacke steht vor einem schild .
+100.0
+1.8787878787878787
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman in a striped outfit on a bike .
+eine frau in einem gestreiften outfit auf einem fahrrad .
+eine frau in einem gestreiften outfit auf einem fahrrad .
+100.0
+2.75
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman with brown hair sitting on a bench outside a cafe .
+eine frau mit braunen haaren sitzt auf einer bank vor einem café .
+eine frau mit braunen haaren sitzt auf einer bank vor einem café .
+100.0
+3.111111111111111
+0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a big black poodle running on the grass with a toy in its mouth .
+ein großer schwarzer pudel läuft auf dem gras mit einem spielzeug im maul .
+ein großer schwarzer pudel läuft auf dem gras mit einem spielzeug im maul .
+100.0
+3.1
+0 0 1 0 1 0 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3
+#######
+the brown dog is standing on the sandy beach .
+der braune hund steht auf dem sandstrand .
+der braune hund steht auf dem sandstrand .
+100.0
+2.6190476190476195
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a young girl sitting on a wooden chair .
+ein junges mädchen sitzt auf einem holzstuhl .
+ein junges mädchen sitzt auf einem holzstuhl .
+100.0
+2.722222222222222
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two small dogs follow a larger dog with a tennis ball
+zwei kleine hunde folgen einem größeren hund mit einem tennisball
+zwei kleine hunde folgen einem größeren hund mit einem tennisball
+100.0
+2.806818181818181
+0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two men sitting in a restaurant .
+zwei männer sitzen in einem restaurant .
+zwei männer sitzen in einem restaurant .
+100.0
+2.6
+0 0 1 0 1 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman and a child are walking down a street .
+eine frau und ein kind gehen eine straße entlang .
+eine frau und ein kind gehen eine straße entlang .
+100.0
+2.4318181818181817
+0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a brown dog is digging in the dirt .
+ein brauner hund gräbt im dreck .
+ein brauner hund gräbt im dreck .
+100.0
+2.375
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man sings and plays the guitar into a microphone .
+ein mann singt und spielt gitarre in ein mikrofon .
+ein mann singt und spielt gitarre in ein mikrofon .
+100.0
+3.155844155844155
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+the woman in the red dress is dancing with the man in a suit .
+die frau im roten kleid tanzt mit dem mann im anzug .
+die frau im roten kleid tanzt mit dem mann im anzug .
+100.0
+2.661538461538462
+0 0 1 0 1 0 0 1 0 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two brown dogs are running through the snow .
+zwei braune hunde rennen durch den schnee .
+zwei braune hunde rennen durch den schnee .
+100.0
+2.238095238095238
+0 0 1 0 1 1 0 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a brown dog wades into a lake to retrieve a stick .
+ein brauner hund watet in einen see , um einen stock zu holen .
+ein brauner hund watet in einen see , um einen stock zu holen .
+100.0
+4.216666666666666
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man playing an instrument next to a tree .
+ein mann spielt neben einem baum ein instrument .
+ein mann spielt neben einem baum ein instrument .
+100.0
+3.4166666666666665
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+an older man is playing a video arcade game .
+ein älterer mann spielt ein videospiel .
+ein älterer mann spielt ein videospiel .
+100.0
+2.1607142857142856
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two adults and two children sit on a park bench .
+zwei erwachsene und zwei kinder sitzen auf einer parkbank .
+zwei erwachsene und zwei kinder sitzen auf einer parkbank .
+100.0
+3.056818181818181
+0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man in a yellow shirt and a man in a dark blue shirt talking .
+ein mann in einem gelben hemd und ein mann in einem dunkelblauen hemd unterhalten sich .
+ein mann in einem gelben hemd und ein mann in einem dunkelblauen hemd unterhalten sich .
+100.0
+2.6666666666666665
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 1 0 1 0 1 0 1 0 1 1 0 1 0 0 1 1 1 3 3 3 3 3 3 3
+#######
+the two dogs , one with a tennis ball in its mouth , are running through tall grass .
+die zwei hunde , einer mit einem tennisball im maul , laufen durch hohes gras .
+die zwei hunde , einer mit einem tennisball im maul , laufen durch hohes gras .
+100.0
+4.279411764705883
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 3 3 3 3
+#######
+a child is laying on a beige rug laughing .
+ein kind liegt auf einem beigefarbenen teppich und lacht .
+ein kind liegt auf einem beigefarbenen teppich und lacht .
+100.0
+3.6666666666666665
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman in an orange jacket sits on a bench .
+eine frau in einer orangefarbenen jacke sitzt auf einer bank .
+eine frau in einer orangefarbenen jacke sitzt auf einer bank .
+100.0
+2.6666666666666665
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a boy stands with three girls .
+ein junge steht mit drei mädchen .
+ein junge steht mit drei mädchen .
+100.0
+3.0
+0 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two indian men participating in a ceremony .
+zwei indische männer nehmen an einer zeremonie teil .
+zwei indische männer nehmen an einer zeremonie teil .
+100.0
+3.0833333333333335
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a black boy is sitting in the sand .
+ein schwarzer junge sitzt im sand .
+ein schwarzer junge sitzt im sand .
+100.0
+2.375
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a girl plays in a small pool .
+ein mädchen spielt in einem kleinen pool .
+ein mädchen spielt in einem kleinen pool .
+100.0
+2.8333333333333335
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a family is playing on the beach with their dog .
+eine familie spielt am strand mit ihrem hund .
+eine familie spielt am strand mit ihrem hund .
+100.0
+3.4
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman in a pink skirt is holding a baby .
+eine frau in einem rosa rock hält ein baby .
+eine frau in einem rosa rock hält ein baby .
+100.0
+2.525252525252525
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man wearing sunglasses is riding a scooter .
+ein mann mit sonnenbrille fährt auf einem roller .
+ein mann mit sonnenbrille fährt auf einem roller .
+100.0
+2.4285714285714284
+0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman is laying down on a sofa laughing .
+eine frau liegt auf einem sofa und lacht .
+eine frau liegt auf einem sofa und lacht .
+100.0
+3.4166666666666665
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a deer jumps a fence .
+ein reh springt über einen zaun .
+ein reh springt über einen zaun .
+100.0
+2.9375
+0 0 1 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+two dogs play by a tree .
+zwei hunde spielen an einem baum .
+zwei hunde spielen an einem baum .
+100.0
+3.0
+0 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a blond girl sleeps on a brown couch .
+ein blondes mädchen schläft auf einer braunen couch .
+ein blondes mädchen schläft auf einer braunen couch .
+100.0
+2.7142857142857144
+0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a group of people standing in front of an igloo .
+eine gruppe von menschen steht vor einem iglu .
+eine gruppe von menschen steht vor einem iglu .
+100.0
+2.9714285714285715
+0 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a blond child swinging on a swing .
+ein blondes kind schaukelt auf einer schaukel .
+ein blondes kind schaukelt auf einer schaukel .
+100.0
+2.5
+0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man sitting on a bench under a large tree .
+ein mann sitzt auf einer bank unter einem großen baum .
+ein mann sitzt auf einer bank unter einem großen baum .
+100.0
+3.4285714285714284
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man standing on a city street .
+ein mann steht auf einer straße in der stadt .
+ein mann steht auf einer straße in der stadt .
+100.0
+3.5636363636363635
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a brown and white dog fetching a toy .
+ein braun-weißer hund holt ein spielzeug .
+ein braun-weißer hund holt ein spielzeug .
+100.0
+3.0
+0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+three men are cooking in a kitchen .
+drei männer kochen in einer küche .
+drei männer kochen in einer küche .
+100.0
+2.95
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a small african child carries a younger child on his back .
+ein kleines afrikanisches kind trägt ein jüngeres kind auf dem rücken .
+ein kleines afrikanisches kind trägt ein jüngeres kind auf dem rücken .
+100.0
+2.5
+0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 1 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+four black men are sitting on the steps of a church .
+vier schwarze männer sitzen auf den stufen einer kirche .
+vier schwarze männer sitzen auf den stufen einer kirche .
+100.0
+2.6136363636363638
+0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman does a somersault on a trampoline on the beach .
+eine frau macht einen salto auf einem trampolin am strand .
+eine frau macht einen salto auf einem trampolin am strand .
+100.0
+3.892857142857143
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a young child wearing green boots playing in a mud puddle
+ein kleines kind in grünen stiefeln spielt in einer schlammpfütze
+ein kleines kind in grünen stiefeln spielt in einer schlammpfütze .
+90.5
+2.191919191919192
+0 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+woman sitting at a table while working on her laptop computer .
+eine frau sitzt an einem tisch und arbeitet an ihrem laptop .
+frau sitzt an einem tisch und arbeitet an ihrem laptop .
+90.4
+3.5
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+the boy is outside enjoying a summer day .
+ein junge ist im freien und genießt einen sommertag .
+der junge ist im freien und genießt einen sommertag .
+88.0
+3.727272727272728
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man in uniform and a man in a blue shirt are standing in front of a truck .
+ein mann in uniform und ein mann in einem blauen hemd stehen vor einem lastwagen .
+ein mann in uniform und ein mann in einem blauen hemd stehen vor einem wagen .
+87.6
+3.7873303167420818
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3
+#######
+a man in a vest is sitting in a chair and holding magazines .
+ein mann in einer weste sitzt auf einem stuhl und hält zeitschriften .
+ein mann in einer weste sitzt auf einem stuhl und hält magazine .
+84.2
+3.6031746031746033
+0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+3 men cooking in a small kitchen .
+drei männer kochen in einer kleinen küche .
+3 männer kochen in einer kleinen küche .
+84.1
+3.2
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a young lady doing yoga on the beach .
+ein junge dame macht yoga am strand .
+eine junge dame macht yoga am strand .
+84.1
+2.722222222222222
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a child is splashing in the water
+ein kind planscht im wasser
+ein kind planscht im wasser .
+81.9
+2.3333333333333335
+0 0 1 0 1 0 0 1 0 0 1 0 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+the workers are surrounding a hole with a bucket .
+die arbeiter stehen um ein loch mit einem eimer .
+die arbeiter stehen um ein loch mit einem eimer herum .
+81.8
+3.6666666666666665
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman in black has a little girl in a yellow dress on her shoulders .
+eine frau in schwarz hat ein kleines mädchen in einem gelben kleid auf ihren schultern .
+eine frau in schwarz trägt ein kleines mädchen in einem gelben kleid auf ihren schultern .
+81.5
+4.454545454545454
+0 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 3 3 3 3 3 3 3
+#######
+a man in a gray shirt jumps over the top of a sand dune in the desert .
+ein mann in einem grauen hemd springt über die spitze einer sanddüne in der wüste .
+ein mann in einem grauen shirt springt über die spitze einer sanddüne in der wüste .
+81.5
+2.909502262443439
+0 0 1 0 1 0 0 1 0 1 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3
+#######
+a young girl swimming in a pool
+ein junges mädchen schwimmt in einem schwimmbecken
+ein junges mädchen schwimmt in einem pool
+80.9
+2.3333333333333335
+0 0 1 0 1 0 1 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a small black dog jumping over gates
+ein kleiner schwarzer hund springt über hindernisse
+ein kleiner schwarzer hund springt über gatter
+80.9
+2.3333333333333335
+0 0 1 0 1 0 1 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+three guys smiling for camera and showing off their muscles .
+drei männer lächeln für die kamera und zeigen ihre arme .
+drei männer lächeln für die kamera und zeigen ihre muskeln .
+80.7
+3.4285714285714284
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a group of men and a child in white shirts are standing in the road .
+eine gruppe von männern und ein kind in weißen hemden stehen auf der straße .
+eine gruppe von männern und ein kind in weißen shorts stehen auf der straße .
+80.0
+3.960227272727273
+0 0 1 0 1 0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3
+#######
+a little girl in a purple plaid dress is lying on the floor crying .
+ein kleines mädchen in einem lila karierten kleid liegt auf dem boden und weint .
+ein kleines mädchen in einem violett karierten kleid liegt auf dem boden und weint .
+80.0
+3.1666666666666665
+0 0 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3
+#######
+a woman in a red skirt is walking on the street with graffiti in the background .
+eine frau in einem roten rock geht auf der straße mit graffiti entlang .
+eine frau in einem roten rock geht auf der straße mit graffiti im hintergrund .
+79.7
+3.1818181818181825
+0 0 1 0 1 0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3
+#######
+an asian man wearing gloves is working at a food stall .
+ein asiatischer mann mit handschuhen arbeitet an einem essensstand .
+ein asiatischer mann mit handschuhen arbeitet an einem imbissstand .
+78.3
+2.2727272727272725
+0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a child is laying on the ground next to a stroller .
+ein kind liegt auf dem boden neben einem kinderwagen .
+ein kind liegt auf dem boden neben einem sportwagen .
+78.3
+3.597402597402598
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a young girl is trying to brush a goat .
+ein junges mädchen versucht , eine ziege zu halten .
+ein junges mädchen versucht , eine ziege zu bürsten .
+78.3
+3.2857142857142856
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a skateboarder in a black t-shirt and jeans skating threw the city .
+ein skateboarder in einem schwarzen t-shirt und jeans fährt in die stadt .
+ein skateboarder in einem schwarzen t-shirt und jeans fährt durch die stadt .
+76.1
+3.5454545454545454
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3
+#######
+boy in sunglasses is running behind a fair .
+ein junge mit sonnenbrille läuft hinter einem jahrmarkt .
+ein junge mit sonnenbrille läuft hinter einem rummelplatz .
+75.1
+2.7142857142857144
+0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man throws a fishing net into the bay .
+ein mann wirft ein fischernetz in die ferne .
+ein mann wirft ein fischernetz in die bucht .
+75.1
+3.4166666666666665
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+an older man in glasses is preparing meat .
+ein älterer mann mit brille bereitet fleisch auf .
+ein älterer mann mit brille bereitet fleisch zu .
+75.1
+2.4285714285714284
+0 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a black dog and a brown dog with a ball .
+ein schwarzer hund und ein brauner hund mit einem ball .
+ein schwarzer und ein brauner hund mit einem ball .
+74.2
+2.3333333333333335
+0 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a young lady in white holding a tennis racket
+ein junge dame in weiß hält einen tennisschläger
+eine junge dame in weiß hält einen tennisschläger .
+74.2
+2.5238095238095233
+0 0 1 0 1 0 1 0 0 1 0 1 0 0 1 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+several teenagers are looking over a railing in a dark room .
+mehrere teenager schauen über ein geländer in einem dunklen raum .
+mehrere teenager blicken über ein geländer in einem dunklen raum .
+74.2
+3.3333333333333335
+0 0 1 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a little girl is holding a little boy on her lap .
+ein kleines mädchen hält einen kleinen jungen auf dem schoß .
+ein kleines mädchen hält einen kleinen jungen auf ihrem schoß .
+74.2
+3.4583333333333335
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man with a red suit is dancing with a lady .
+ein mann mit einem roten anzug tanzt mit einer dame .
+ein mann in einem roten anzug tanzt mit einer dame .
+74.2
+2.6666666666666665
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 0 1 0 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman in a black shirt is knitting with purple yarn .
+eine frau in einem schwarzen hemd strickt mit lila garn .
+eine frau in einem schwarzen hemd strickt mit rotem garn .
+74.2
+3.0
+0 0 1 0 1 0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman with a drink and a woman with a cellphone .
+eine frau mit einem getränk und eine frau mit handy .
+eine frau mit einem getränk und eine frau mit einem mobiltelefon .
+73.7
+3.5555555555555554
+0 0 1 0 1 0 0 1 0 0 1 0 1 0 0 1 0 1 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+three asian children sitting on a couch with tapestries hanging in the background .
+drei asiatische kinder sitzen auf einer couch mit getränken im hintergrund .
+drei asiatische kinder sitzen auf einer couch mit wandteppichen im hintergrund .
+73.5
+3.384615384615385
+0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man in a black shirt fishing on a rocky shore .
+ein mann in einem schwarzen hemd angelt an einem felsigen ufer .
+ein mann in einem schwarzen shirt angelt an einem felsigen ufer .
+73.5
+3.0
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a group of men standing on a field of black balls .
+eine gruppe von männern steht auf einem feld mit schwarzen bällen .
+eine gruppe von männern steht auf einem feld aus schwarzen bällen .
+73.5
+3.875
+0 0 1 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a woman in a blue shirt and white shorts playing tennis .
+eine frau in einem blauen hemd und weißen shorts spielt tennis .
+eine frau in einem blauen shirt und weißen shorts spielt tennis .
+73.5
+1.9090909090909092
+0 0 1 0 1 0 1 0 1 0 1 0 1 0 1 1 0 1 0 0 1 0 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man in a uniform walking on a street with two cars and a tree .
+ein mann in uniform geht auf einer straße mit zwei autos und einem baum .
+ein uniformierter mann geht auf einer straße mit zwei autos und einem baum .
+73.1
+4.861111111111111
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3
+#######
+a man in a black shirt and jeans standing on the sidewalk looking at the camera .
+ein mann in einem schwarzen hemd und jeans steht auf dem gehweg und schaut in die kamera .
+ein mann in einem schwarzen hemd und jeans steht auf dem gehsteig und blickt in die kamera .
+72.8
+3.87280701754386
+0 0 1 0 1 0 0 1 0 1 0 1 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 3 3 3 3
+#######
+a young brunette woman eating and drinking something .
+ein junger brünette frau isst und trinkt etwas .
+eine junge brünette frau isst und trinkt etwas .
+72.6
+2.7142857142857144
+0 0 1 0 1 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+an older man with a cigarette in his mouth and a ball cap inspects his camera .
+ein älterer mann mit einer zigarette im mund und einer baseballmütze untersucht seine kamera .
+ein älterer mann mit einer zigarette im mund und einer mütze inspiziert seine kamera .
+72.4
+3.465909090909091
+0 0 1 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 3 3 3 3 3 3 3
+#######
+two individual climbing up a steep mountain .
+zwei person klettern einen steilen berg hoch .
+zwei personen klettern einen steilen berg hoch .
+70.7
+2.6666666666666665
+0 0 1 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man is at the beach making a sand sculpture .
+ein mann steht am strand und macht eine sandskulptur .
+ein mann ist am strand und macht eine sandskulptur .
+70.7
+3.7272727272727266
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man is dancing with a dog between his legs .
+ein mann tanzt mit einem hund zwischen seinen beinen .
+ein mann tanzt mit einem hund zwischen den beinen .
+70.7
+3.7272727272727266
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man and a boy on a rocky beach .
+ein mann und ein junge auf einem steinigen strand .
+ein mann und ein junge auf einem felsigen strand .
+70.7
+3.142857142857143
+0 0 1 0 1 0 0 1 0 1 0 1 0 0 1 0 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a group of men in blue uniforms are standing together .
+eine gruppe von männern in blauen uniformen steht zusammen .
+eine gruppe von männern in blauen uniformen stehen zusammen .
+70.7
+2.414141414141414
+0 0 1 0 1 0 0 1 0 1 0 1 0 1 1 0 0 1 0 0 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a man doing a trick on skateboard
+ein mann macht einen trick auf seinem skateboard
+ein mann macht einen trick auf dem skateboard
+70.7
+3.2222222222222228
+0 0 1 0 1 0 0 1 0 0 1 0 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+Worst Bleu
+a girl wearing a baseball cap , white t-shirt and blue shorts is standing in a rock-bottomed , forest-lined mountain stream .
+ein mädchen trägt eine baseballkappe
+ein mädchen mit einer baseballmütze , weißem t-shirt und blauen shorts steht in einem von wald umgebenen gebirgsbach .
+1.3
+1.4166666666666667
+0 0 1 0 1 0 1 0 0 1 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a large crowd of people are standing around in a park and a few are playing instruments .
+ein großer menschenmenge .
+eine große menschenmenge steht in einem park herum und einige spielen auf instrumenten .
+1.6
+1.2
+0 0 1 0 1 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+a fallen dirt biker is aided by another .
+ein geländemotorradfahrer .
+ein offroad-biker hilft einem anderen , der hingefallen ist , auf .
+1.7
+1.625
+0 0 1 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+white dog on mountainside turns to face something offstage , sky in background .
+weiße weiße weiße weiße weiße weiße weiße hund .
+weißer hund auf einem berg dreht sich zu etwas außerhalb des bildes um , himmel im hintergrund .
+2.1
+-0.55
+0 1 1 1 1 1 1 1 0 1 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+soccer players are jumping in the air to hit the ball with their heads .
+fußballspieler in einem fußballspiel fußball .
+fußballer springen in die luft , um den ball mit dem kopf zu treffen .
+2.2
+-0.28571428571428575
+0 1 1 1 1 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+#######
+Best Lag
+several children are outdoors getting ready to play tug-of-war .
+mehrere kinder sind im freien bereit , vor dem aus steinen tauziehen spielen .
+mehrere kinder sind im freien und bereiten sich auf tauziehen vor .
+29.9
+7.2
+0 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3
+three people sit at a picnic table outside of a building painted like a union jack .
+drei personen sitzen an einem picknicktisch vor einem gebäude , das als &quot; the jack &quot; steht , an einem gebäude zu sehen
+drei leute sitzen an einem picknicktisch vor einem gebäude , das wie der union jack bemalt ist .
+36.3
+6.478260869565217
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+in a outdoor market two men shovel snow and slush out of the path .
+in einem markt im freien sind eine bäume und eine person mit schnee und einem kreuz auf dem weg .
+zwei männer schaufeln auf einem freiluftmarkt den weg von schnee und matsch frei .
+5.0
+6.333333333333334
+0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3
+a mother teaches her two young boys to fish off of a rocky coast into very blue water .
+eine mutter lehrt zwei jungen , die gleich mit einem felsigen wasser zu fischen , sehr in blauen wasser .
+eine mutter bringt ihren zwei kleinen söhnen an einer felsigen küste mit sehr blauem wasser das angeln bei .
+5.4
+6.238095238095238
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1
+a woman runs after making a hit in women &apos;s softball , the catcher rises to her feet .
+eine frau rennt nach dem schlag in den softball , der der fänger eines teams hebt ihre füße zu .
+eine frau läuft beim softball nach einem erfolgreichen schlag los während die fängerin sich erhebt .
+5.0
+6.238095238095238
+0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 1 1 1 1 1 1 1 1
+Worst Lag
+firemen emerge from a subway station .
+feuerwehrmänner in feuerwehrleute , die feuerwehrmänner zum verkauf in feuerwehrleute sind .
+feuerwehrmänner kommen aus einer u-bahnstation .
+4.0
+-1.076923076923077
+0 1 1 1 1 1 1 1 1 1 1 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+hockey player in white uniform with stick
+hockeyspieler beim hockey-hockey-hockey-hockey-spieler .
+hockeyspieler in weißem trikot mit einem schläger .
+7.0
+-1.076923076923077
+0 1 1 1 1 1 1 1 1 1 1 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+doctors performing some type of surgery .
+ärzte versuchen ärzte mit einem baseballspiel zu .
+ärzte bei einer art operation .
+6.6
+-1.0
+0 1 1 1 1 1 1 0 0 1 0 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+white duck flapping its wings in the water .
+weiße weiße weiße weiße weiße weiße weiße ente .
+eine weiße ente schlägt im wasser mit den flügeln .
+9.4
+-0.7999999999999997
+0 1 1 1 1 1 1 1 0 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+fall shoppers and bistro food lovers caught in the ebb and flow of the city .
+fallen gerade im herbst ein fallen im herbst .
+herbsteinkäufer und bistroliebhaber lassen sich in den gezeiten der stadt treiben .
+3.4
+-0.65
+0 1 1 1 1 1 1 1 1 0 0 1 0 0 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
